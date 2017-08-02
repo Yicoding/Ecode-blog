@@ -1,6 +1,6 @@
 # myblog
 
-> A Vue.js project
+> Personal blog use of vue,node,express and mysql
 
 ## Build Setup
 
