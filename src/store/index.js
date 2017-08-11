@@ -6,10 +6,13 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 import axios from 'axios'
 
+// axiso.get()
+var uname = ''
+uname = window.sessionStorage.getItem('uname')
 const store = new Vuex.Store({
   state: {
     user: {
-    	name: ''
+    	name: uname
     }
   },
   getters: {
@@ -24,6 +27,9 @@ const store = new Vuex.Store({
     getUser (store, name) {
     	store.commit('setUser', name)
     },
+    firstGet (store) {
+      axios.get()
+    }
   }
 })
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading="loading" element-loading-text="拼命加载中">
   	<el-popover
   	  ref="popover5"
   	  placement="bottom"
@@ -39,14 +39,15 @@ export default {
   		visible2: false,
   		dialogFormVisible: false,
   		form: {
-          name: '',
-          oldpwd: '',
-          newpwd: ''
-        },
-        rules: {
-        	oldpwd: [{required: true, message: '请输入旧密码', trigger: 'blur'}],
-        	newpwd: [{required: true, message: '请输入新密码', trigger: 'blur'}]
-        }
+        name: '',
+        oldpwd: '',
+        newpwd: ''
+      },
+      rules: {
+      	oldpwd: [{required: true, message: '请输入旧密码', trigger: 'blur'}],
+      	newpwd: [{required: true, message: '请输入新密码', trigger: 'blur'}]
+      },
+      loading: true,
   	}
   },
   computed: {
@@ -59,12 +60,15 @@ export default {
   	this.$http.get('/api/user/loginfo', {params: {name: this.loginname}}).then((res) => {
   		console.log(JSON.stringify(res.data))
   		this.user = res.data
+      setTimeout(() => {
+        this.loading = false
+      }, 1000)
   	}).catch(() => {
-		this.$message({
-          showClose: true,
-          message: '登录超时，请重新登陆',
-          type: 'error'
-        });
+		  this.$message({
+        showClose: true,
+        message: '登录超时，请重新登陆',
+        type: 'error'
+      });
     	this.$router.push('/login')
 	})
   },

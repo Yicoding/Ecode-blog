@@ -108,7 +108,7 @@ router.get('/api/user/loginfo', (req, res) => {
 			if (err) {
 				res.send(err)
 			} else {
-				console.log(data[0].loginname)
+				// console.log(data[0].loginname)
 				if (data.length > 0) {
 					res.send({
 						id: data[0].id,
