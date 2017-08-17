@@ -8,6 +8,7 @@ import axios from 'axios'
 
 // axiso.get()
 var uname = ''
+// uname = window.localStorage.getItem('uname')
 uname = window.sessionStorage.getItem('uname')
 const store = new Vuex.Store({
   state: {

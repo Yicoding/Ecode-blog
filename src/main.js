@@ -14,6 +14,11 @@ Vue.use(ElementUI)
 Vue.use(MintUI)
 Vue.prototype.$http = axios
 import store from './store'
+
+// 图标icom
+import 'assets/style.css'
+// 自定义css
+import 'assets/main.css'
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

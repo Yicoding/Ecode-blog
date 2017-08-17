@@ -46,9 +46,9 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.$http.get('/api/user/findByName', {params: {name: this.ruleForm.name, password: this.ruleForm.password}}).then((res) => {
-              window.sessionStorage.setItem('uname', this.ruleForm.name)
             	console.log(res.data)
             	if (res.data.code == 200) {
+                window.sessionStorage.setItem('uname', this.ruleForm.name)
             		this.$store.dispatch('getUser', this.ruleForm.name)
 	            	this.$message({
 			          showClose: true,
