@@ -18,6 +18,14 @@ npm run build
 npm run build --report
 ```
 # 效果图
+## 登录页面
+![image](https://github.com/Yicoding/Ecode-blog/raw/master/src/assets/12.png)
+
+
+## 注册页面
+![image](https://github.com/Yicoding/Ecode-blog/raw/master/src/assets/13.png)
+
+
 ## 超级系统管理员登录界面
 ![image](https://github.com/Yicoding/Ecode-blog/raw/master/src/assets/1.png)
 
