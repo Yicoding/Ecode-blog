@@ -95,3 +95,17 @@ a.active {
 .mint-popup-4 {
     width: 100%;
 }
+/*mine*/
+.div-title {
+    color: #7ba5de;
+    padding: 10px 10px;
+    font-size: 14px;
+    background-color: #eee;
+}
+.div-content {
+    padding: 15px;
+    color: #8f8f8f;
+    font-size: 13px;
+}
+
+

@@ -62,6 +62,18 @@ export default {
   created () {
     console.log(this.loginname)
     this.$http.get('/api/user/loginfo', {params: {name: this.loginname}}).then((res) => {
+      this.$store.dispatch('getUser', res.data)
+      var item = sessionStorage.getItem('item')
+      if (item == null) {
+        if (res.data.role.name == 'root') {
+          this.$router.push('/root/mine')
+        } else if (res.data.role.name == 'admin') {
+          this.$router.push('/admin/mine')
+        } else if (res.data.role.name == 'general') {
+          this.$router.push('/general/mine')
+        }
+        sessionStorage.setItem('item', 'show')
+      }
       console.log(JSON.stringify(res.data))
       this.user = res.data
       this.loading = false
@@ -74,8 +86,8 @@ export default {
       });
       setTimeout(() => {
        window.location.href = '/login'
-      }, 1000)
-  })
+      }, 2000)
+    })
   },
   methods: {
     putpwd () {
@@ -85,7 +97,6 @@ export default {
     },
     logout () {
       this.$http.get('/api/loginfo/logout', {params: {name: this.loginname}}).then((res) => {
-        this.$store.dispatch('getUser', '')
         this.$message({
           showClose: true,
           message: '退出成功，下次再见呦',
@@ -93,7 +104,8 @@ export default {
         });
         window.sessionStorage.clear()
         setTimeout(() => {
-         window.location.href = '/login'
+          this.$store.dispatch('getUser', '')
+          window.location.href = '/login'
         }, 1000)
       })
     },
@@ -113,10 +125,10 @@ export default {
               this.form.newpwd = ''
               } else if (res.data.code == 500) {
                 this.$message({
-                showClose: true,
-                message: '修改失败：旧密码不正确',
-                type: 'error'
-              });
+                  showClose: true,
+                  message: '修改失败：旧密码不正确',
+                  type: 'error'
+                });
               }
             })
           } else {

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+// root
 // root （一级路由）
 import rootpage from 'components/root/root'
 // order (二级路由)
@@ -18,6 +19,21 @@ import part from 'components/root/system/part'
 import partinfo from 'components/root/system/partinfo'
 import role from 'components/root/system/role'
 import roleinfo from 'components/root/system/roleinfo'
+
+// admin
+// admin (一级路由)
+import admin from 'components/admin/admin'
+// myorder (二级路由)
+import myorder from 'components/myorder/myorder'
+import usermanage from 'components/admin/usermanage'
+import userchange from 'components/admin/userchange'
+// (三级路由)
+import today from 'components/myorder/today'
+import pastorder from 'components/myorder/pastorder'
+
+// general 
+// general (一级路由)
+import general from 'components/general/general'
 
 // mine (一级路由)
 import mine from 'components/mine'
@@ -92,14 +108,76 @@ export default new Router({
           ]
         },
         {
-          path: '/mine',
+          path: 'mine',
           component: mine
         },
       ]
     },
     {
-      path: '*',
-      redirect: '/root/order/unorder'
-    }
+      path: '/admin',
+      component: admin,
+      children: [
+        {
+          path: '/',
+          component: myorder
+        },
+        {
+          path: 'myorder',
+          component: myorder,
+          children: [
+            {
+              path: '/',
+              component: today
+            },
+            {
+              path: 'today',
+              component: today
+            },
+            {
+              path: 'pastorder',
+              component: pastorder
+            }
+          ]
+        },
+        {
+          path: 'usermanage',
+          component: usermanage
+        },
+        {
+          path: 'userchange',
+          component: userchange
+        },
+        {
+          path: 'mine',
+          component: mine
+        }
+      ]
+    },
+    {
+      path: '/general',
+      component: general,
+      children: [
+        {
+          path: '/',
+          component: today
+        },
+        {
+          path: 'today',
+          component: today
+        },
+        {
+          path: 'pastorder',
+          component: pastorder
+        },
+        {
+          path: 'mine',
+          component: mine
+        }
+      ]
+    },
+    // {
+    //   path: '*',
+    //   redirect: '/admin/mine'
+    // }
   ]
 })

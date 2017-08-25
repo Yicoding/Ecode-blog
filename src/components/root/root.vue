@@ -31,7 +31,7 @@
     		<a class="tab" :class="system?'active':''"><span class="icon-cog"></span><br/>系统管理</a>
     	</div>
     	<div class="bar left">
-    		<router-link to="/mine" class="tab"><span class="icon-home"></span><br/>我的</router-link>
+    		<router-link to="/root/mine" class="tab"><span class="icon-home"></span><br/>我的</router-link>
     	</div>
     </footer>
   </div>

@@ -27,7 +27,7 @@ router.get('/api/user/findByName', (req, res) => {
 							console.log(todo[0])
 							res.send({code: 200, message: '登陆成功'})
 						} else {
-							connection.query('insert into loginfo values (null, ?, ?, ?, ?)', [data[0].name, data[0].age, data[0].password, data[0].role_id], (err, result) => {
+							connection.query('insert into loginfo values (?, ?, ?, ?, ?, ?)', [data[0].id, data[0].name, data[0].age, data[0].password, data[0].role_id, data[0].part_id], (err, result) => {
 								if (err) {
 									res.send(err)
 								} else {
@@ -51,7 +51,7 @@ router.get('/api/user/findByName', (req, res) => {
 })
 // /user/add
 router.post('/api/user/add', (req, res) => {
-	var sql = 'insert into user values(null, ?, ?, ?, ?)'
+	var sql = 'insert into user values(null, ?, ?, ?, ?, 3, 1)'
 	pool.getConnection((err, connection) => {
 		connection.query('select * from user where name=?', [req.body.name], (err, result) => {
 			if (result.length > 0) {
@@ -97,7 +97,7 @@ router.put('/api/user/put', (req, res) => {
 // /user/loginfo
 router.get('/api/user/loginfo', (req, res) => {
 	// var sql = 'select * from loginfo where name=?'
-	var sql = 'select l.id, l.name, l.age, r.name rolename, r.fullname from loginfo l inner join role r on l.rid=r.id where l.name=?'
+	var sql = 'select l.id, l.name, l.age, r.id rid, r.name rolename, r.fullname, p.id pid, p.name pname from loginfo l inner join role r on l.rid=r.id join part p on l.pid=p.id where l.name=?'
 	pool.getConnection((err, connection) => {
 		connection.query(sql, [req.query.name], (err, data) => {
 			if (err) {
@@ -110,10 +110,14 @@ router.get('/api/user/loginfo', (req, res) => {
 						name: data[0].name,
 						age: data[0].age,
 						role: {
+							id: data[0].rid,
 							name: data[0].rolename,
 							fullname: data[0].fullname
+						},
+						part: {
+							id: data[0].pid,
+							name: data[0].pname
 						}
-
 					})
 				} else {
 					res.status(500).send({code: 500, message: '请重新登陆'})

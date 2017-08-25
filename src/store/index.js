@@ -20,13 +20,13 @@ const store = new Vuex.Store({
     // config: state => state.config
   },
   mutations: {
-    setUser: (state, name) => {
-      state.user.name = name
+    setUser: (state, user) => {
+      state.user = user
     },
   },
   actions: {
-    getUser (store, name) {
-    	store.commit('setUser', name)
+    getUser (store, user) {
+    	store.commit('setUser', user)
     },
     firstGet (store) {
       axios.get()
