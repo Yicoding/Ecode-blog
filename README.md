@@ -19,36 +19,36 @@ npm run build --report
 ```
 # 效果图
 ## 登录页面
-![image](https://github.com/Yicoding/Ecode-blog/raw/master/src/assets/12.png)
+![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/12.png)
 
 
 ## 注册页面
-![image](https://github.com/Yicoding/Ecode-blog/raw/master/src/assets/13.png)
+![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/13.png)
 
 
 ## 超级系统管理员登录界面
-![image](https://github.com/Yicoding/Ecode-blog/raw/master/src/assets/1.png)
+![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/1.png)
 
-![image](https://github.com/Yicoding/Ecode-blog/raw/master/src/assets/2.png)
+![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/2.png)
 
-![image](https://github.com/Yicoding/Ecode-blog/raw/master/src/assets/3.png)
+![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/3.png)
 
-![image](https://github.com/Yicoding/Ecode-blog/raw/master/src/assets/4.png)
+![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/4.png)
 
-![image](https://github.com/Yicoding/Ecode-blog/raw/master/src/assets/5.png)
+![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/5.png)
 
 ## 部门管理员登录界面
-![image](https://github.com/Yicoding/Ecode-blog/raw/master/src/assets/6.png)
+![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/6.png)
 
-![image](https://github.com/Yicoding/Ecode-blog/raw/master/src/assets/7.png)
+![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/7.png)
 
-![image](https://github.com/Yicoding/Ecode-blog/raw/master/src/assets/8.png)
+![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/8.png)
 
 ## 普通用户登录界面
-![image](https://github.com/Yicoding/Ecode-blog/raw/master/src/assets/9.png)
+![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/9.png)
 
-![image](https://github.com/Yicoding/Ecode-blog/raw/master/src/assets/10.png)
+![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/10.png)
 
-![image](https://github.com/Yicoding/Ecode-blog/raw/master/src/assets/11.png)
+![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/11.png)
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
