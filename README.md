@@ -18,6 +18,10 @@ npm run build
 npm run build --report
 ```
 # 效果图
+## gif动图
+![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/example.gif)
+
+
 ## 登录页面
 ![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/12.png)
 
@@ -44,7 +48,7 @@ npm run build --report
 
 ![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/8.png)
 
-## 普通用户登录界面
+## 普通员工登录界面
 ![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/9.png)
 
 ![image](https://github.com/Yicoding/Ecode-blog/raw/dev/src/assets/10.png)
