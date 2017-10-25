@@ -13,6 +13,7 @@ import past from 'components/root/order/past'
 // system (二级路由)
 import system from 'components/root/system/system'
 // (三级路由)
+import menu from 'components/root/system/menu'
 import user from 'components/root/system/user'
 import userinfo from 'components/root/system/userinfo'
 import part from 'components/root/system/part'
@@ -79,7 +80,11 @@ export default new Router({
           children: [
             {
               path: '/',
-              component: user
+              component: menu
+            },
+            {
+              path: 'menu',
+              component: menu
             },
             {
               path: 'user',

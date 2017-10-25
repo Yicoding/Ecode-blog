@@ -1,6 +1,6 @@
 # myblog
 
-> Personal blog use of vue,node,express and mysql
+> Personal orderMeal use of vue,node,express and mysql
 
 ## Build Setup
 

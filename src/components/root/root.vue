@@ -22,6 +22,9 @@
     		  placement="top"
     		  width="90"
     		  trigger="click" v-model="modalSystem">
+          <div class="child-div" @click="getSystem">
+            <router-link to="/root/system/menu" class="tab">菜单管理</router-link>
+          </div>
     		  <div class="child-div" @click="getSystem">
     		    <router-link to="/root/system/user" class="tab">员工管理</router-link>
     		  </div>
