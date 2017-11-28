@@ -22,9 +22,9 @@ var proxyTable = config.dev.proxyTable
 
 var app = express()
 
-// 使用路由
-var server = require('../server/index')
-app.use(server)
+// // 使用路由
+// var server = require('../server/index')
+// app.use(server)
 
 var compiler = webpack(webpackConfig)
 
@@ -68,7 +68,8 @@ app.use(hotMiddleware)
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
-var uri = 'http://localhost:' + port + '/login'
+var uri = 'http://localhost:' + port
+// var uri = 'http://localhost:3000/login'
 
 var _resolve
 var readyPromise = new Promise(resolve => {

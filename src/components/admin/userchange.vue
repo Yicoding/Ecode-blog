@@ -32,7 +32,7 @@ export default {
   mounted () {
   	if (this.$route.query.id) {
     	this.method = 'put'
-    	this.$http.get('/api/user/findone', {params: {id: this.$route.query.id}}).then((res) => {
+    	this.$http.get(this.resource + '/api/user/findone', {params: {id: this.$route.query.id}}).then((res) => {
     		console.log(JSON.stringify(res.data))
 	        this.user = res.data
   		})
@@ -47,7 +47,7 @@ export default {
   			this.user.role_id = rid
   			var pid = this.info.part.id
   			this.user.part_id = pid
-  			this.$http.post('/api/user/adminadd', this.user).then(res => {
+  			this.$http.post(this.resource + '/api/user/adminadd', this.user).then(res => {
 		        console.log(JSON.stringify(res.data))
 		        if (res.data.code == 500) {
 		        	this.$message({
@@ -60,7 +60,7 @@ export default {
 		        }
     		})
   		} else {
-  			this.$http.put('/api/user/adminput', this.user).then(res => {
+  			this.$http.put(this.resource + '/api/user/adminput', this.user).then(res => {
 		        console.log(JSON.stringify(res.data))
 		        if (res.data.code == 500) {
 		        	this.$message({

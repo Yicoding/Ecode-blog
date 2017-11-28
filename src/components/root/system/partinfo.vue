@@ -42,13 +42,13 @@ export default {
   mounted () {
   	if (this.$route.query.id) {
     	this.method = 'put'
-    	this.$http.get('/api/part/findone', {params: {id: this.$route.query.id}}).then((res) => {
+    	this.$http.get(this.resource + '/api/part/findone', {params: {id: this.$route.query.id}}).then((res) => {
     		console.log(JSON.stringify(res.data))
 	        this.part.id = res.data.id
 	        this.part.name = res.data.name
 	        this.part.admin = res.data.admin
 	        this.part.newadmin = res.data.admin
-	  		this.$http.get('/api/part/' + this.$route.query.id + '/users').then((response) => {
+	  		this.$http.get(this.resource + '/api/part/' + this.$route.query.id + '/users').then((response) => {
 	  			console.log(JSON.stringify(response.data))
 	  			for (var k = 0; k < response.data.length; k ++) {
 	  				this.typeSlot[0].values.push({id: response.data[k].id, text: response.data[k].name})
@@ -65,7 +65,7 @@ export default {
   methods: {
   	send () {
   		if (this.method == 'post') {
-  			this.$http.post('/api/part/add', this.part).then(res => {
+  			this.$http.post(this.resource + '/api/part/add', this.part).then(res => {
 		        console.log(JSON.stringify(res.data))
 		        if (res.data.code == 500) {
 		        	this.$message({
@@ -78,7 +78,7 @@ export default {
 		        }
     		})
   		} else {
-  			this.$http.put('/api/part/put', this.part).then(res => {
+  			this.$http.put(this.resource + '/api/part/put', this.part).then(res => {
 	        console.log(JSON.stringify(res.data))
 	        this.$router.push('/root/system/part')
   			})

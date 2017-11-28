@@ -17,7 +17,7 @@
       </el-table-column>
       <el-table-column
         label="操作">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-button type="text" size="small" @click="putrole(scope.row.id)">编辑</el-button>
           <el-button type="text" size="small" @click="deleterole(scope.row.id)">删除</el-button>
         </template>
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     findall () {
-      this.$http.get('/api/part/findall').then(res => {
+      this.$http.get(this.resource + '/api/part/findall').then(res => {
         console.log(JSON.stringify(res.data))
         this.data = res.data
       })
@@ -50,7 +50,7 @@ export default {
       this.$router.push({path: '/root/system/partinfo', query: {id: data}})
     },
     deleterole (data) {
-      this.$http.delete('/api/part/' + data).then(res => {
+      this.$http.delete(this.resource + '/api/part/' + data).then(res => {
         if (res.data.code == 200) {
           this.$message({
             showClose: true,

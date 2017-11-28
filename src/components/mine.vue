@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     logout () {
-      this.$http.get('/api/loginfo/logout', {params: {name: this.loginname}}).then((res) => {
+      this.$http.get(this.resource + '/api/loginfo/logout', {params: {name: this.loginname}}).then((res) => {
         this.$message({
           showClose: true,
           message: '退出成功，下次再见呦',
@@ -35,8 +35,8 @@ export default {
         });
         window.sessionStorage.clear()
         setTimeout(() => {
-          this.$store.dispatch('getUser', '')
-          window.location.href = '/login'
+          // this.$store.dispatch('getUser', '')
+          window.location.href = 'http://localhost:3000'
         }, 1000)
       })
     },

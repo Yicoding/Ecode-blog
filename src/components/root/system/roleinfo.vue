@@ -13,7 +13,7 @@ export default {
   created () {
     if (this.$route.query.id) {
     	this.method = 'put'
-    	this.$http.get('/api/role/findone', {params: {id: this.$route.query.id}}).then((res) => {
+    	this.$http.get(this.resource + '/api/role/findone', {params: {id: this.$route.query.id}}).then((res) => {
     		console.log(JSON.stringify(res.data))
 	        this.role = res.data
   		})
@@ -34,12 +34,12 @@ export default {
   methods: {
   	send () {
   		if (this.method == 'post') {
-  			this.$http.post('/api/role/add', this.role).then(res => {
+  			this.$http.post(this.resource + '/api/role/add', this.role).then(res => {
 	        console.log(JSON.stringify(res.data))
 	        this.$router.push('/root/system/role')
     		})
   		} else {
-  			this.$http.put('/api/role/put', this.role).then(res => {
+  			this.$http.put(this.resource + '/api/role/put', this.role).then(res => {
 	        console.log(JSON.stringify(res.data))
 	        this.$router.push('/root/system/role')
   			})

@@ -61,7 +61,8 @@ export default {
   },
   created () {
     console.log(this.loginname)
-    this.$http.get('/api/user/loginfo', {params: {name: this.loginname}}).then((res) => {
+    // this.$http.get(this.resource + '/api/user/loginfo', {params: {name: this.loginname}}).then((res) => {
+    this.$http.get(this.resource + '/api/user/loginfo', {params: {name: 'root'}}).then((res) => {
       this.$store.dispatch('getUser', res.data)
       var item = sessionStorage.getItem('item')
       if (item == null) {
@@ -84,8 +85,9 @@ export default {
         message: '登录超时，请重新登陆',
         type: 'error'
       });
+      sessionStorage.clear()
       setTimeout(() => {
-       window.location.href = '/login'
+       window.location.href = 'http://localhost:3000'
       }, 2000)
     })
   },
@@ -96,7 +98,7 @@ export default {
       this.form.name = name
     },
     logout () {
-      this.$http.get('/api/loginfo/logout', {params: {name: this.loginname}}).then((res) => {
+      this.$http.get(this.resource + '/api/loginfo/logout', {params: {name: this.loginname}}).then((res) => {
         this.$message({
           showClose: true,
           message: '退出成功，下次再见呦',
@@ -112,7 +114,7 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$http.put('/api/user/put', this.form).then((res) => {
+            this.$http.put(this.resource + '/api/user/put', this.form).then((res) => {
               console.log(JSON.stringify(res.data))
               if (res.data.code == 200) {
                 this.dialogFormVisible = false

@@ -44,10 +44,10 @@ export default {
   mounted () {
   	if (this.$route.query.id) {
     	this.method = 'put'
-    	this.$http.get('/api/user/findone', {params: {id: this.$route.query.id}}).then((res) => {
+    	this.$http.get(this.resource + '/api/user/findone', {params: {id: this.$route.query.id}}).then((res) => {
     		console.log(JSON.stringify(res.data))
 	        this.user = res.data
-	        this.$http.get('/api/part/findall').then((response) => {
+	        this.$http.get(this.resource + '/api/part/findall').then((response) => {
 		  		for (var k = 0; k < response.data.length; k ++) {
 		  			this.typeSlot[0].values.push({id: response.data[k].id, name: response.data[k].name})
 		  			if (res.data.part_id == response.data[k].id) {
@@ -58,7 +58,7 @@ export default {
   		})
     } else {
     	this.method = 'post'
-    	this.$http.get('/api/part/findall').then((response) => {
+    	this.$http.get(this.resource + '/api/part/findall').then((response) => {
     		this.typeSlot[0].values.push({id: 0, name: '请选择'})
     		for (var k = 0; k < response.data.length; k ++) {
 	  			this.typeSlot[0].values.push({id: response.data[k].id, name: response.data[k].name})
@@ -69,7 +69,7 @@ export default {
   methods: {
   	send () {
   		if (this.method == 'post') {
-  			this.$http.post('/api/user/rootadd', this.user).then(res => {
+  			this.$http.post(this.resource + '/api/user/rootadd', this.user).then(res => {
 		        console.log(JSON.stringify(res.data))
 		        if (res.data.code == 500) {
 		        	this.$message({
@@ -82,7 +82,7 @@ export default {
 		        }
     		})
   		} else {
-  			this.$http.put('/api/user/rootput', this.user).then(res => {
+  			this.$http.put(this.resource + '/api/user/rootput', this.user).then(res => {
 		        console.log(JSON.stringify(res.data))
 		        if (res.data.code == 500) {
 		        	this.$message({

@@ -72,13 +72,14 @@
 		        	three: '点我注册'
 		        },
 		        loading: false,
+		        resource: 'http://localhost:3000',
 			},
 			methods: {
 				submitForm(formName) {
 			        this.$refs[formName].validate((valid) => {
 			          if (valid) {
 			          	this.loading = true
-			            axios.get('/api/user/findByName', {params: {name: this.ruleForm.name, password: this.ruleForm.password}}).then((res) => {
+			            axios.get(this.resource + '/api/user/findByName', {params: {name: this.ruleForm.name, password: this.ruleForm.password}}).then((res) => {
 			            	console.log(res.data)
 			            	if (res.data.code == 200) {
 			                	// window.localStorage.setItem('uname', this.ruleForm.name)
@@ -90,7 +91,7 @@
 						        });
 					        	this.loading = false
 						        setTimeout(() => {
-					        		window.location.href = '/'
+					        		window.location.href = 'http://localhost:2000'
 						        },1000)
 			            	} else if (res.data.code == 500) {
 			            		this.$message({

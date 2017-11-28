@@ -93,7 +93,7 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$http.post('/api/user/add', this.ruleForm).then((res) => {
+            this.$http.post(this.resource + '/api/user/add', this.ruleForm).then((res) => {
             	console.log(JSON.stringify(res.data))
             	this.$message({
 		          showClose: true,

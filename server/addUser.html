@@ -120,13 +120,14 @@
 		        	two: '重置',
 		        	three: '取消'
 		        },
+		        resource: 'http://localhost:3000',
 		      };
 		    },
 			methods: {
 				submitForm(formName) {
 			        this.$refs[formName].validate((valid) => {
 			          if (valid) {
-			            axios.post('/api/user/add', this.ruleForm).then((res) => {
+			            axios.post(this.resource + '/api/user/add', this.ruleForm).then((res) => {
 			            	console.log(JSON.stringify(res.data))
 			            	this.$message({
 					          showClose: true,
@@ -134,7 +135,7 @@
 					          type: 'success'
 					        });
 					        setTimeout(() => {
-					        	window.location.href = '/login'
+					        	window.location.href = '/'
 					        }, 3000)
 			            }).catch((err) => {
 			            	this.$message({
@@ -154,7 +155,7 @@
 		      	},
 		      	cancel () {
 		      		this.loading = true
-			      	window.location.href = '/login'
+			      	window.location.href = '/'
 		      	}
 			},
 		})

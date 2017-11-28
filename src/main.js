@@ -13,6 +13,7 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(MintUI)
 Vue.prototype.$http = axios
+Vue.prototype.resource = 'http://localhost:3000'
 import store from './store'
 
 // 图标icom

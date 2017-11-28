@@ -51,7 +51,7 @@ router.get('/api/user/findByName', (req, res) => {
 })
 // /user/add
 router.post('/api/user/add', (req, res) => {
-	var sql = 'insert into user values(null, ?, ?, ?, 3, 1)'
+	var sql = 'insert into user values(null, ?, ?, ?, 3, 5)'
 	pool.getConnection((err, connection) => {
 		connection.query('select * from user where name=?', [req.body.name], (err, result) => {
 			if (result.length > 0) {
