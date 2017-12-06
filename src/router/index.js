@@ -8,12 +8,11 @@ import rootpage from 'components/root/root'
 import order from 'components/root/order/order'
 // (三级路由)
 import unorder from 'components/root/order/unorder'
-import sign from 'components/root/order/sign'
 import past from 'components/root/order/past'
 // system (二级路由)
 import system from 'components/root/system/system'
 // (三级路由)
-import menu from 'components/root/system/menu'
+import sysmenu from 'components/root/system/sysmenu'
 import user from 'components/root/system/user'
 import userinfo from 'components/root/system/userinfo'
 import part from 'components/root/system/part'
@@ -38,6 +37,26 @@ import general from 'components/general/general'
 
 // mine (一级路由)
 import mine from 'components/mine'
+import minemenu from 'components/minemenu'
+import mineinfo from 'components/mineinfo'
+
+// user option
+import useroption from 'components/useroption'
+
+// sign
+import sign from 'components/sign'
+
+// login (一级路由)
+import login from 'components/login/login'
+
+// registered (一级路由)
+import registered from 'components/login/registered'
+
+// 菜单
+import menu from 'components/menu'
+
+// 购物车
+import shop from 'components/shop'
 
 Vue.use(Router)
 
@@ -65,10 +84,6 @@ export default new Router({
               component: unorder
             },
             {
-              path: 'sign',
-              component: sign
-            },
-            {
               path: 'past',
               component: past
             },
@@ -80,11 +95,11 @@ export default new Router({
           children: [
             {
               path: '/',
-              component: menu
+              component: sysmenu
             },
             {
               path: 'menu',
-              component: menu
+              component: sysmenu
             },
             {
               path: 'user',
@@ -114,7 +129,14 @@ export default new Router({
         },
         {
           path: 'mine',
-          component: mine
+          component: mine,
+          children: [
+            { path: '/', component: minemenu },
+            { path: 'minemenu', component: minemenu },
+            { path: 'mineinfo', component: mineinfo },
+            { path: 'useroption', component: useroption },
+            { path: 'sign', component: sign },
+          ]
         },
       ]
     },
@@ -154,8 +176,17 @@ export default new Router({
         },
         {
           path: 'mine',
-          component: mine
-        }
+          component: mine,
+          children: [
+            { path: '/', component: minemenu },
+            { path: 'minemenu', component: minemenu },
+            { path: 'mineinfo', component: mineinfo },
+            { path: 'useroption', component: useroption },
+            { path: 'sign', component: sign },
+          ]
+        },
+        { path: 'menu', component: menu },
+        { path: 'shop', component: shop },
       ]
     },
     {
@@ -176,10 +207,21 @@ export default new Router({
         },
         {
           path: 'mine',
-          component: mine
-        }
+          component: mine,
+          children: [
+            { path: '/', component: minemenu },
+            { path: 'minemenu', component: minemenu },
+            { path: 'mineinfo', component: mineinfo },
+            { path: 'useroption', component: useroption },
+            { path: 'sign', component: sign },
+          ]
+        },
+        { path: 'menu', component: menu },
+        { path: 'shop', component: shop },
       ]
     },
+    { path: '/login', component: login },
+    { path: '/registered', component: registered },
     // {
     //   path: '*',
     //   redirect: '/admin/mine'

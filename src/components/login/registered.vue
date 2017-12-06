@@ -1,29 +1,29 @@
 <template>
   <div>
-    <header>
-    	欢迎来到注册界面
-    </header>
-    <section>
-    	<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-    	  <el-form-item label="用户名" prop="name">
-    	    <el-input v-model.number="ruleForm.name"></el-input>
-    	  </el-form-item>
-    	  <el-form-item label="年龄" prop="age">
-    	    <el-input v-model.number="ruleForm.age"></el-input>
-    	  </el-form-item>
-    	  <el-form-item label="密码" prop="password">
-    	    <el-input type="password" v-model="ruleForm.password" auto-complete="off"></el-input>
-    	  </el-form-item>
-    	  <el-form-item label="确认密码" prop="checkPass">
-    	    <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off"></el-input>
-    	  </el-form-item>
-    	  <el-form-item>
-    	    <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-    	    <el-button @click="resetForm('ruleForm')">重置</el-button>
-    	    <el-button @click="cancel" type="warning">取消</el-button>
-    	  </el-form-item>
-    	</el-form>
-    </section>
+    <div style="height: 20px;"></div>
+    <div style="width: 150px; margin:auto;">
+      <img src="static/img/bind.jpg" style="max-width: 100%; height: 150px; border-radius: 50%;"/>
+    </div>
+    <div style="height: 20px;"></div>
+  	<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+  	  <el-form-item label="用户名" prop="name">
+  	    <el-input v-model.number="ruleForm.name" style="width: 80%;"></el-input>
+  	  </el-form-item>
+  	  <el-form-item label="年龄" prop="age">
+  	    <el-input v-model.number="ruleForm.age" style="width: 80%;"></el-input>
+  	  </el-form-item>
+  	  <el-form-item label="密码" prop="password">
+  	    <el-input type="password" v-model="ruleForm.password" auto-complete="off" style="width: 80%;"></el-input>
+  	  </el-form-item>
+  	  <el-form-item label="确认密码" prop="checkPass">
+  	    <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off" style="width: 80%;"></el-input>
+  	  </el-form-item>
+  	  <el-form-item>
+  	    <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+  	    <el-button @click="resetForm('ruleForm')">重置</el-button>
+  	    <el-button @click="cancel" type="warning">取消</el-button>
+  	  </el-form-item>
+  	</el-form>
   </div>
 </template>
 

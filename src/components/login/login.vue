@@ -1,25 +1,26 @@
 <template>
   <div>
-    <header>
-    	欢迎来到登录界面
-    </header>
-    <section>
-    	<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+    <div style="height: 20px;"></div>
+    <div style="width: 180px; margin:auto;">
+      <img src="static/img/login.gif" style="max-width: 100%; height: 180px; border-radius: 50%;"/>
+    </div>
+    <div style="padding: 20px;">
+    	<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
     	  <el-form-item label="用户名" prop="name">
-    	    <el-input v-model="ruleForm.name"></el-input>
+    	    <el-input v-model="ruleForm.name" style="width: 80%"></el-input>
     	  </el-form-item>
     	  <el-form-item label="密码" prop="password">
-    	    <el-input type="password" v-model="ruleForm.password" auto-complete="off"></el-input>
+    	    <el-input type="password" v-model="ruleForm.password" style="width: 80%"></el-input>
     	  </el-form-item>
     	  <el-form-item>
     	    <el-button type="primary" @click="submitForm('ruleForm')">确定</el-button>
     	    <el-button @click="resetForm('ruleForm')">重置</el-button>
     	  </el-form-item>
-		  <el-form-item label="还没有账号？">
+		    <el-form-item label="还没有账号？">
 	  	  	<el-button type="text" @click="register">点我注册</el-button>
 	  	  </el-form-item>
     	</el-form>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -49,21 +50,27 @@
             	console.log(res.data)
             	if (res.data.code == 200) {
                 window.sessionStorage.setItem('uname', this.ruleForm.name)
-            		this.$store.dispatch('getUser', this.ruleForm.name)
 	            	this.$message({
-			          showClose: true,
-			          message: '恭喜你，登录成功！欢迎来到home',
-			          type: 'success'
-			        });
-			        setTimeout(() => {
-		        		this.$router.push('/home')
-			        },500)
+  			          showClose: true,
+  			          message: '恭喜你，登录成功！欢迎来到home',
+  			          type: 'success'
+  			        });
+                this.$http.get(this.resource + '/api/user/loginfo', {params: {name: this.ruleForm.name}}).then((res) => {
+                  this.$store.dispatch('getUser', res.data)
+                  if (res.data.role.name == 'root') {
+                    this.$router.push('/root/mine')
+                  } else if (res.data.role.name == 'admin') {
+                    this.$router.push('/admin/mine')
+                  } else if (res.data.role.name == 'general') {
+                    this.$router.push('/general/mine')
+                  }
+                })
             	} else if (res.data.code == 500) {
             		this.$message({
-			          showClose: true,
-			          message: res.data.message,
-			          type: 'error'
-			        });
+  			          showClose: true,
+  			          message: res.data.message,
+  			          type: 'error'
+  			        });
             	}
             })
           } else {

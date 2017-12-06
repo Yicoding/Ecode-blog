@@ -9,6 +9,7 @@ body {
     padding:0;
     height: 100%;
     overflow: hidden;
+    background-color: #fafafa;
 }
 
 ul,ol,p,h1,h2,h3,h4,h5,h6,dl,dt,dd {
@@ -44,31 +45,39 @@ img {
 .header-home {
 	background: #324157;
 	width: 100%;
+    height: 8%;
 	line-height: 50px;
 	text-align: right;
 }
 section {
-    height: 100%;
+    height: 84%;
     overflow: auto;
 }
-.section {
-  margin-bottom: 100px;
-}
 footer {
+    height: 8%;
     background: #eaeaea;
     width: 100%;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     z-index: 999;
 }
 .bar{
 	padding: 5px 0;
-	width: 33%;
+	width: 24%;
 	text-align: center;
 	border-right: 1px solid #ddd;
 }
 .bar:last-child {
 	border: 0;
+}
+.box{
+    padding: 5px 0;
+    width: 33%;
+    text-align: center;
+    border-right: 1px solid #ddd;
+}
+.box:last-child {
+    border: 0;
 }
 a.tab {
 	display: block;
@@ -107,5 +116,113 @@ a.active {
     color: #8f8f8f;
     font-size: 13px;
 }
-
-
+/*menu*/
+.mint-search {
+    height: 60px;
+}
+.menu-left {
+    float: left;
+    height: 120px;
+    width: 37%;
+    padding: 10px;
+}
+.menu-right {
+    height: 120px;
+    margin-left: 37%;
+    padding: 10px;
+    position: relative;
+}
+.menu-left > img {
+    width: 100%;
+}
+.menu-ul > li {
+    border-bottom: 1px solid #dfdddd;
+    overflow: hidden;
+    padding-bottom: 10px;
+}
+.menu-ul > li:last-child {
+    border: none;
+}
+.menu-ul > li h4 {
+    padding: 0 0 5px;
+}
+.menu-ul > li p {
+    font-size: 0.8em;
+    color: #aaa;
+}
+.menu-num {
+    padding: 5px 0  0;
+    font-size: 0.9em;
+}
+.munu-price {
+    color: #e4393c;
+    padding: 5px 0;
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    width: 100%;
+}
+.menu-shop {
+    height: 30px;
+    float: right;
+    margin-right: 40px;
+}
+.menu-shop > div {
+    float: left;
+}
+.menu-shop .shop-first {
+    color: #00a0dc;
+    width: 22px;
+    height: 22px;
+    border: 1px solid #00a0dc;
+    border-radius: 50%;
+    line-height: 22px;
+    text-align: center;
+    font-size: 16px;
+}
+.menu-shop .shop-second {
+    color: #93999f;
+    font-size: 0.8em;
+    line-height: 24px;
+    margin: 0 8px;
+}
+.menu-shop .shop-third {
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    background-color: #00a0dc;
+    border-radius: 50%;
+    line-height: 22px;
+    text-align: center;
+    font-size: 16px;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+  opacity: 0
+}
+.menu-left-shop {
+    float: left;
+    height: 120px;
+    width: 37%;
+}
+.menu-left-shop > img {
+    width: 100%;
+}
+.radio-check {
+    width: 1em;
+    height: 1em;
+    border: 1px solid #1f2d3d;
+    border-radius: 50%;
+    margin: 70px auto;
+}
+.radio-not-check {
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    margin: 70px auto;
+    background-color: #e4393c;
+    color: #fff;
+    text-align: center;
+}

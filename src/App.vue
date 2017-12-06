@@ -4,8 +4,8 @@
       ref="popover5"
       placement="bottom"
       v-model="visible2">
-    <el-button @click="putpwd">修改密码</el-button>
-     <el-button type="primary" @click="logout">退出</el-button> 
+      <el-button @click="putpwd">修改密码</el-button>
+      <el-button type="primary" @click="logout">退出</el-button> 
     </el-popover>
     <el-dialog title="修改密码" :visible.sync="dialogFormVisible" size="large">
       <el-form :model="form" :rules="rules" ref="form">
@@ -25,12 +25,10 @@
       </div>
     </el-dialog>
     <div class="header-home">
-      <el-button type="text" style="margin-right: 40px;" v-popover:popover5>{{user.name}}</el-button>
+      <el-button type="text" style="margin-right: 40px;" v-popover:popover5>{{loginname.name}}</el-button>
     </div>
     <section>
-      <div class="section">
-        <router-view></router-view>
-      </div>
+      <router-view></router-view>
     </section>
   </div>
 </template>
@@ -39,7 +37,6 @@
 export default {
   data () {
     return {
-      user: {},
       visible2: false,
       dialogFormVisible: false,
       form: {
@@ -56,58 +53,42 @@ export default {
   },
   computed: {
     loginname () {
-      return this.$store.state.user.name
+      return this.$store.state.user
     }
   },
   created () {
     console.log(this.loginname)
-    // this.$http.get(this.resource + '/api/user/loginfo', {params: {name: this.loginname}}).then((res) => {
-    this.$http.get(this.resource + '/api/user/loginfo', {params: {name: 'root'}}).then((res) => {
-      this.$store.dispatch('getUser', res.data)
-      var item = sessionStorage.getItem('item')
-      if (item == null) {
-        if (res.data.role.name == 'root') {
-          this.$router.push('/root/mine')
-        } else if (res.data.role.name == 'admin') {
-          this.$router.push('/admin/mine')
-        } else if (res.data.role.name == 'general') {
-          this.$router.push('/general/mine')
-        }
-        sessionStorage.setItem('item', 'show')
-      }
-      console.log(JSON.stringify(res.data))
-      this.user = res.data
+    if (!(this.$route.path == '/registered' || this.$route.path == '/login')) {
+      this.$http.get(this.resource + '/api/user/loginfo', {params: {name: this.loginname.name}}).then((res) => {
+        this.$store.dispatch('getUser', res.data)
+        this.loading = false
+      }).catch(() => {
+        this.loading = false
+        this.$router.push('/login')
+      })
+    } else {
       this.loading = false
-    }).catch(() => {
-      this.loading = false
-      this.$message({
-        showClose: true,
-        message: '登录超时，请重新登陆',
-        type: 'error'
-      });
-      sessionStorage.clear()
-      setTimeout(() => {
-       window.location.href = 'http://localhost:3000'
-      }, 2000)
-    })
+    }
   },
   methods: {
     putpwd () {
+      this.visible2 = false
       this.dialogFormVisible = true
-      var name = this.user.name
+      var name = this.loginname.name
       this.form.name = name
     },
     logout () {
-      this.$http.get(this.resource + '/api/loginfo/logout', {params: {name: this.loginname}}).then((res) => {
+      this.$http.get(this.resource + '/api/loginfo/logout', {params: {name: this.loginname.name}}).then((res) => {
         this.$message({
           showClose: true,
           message: '退出成功，下次再见呦',
           type: 'success'
         });
+        this.visible2 = false
         window.sessionStorage.clear()
         setTimeout(() => {
           this.$store.dispatch('getUser', '')
-          window.location.href = '/login'
+          this.$router.push('/login')
         }, 1000)
       })
     },

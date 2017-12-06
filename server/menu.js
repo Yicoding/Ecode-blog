@@ -11,10 +11,12 @@ var pool  = mysql.createPool({
 })
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: false }))
+
 // menu
 // /menu/findall
-router.get('/api/menu/findall', (req, res) => {
-	var sql = 'select * from menu'
+router.get('/api/menu/findall/:type/:order', (req, res) => {
+	var sql = 'select * from menu order by ' + req.params.type + ' ' + req.params.order
+	// console.log(req.params.type + ',' + req.params.order)
 	pool.getConnection(function(err, connection) {
 		connection.query(sql, (err, data, fields) => {
 			if (err) {

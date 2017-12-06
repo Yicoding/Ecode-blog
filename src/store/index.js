@@ -13,8 +13,8 @@ uname = window.sessionStorage.getItem('uname')
 const store = new Vuex.Store({
   state: {
     user: {
-    	name: uname
-    }
+      name: uname
+    },
   },
   getters: {
     // config: state => state.config
