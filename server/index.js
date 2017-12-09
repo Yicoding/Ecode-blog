@@ -24,6 +24,12 @@ app.use(menu)
 // 购物车
 var shop = require('./shop')
 app.use(shop)
+// 收藏
+var collect = require('./collect')
+app.use(collect)
+// 订单
+var order = require('./order')
+app.use(order)
 
 var server = app.listen(3000, function () {
  

@@ -53,10 +53,24 @@ import login from 'components/login/login'
 import registered from 'components/login/registered'
 
 // 菜单
-import menu from 'components/menu'
+import menulist from 'components/menulist'
+import menuinfo from 'components/menuinfo'
 
 // 购物车
 import shop from 'components/shop'
+
+// 我的收藏
+import collect from 'components/collect'
+
+// 我的订单
+import mineorderlist from 'components/mineorderlist'
+
+// 确认订单
+import orderlist from 'components/orderlist'
+
+// 单个订单详情
+import ordercontent from 'components/ordercontent'
+
 
 Vue.use(Router)
 
@@ -181,11 +195,14 @@ export default new Router({
             { path: '/', component: minemenu },
             { path: 'minemenu', component: minemenu },
             { path: 'mineinfo', component: mineinfo },
+            { path: 'collect', component: collect },
+            { path: 'mineorderlist', component: mineorderlist },
             { path: 'useroption', component: useroption },
             { path: 'sign', component: sign },
           ]
         },
-        { path: 'menu', component: menu },
+        { path: 'menulist', component: menulist },
+        { path: 'menuinfo', component: menuinfo },
         { path: 'shop', component: shop },
       ]
     },
@@ -212,16 +229,21 @@ export default new Router({
             { path: '/', component: minemenu },
             { path: 'minemenu', component: minemenu },
             { path: 'mineinfo', component: mineinfo },
+            { path: 'collect', component: collect },
+            { path: 'mineorderlist', component: mineorderlist },
             { path: 'useroption', component: useroption },
             { path: 'sign', component: sign },
           ]
         },
-        { path: 'menu', component: menu },
+        { path: 'menulist', component: menulist },
+        { path: 'menuinfo', component: menuinfo },
         { path: 'shop', component: shop },
       ]
     },
     { path: '/login', component: login },
     { path: '/registered', component: registered },
+    { path: '/orderlist', component: orderlist },
+    { path: '/ordercontent', component: ordercontent },
     // {
     //   path: '*',
     //   redirect: '/admin/mine'

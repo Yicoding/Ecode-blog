@@ -13,9 +13,9 @@
     <div v-if="user.role && user.role.name == 'admin'">
      <mt-cell title="个人信息" is-link to="/admin/mine/mineinfo"></mt-cell>
      <div style="height: 5px;"></div>
-     <mt-cell title="我的收藏" is-link to="/admin/mine/mineinfo"></mt-cell>
+     <mt-cell title="我的收藏" is-link to="/admin/mine/collect"></mt-cell>
      <div style="height: 5px;"></div>
-     <mt-cell title="我的订单" is-link to="/admin/mine/mineinfo"></mt-cell>
+     <mt-cell title="我的订单" is-link to="/admin/mine/mineorderlist"></mt-cell>
      <div style="height: 5px;"></div>
      <mt-cell title="我的评价" is-link to="/admin/mine/mineinfo"></mt-cell>
      <div style="height: 5px;"></div>
@@ -29,9 +29,9 @@
     <div v-if="user.role && user.role.name == 'general'">
      <mt-cell title="个人信息" is-link to="/general/mine/mineinfo"></mt-cell>
      <div style="height: 5px;"></div>
-     <mt-cell title="我的收藏" is-link to="/general/mine/mineinfo"></mt-cell>
+     <mt-cell title="我的收藏" is-link to="/general/mine/collect"></mt-cell>
      <div style="height: 5px;"></div>
-     <mt-cell title="我的订单" is-link to="/general/mine/mineinfo"></mt-cell>
+     <mt-cell title="我的订单" is-link to="/general/mine/mineorderlist"></mt-cell>
      <div style="height: 5px;"></div>
      <mt-cell title="我的评价" is-link to="/general/mine/mineinfo"></mt-cell>
      <div style="height: 5px;"></div>
@@ -41,7 +41,7 @@
      <div style="height: 5px;"></div>
      <mt-cell title="我的积分">350</mt-cell>
     </div>
-    <mt-button type="danger" size="large" @click.native="logout" style="position: fixed; bottom: 52px;">退出账号</mt-button>
+    <mt-button type="danger" size="large" @click.native="logout" style="position: fixed; bottom: 42px; height: 55px;">退出账号</mt-button>
     <div></div>
   </div>
 </template>
