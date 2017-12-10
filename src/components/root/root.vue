@@ -2,7 +2,7 @@
   <div>
     <router-view></router-view>
     <footer>
-    	<div class="bar left" v-popover:popover1>
+    	<!--<div class="bar left" v-popover:popover1>
     		<el-popover
     		  ref="popover1"
     		  placement="top"
@@ -15,7 +15,10 @@
     		  <div class="child-div" @click="getOrder"><router-link to="/root/order/past" class="tab">历史订单</router-link></div>
     		</el-popover>
     		<a class="tab" :class="order?'active':''"><span class="icon-books"></span><br/>订单</a>
-    	</div>
+      </div>-->
+      <div class="bar left">
+        <router-link to="/root/order" class="tab"><span class="icon-menu"></span><br/>订单</router-link>
+      </div>
       <div class="bar left">
         <router-link to="/root/system/menu" class="tab"><span class="icon-menu"></span><br/>菜单</router-link>
       </div>

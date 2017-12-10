@@ -97,7 +97,11 @@ export default {
         res.data.forEach((item) => {
           item.total = 0
           this.$http.get(this.resource + '/api/menu/saleNum', {params: {menu_id: item.id}}).then((result) => {
-            item.num = result.data.nums
+            if (result.data.nums) {
+              item.num = result.data.nums
+            } else {
+              item.num = 0
+            }
             this.$http.get(this.resource + '/api/rateAllNum/rate', {params: {menu_id: item.id}}).then((response) => {
               item.rateAllNum = response.data.rateAllNum
               this.listData.push(item)
@@ -112,7 +116,11 @@ export default {
         res.data.forEach((item) => {
           item.total = 0
           this.$http.get(this.resource + '/api/menu/saleNum', {params: {menu_id: item.id}}).then((result) => {
-            item.num = result.data.nums
+            if (result.data.nums) {
+              item.num = result.data.nums
+            } else {
+              item.num = 0
+            }
             this.$http.get(this.resource + '/api/rateAllNum/rate', {params: {menu_id: item.id}}).then((response) => {
               item.rateAllNum = response.data.rateAllNum
               this.listData.push(item)

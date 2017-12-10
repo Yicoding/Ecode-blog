@@ -14,22 +14,6 @@ router.use(bodyParser.urlencoded({ extended: false }))
 
 
 // order
-// order/surelist
-router.get('/api/order/surelist', (req, res) => {
-	var sql = 'select s.id, s.menu_id, s.total, s.isCheck, m.name, m.price, m.type_id, m.desc, m.picture from shop s inner join menu m on s.menu_id=m.id where s.user_id=? and isCheck="true"'
-	pool.getConnection(function(err, connection) {
-		connection.query(sql, [req.query.user_id], (err, data) => {
-			if (err) {
-				res.status(500).send(err)
-			} else {
-				console.log(data)
-				res.send(data)
-			}
-			connection.release();
-		})
-	})
-})
-
 // order/add
 router.post('/api/order/add', (req, res) => {
 	var sql = 'insert into orderlist values(null,?,?,0,null,null,?,?,?)'
@@ -77,6 +61,21 @@ router.get('/api/order/findall', (req, res) => {
 		})
 	})
 })
+// order/findByType
+router.get('/api/order/findByType', (req, res) => {
+	var sql = 'select * from orderlist where user_id=? and status=? order by createdTime DESC'
+	pool.getConnection(function(err, connection) {
+		connection.query(sql, [req.query.user_id, req.query.status], (err, data) => {
+			if (err) {
+				res.status(500).send(err)
+			} else {
+				console.log(data)
+				res.send(data)
+			}
+			connection.release();
+		})
+	})
+})
 // 再来一单
 router.post('/api/shop/addArr', (req, res) => {
 	let sql = 'insert into shop(id, user_id, menu_id, total, isCheck) values'
@@ -99,88 +98,11 @@ router.post('/api/shop/addArr', (req, res) => {
 	})
 })
 
-// /order/put
-router.put('/api/order/put', (req, res) => {
-	var searchsql = 'select 1 from order where menu_id=? and user_id=? limit 1'
-	pool.getConnection((err, connection) => {
-		connection.query(searchsql, [req.body.menu_id, req.body.user_id], (err, data) => {
-			if (err) {
-				res.status(500).send(err)
-			} else {
-				console.log(data[0])
-				let num
-				for (let k in data[0]) {
-					num = data[0][k]
-				}
-				console.log(num)
-				if (num == 1) {
-					console.log('更新数据')
-					let sql
-					req.body.action == 'add' ? sql = 'update order set total=total+1 where menu_id=? and user_id=?' : sql = 'update order set total=total-1 where menu_id=? and user_id=?'
-					connection.query(sql, [req.body.menu_id, req.body.user_id], (error, result) => {
-						if (error) {
-							res.status(500).send(error)
-						} else {
-							res.status(200).send({code: 'ok'})
-						}
-						connection.release();
-					})
-				} else {
-					console.log('新增')
-					let sql = 'insert into order values(null, ?, ?, 1, "false")'
-					connection.query(sql, [req.body.user_id, req.body.menu_id], (error, result) => {
-						if (error) {
-							res.status(500).send(error)
-						} else {
-							res.status(200).send({code: 'ok'})
-						}
-						connection.release();
-					})
-				}
-			} 
-		})
-	})
-})
-// order/delete
-router.delete('/api/order/remove', (req, res) => {
-	var searchsql = 'select total from order where menu_id=? and user_id=?'
-	pool.getConnection((err, connection) => {
-		connection.query(searchsql, [req.query.menu_id, req.query.user_id], (err, data) => {
-			if (err) {
-				res.status(500).send(err)
-			} else {
-				console.log(data)
-				if (data[0].total > 1) {
-					let sql = 'update order set total=total-1 where menu_id=? and user_id=?'
-					connection.query(sql, [req.query.menu_id, req.query.user_id], (error, result) => {
-						if (error) {
-							res.status(500).send(error)
-						} else {
-							res.status(200).send({code: 'ok'})
-						}
-						connection.release();
-					})
-				} else {
-					let sql = 'delete from order where menu_id=? and user_id=?'
-					connection.query(sql, [req.query.menu_id, req.query.user_id], (error, result) => {
-						if (error) {
-							res.status(500).send(error)
-						} else {
-							res.status(200).send({code: 'ok'})
-						}
-						connection.release();
-					})
-				}
-			} 
-		})
-	})
-})
-
-// order/multiple
-router.put('/api/order/multiple', (req, res) => {
-	var sql = 'update order set isCheck=? where user_id=?'
+// order/root/findAll
+router.get('/api/order/root/findAll', (req, res) => {
+	var sql = 'select * from orderlist order by createdTime DESC'
 	pool.getConnection(function(err, connection) {
-		connection.query(sql, [req.body.isCheck, req.body.user_id], (err, data) => {
+		connection.query(sql, (err, data) => {
 			if (err) {
 				res.status(500).send(err)
 			} else {
@@ -191,11 +113,26 @@ router.put('/api/order/multiple', (req, res) => {
 		})
 	})
 })
-// order/changeone
-router.put('/api/order/changeone', (req, res) => {
-	var sql = 'update order set isCheck=? where user_id=? and menu_id=?'
+// order/root/findByType
+router.get('/api/order/root/findByType', (req, res) => {
+	var sql = 'select * from orderlist where status=? order by createdTime DESC'
 	pool.getConnection(function(err, connection) {
-		connection.query(sql, [req.body.isCheck, req.body.user_id, req.body.menu_id], (err, data) => {
+		connection.query(sql, [req.query.status], (err, data) => {
+			if (err) {
+				res.status(500).send(err)
+			} else {
+				console.log(data)
+				res.send(data)
+			}
+			connection.release();
+		})
+	})
+})
+// 确认发货
+router.put('/api/order/surepost', (req, res) => {
+	var sql = 'update orderlist set status=1, acceptTime=? where id=?'
+	pool.getConnection(function(err, connection) {
+		connection.query(sql, [req.body.acceptTime, req.body.id], (err, data) => {
 			if (err) {
 				res.status(500).send(err)
 			} else {
@@ -207,11 +144,57 @@ router.put('/api/order/changeone', (req, res) => {
 	})
 })
 
-// order/deleteCheck
-router.delete('/api/order/deleteCheck', (req, res) => {
-	var sql = 'delete from order where id in (?) and user_id=?'
+// 确认收货
+router.put('/api/order/surearrive', (req, res) => {
+	var sql = 'update orderlist set status=2, completeTime=? where id=?'
 	pool.getConnection(function(err, connection) {
-		connection.query(sql, [req.query.data, req.query.user_id], (err, data) => {
+		connection.query(sql, [req.body.completeTime, req.body.id], (err, data) => {
+			if (err) {
+				res.status(500).send(err)
+			} else {
+				console.log(data)
+				res.send(data)
+			}
+			connection.release();
+		})
+	})
+})
+// 新增评论rate
+router.post('/api/rate/add', (req, res) => {
+	var sql = 'insert into ratelist values(null,?,?,?,?,?,?)'
+	pool.getConnection(function(err, connection) {
+		connection.query(sql, [req.body.menu_id, req.body.content, req.body.star, req.body.time, req.body.user_id, req.body.picture], (err, data) => {
+			if (err) {
+				res.status(500).send(err)
+			} else {
+				console.log(data)
+				res.send(data)
+			}
+			connection.release();
+		})
+	})
+})
+// 修改订单字段（改为已评价）
+router.put('/api/order/hasRate', (req, res) => {
+	var sql = 'update orderlist set content=? where id=?'
+	pool.getConnection(function(err, connection) {
+		connection.query(sql, [req.body.content, req.body.id], (err, data) => {
+			if (err) {
+				res.status(500).send(err)
+			} else {
+				console.log(data)
+				res.send(data)
+			}
+			connection.release();
+		})
+	})
+})
+// 查看自己的评价
+router.get('/api/ratelist/mine', (req, res) => {
+	var sql = 'select * from ratelist where user_id=? order by time DESC'
+	console.log(sql)
+	pool.getConnection(function(err, connection) {
+		connection.query(sql, [req.query.user_id], (err, data) => {
 			if (err) {
 				res.status(500).send(err)
 			} else {

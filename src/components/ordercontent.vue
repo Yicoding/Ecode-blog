@@ -20,12 +20,17 @@
             </div>
             <div class="orderlist-num">x{{item.total}}</div>
           </div>
+          <div style="clear: both;">
+          <mt-cell v-if="(listData.status == 2) && user.role && (user.role.name != 'root') && !item.hasRate" title="去评价该商品" is-link @click.native="gotoRate(index)"></mt-cell>
+          <mt-cell v-if="user.role && (user.role.name != 'root') && item.hasRate">已完成评价</mt-cell>
+            <div class="split"></div>
+          </div>
         </li>
       </ul>
     </div>
     <div class="split"></div>
     <mt-cell>共{{menuNum}}件商品</mt-cell>
-    <mt-button size="large" style="position: fixed; bottom: 0;" type="primary" @click="$router.go(-1)">返回到订单列表</mt-button>
+    <mt-button size="large" style="position: fixed; bottom: 0;" type="primary" @click="back">返回到订单列表</mt-button>
   </div>
 </template>
 
@@ -35,12 +40,16 @@ export default {
   	statusFilter (value) {
   		if (value == 0) {
   			return '待发货'
-  		}
+  		} else if (value == 1) {
+        return '待收货'
+      } else {
+        return '已完成'
+      }
   	}
   }, 
   data () {
     return {
-      listData: [],
+      listData: {},
       menuNum: 0,
     }
   },
@@ -50,13 +59,25 @@ export default {
     }
   },
   created () {
-    // console.log(JSON.parse(this.$route.query.item))
+    console.log(JSON.parse(this.$route.query.item))
     this.listData = JSON.parse(this.$route.query.item)
     this.listData.content.forEach((item) => {
     	this.menuNum += item.total
     })
   },
   methods: {
+    // 去评价
+    gotoRate (index) {
+      console.log(index)
+      this.$router.push({path: '/torate', query: {item: this.$route.query.item, index: index}})
+    },
+    back () {
+      if (this.user.role.nanme == 'root') {
+        this.$router.push({path: '/root/order'})
+      } else {
+        this.$router.push({path: '/' + this.user.role.name + '/mine/mineorderlist'})
+      }
+    },
     // 中国标准时间转换
     changedate (time, format) {
       var t = new Date(time);

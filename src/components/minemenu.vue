@@ -17,7 +17,7 @@
      <div style="height: 5px;"></div>
      <mt-cell title="我的订单" is-link to="/admin/mine/mineorderlist"></mt-cell>
      <div style="height: 5px;"></div>
-     <mt-cell title="我的评价" is-link to="/admin/mine/mineinfo"></mt-cell>
+     <mt-cell title="我的评价" is-link to="/admin/mine/minerate"></mt-cell>
      <div style="height: 5px;"></div>
      <mt-cell title="意见反馈" is-link to="/admin/mine/useroption"></mt-cell>
      <div style="height: 5px;"></div>
@@ -33,7 +33,7 @@
      <div style="height: 5px;"></div>
      <mt-cell title="我的订单" is-link to="/general/mine/mineorderlist"></mt-cell>
      <div style="height: 5px;"></div>
-     <mt-cell title="我的评价" is-link to="/general/mine/mineinfo"></mt-cell>
+     <mt-cell title="我的评价" is-link to="/general/mine/minerate"></mt-cell>
      <div style="height: 5px;"></div>
      <mt-cell title="意见反馈" is-link to="/general/mine/useroption"></mt-cell>
      <div style="height: 5px;"></div>

@@ -71,6 +71,11 @@ import orderlist from 'components/orderlist'
 // 单个订单详情
 import ordercontent from 'components/ordercontent'
 
+// 去评价
+import torate from 'components/torate'
+// 去评价
+import minerate from 'components/minerate'
+
 
 Vue.use(Router)
 
@@ -85,23 +90,24 @@ export default new Router({
           path: '/',
           component: order
         },
+        { path: 'menuinfo', component: menuinfo },
         {
           path: 'order',
           component: order,
-          children: [
-            {
-              path: '/',
-              component: unorder
-            },
-            {
-              path: 'unorder',
-              component: unorder
-            },
-            {
-              path: 'past',
-              component: past
-            },
-          ]
+          // children: [
+          //   {
+          //     path: '/',
+          //     component: unorder
+          //   },
+          //   {
+          //     path: 'unorder',
+          //     component: unorder
+          //   },
+          //   {
+          //     path: 'past',
+          //     component: past
+          //   },
+          // ]
         },
         {
           path: 'system',
@@ -197,6 +203,7 @@ export default new Router({
             { path: 'mineinfo', component: mineinfo },
             { path: 'collect', component: collect },
             { path: 'mineorderlist', component: mineorderlist },
+            { path: 'minerate', component: minerate },
             { path: 'useroption', component: useroption },
             { path: 'sign', component: sign },
           ]
@@ -231,6 +238,7 @@ export default new Router({
             { path: 'mineinfo', component: mineinfo },
             { path: 'collect', component: collect },
             { path: 'mineorderlist', component: mineorderlist },
+            { path: 'minerate', component: minerate },
             { path: 'useroption', component: useroption },
             { path: 'sign', component: sign },
           ]
@@ -244,6 +252,7 @@ export default new Router({
     { path: '/registered', component: registered },
     { path: '/orderlist', component: orderlist },
     { path: '/ordercontent', component: ordercontent },
+    { path: '/torate', component: torate },
     // {
     //   path: '*',
     //   redirect: '/admin/mine'

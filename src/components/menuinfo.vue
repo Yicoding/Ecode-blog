@@ -10,9 +10,9 @@
     	<h4>{{food.name}}</h4>
     	<div class="food-num">共销售{{nums}}份&nbsp;&nbsp;&nbsp;好评率{{favoraRate}}%</div>
     	<div class="food-price">&yen;{{food.price}}</div>
-    	<i @click="changeCollect('add')" v-show="iscollect == 0" class="el-icon-star-off food-collection"></i>
-    	<i @click="changeCollect('remove')" v-show="iscollect == 1" class="el-icon-star-on food-collection-full"></i>
-    	<div class="buy">
+    	<i @click="changeCollect('add')" v-show="(iscollect == 0) && user.role && (user.role.name != 'root')" class="el-icon-star-off food-collection"></i>
+    	<i @click="changeCollect('remove')" v-show="(iscollect == 1) && user.role && (user.role.name != 'root')" class="el-icon-star-on food-collection-full"></i>
+    	<div class="buy" v-if="user.role && (user.role.name != 'root')">
     		<el-button size="small" type="primary" v-if="total == 0" @click="add">加入购物车</el-button>
     		<transition name="fade">
               <div v-show="total > 0" class="shop-first" @click="remove">-</div>
@@ -85,6 +85,36 @@ export default {
 	      return this.$store.state.user
 	    }
   	},
+  	created () {
+  		console.log(this.$route.query.id)
+		this.$http.get(this.resource + '/api/menu/findone', {params: {id: this.$route.query.id}}).then((res) => {
+			this.food = res.data
+		})
+		this.total = 0
+		this.$http.get(this.resource + '/api/rate/all', {params: {menu_id: this.$route.query.id}}).then((res) => {
+			this.rateArr = res.data
+			this.$http.get(this.resource + '/api/greatNum/rate', {params: {menu_id: this.$route.query.id}}).then((result) => {
+				this.favoraRate = ((result.data.greatNum / res.data.length) * 100).toFixed(2) || 0
+			})
+		})
+		this.$http.get(this.resource + '/api/menu/saleNum', {params: {menu_id: this.$route.query.id}}).then((res) => {
+			if (res.data.nums) {
+				this.nums = res.data.nums
+			} else {
+				this.nums = 0
+			}
+		})
+		// imgArr
+		this.$http.get(this.resource + '/api/menu/imgArr', {params: {menu_id: this.$route.query.id}}).then((res) => {
+			this.imgArr = res.data
+		})
+		// 查看是否收藏改商品
+		setTimeout(() => {
+			this.$http.get(this.resource + '/api/collect/iscollect', {params: {menu_id: this.$route.query.id, user_id: this.user.id}}).then((res) => {
+				this.iscollect = res.data.iscollect
+			})
+		}, 500)
+  	},
 	activated () {
 		console.log(this.$route.query.id)
 		this.$http.get(this.resource + '/api/menu/findone', {params: {id: this.$route.query.id}}).then((res) => {
@@ -94,11 +124,15 @@ export default {
 		this.$http.get(this.resource + '/api/rate/all', {params: {menu_id: this.$route.query.id}}).then((res) => {
 			this.rateArr = res.data
 			this.$http.get(this.resource + '/api/greatNum/rate', {params: {menu_id: this.$route.query.id}}).then((result) => {
-				this.favoraRate = (result.data.greatNum / res.data.length) * 100 || 0
+				this.favoraRate = ((result.data.greatNum / res.data.length) * 100).toFixed(2) || 0
 			})
 		})
 		this.$http.get(this.resource + '/api/menu/saleNum', {params: {menu_id: this.$route.query.id}}).then((res) => {
-			this.nums = res.data.nums
+			if (res.data.nums) {
+				this.nums = res.data.nums
+			} else {
+				this.nums = 0
+			}
 		})
 		// imgArr
 		this.$http.get(this.resource + '/api/menu/imgArr', {params: {menu_id: this.$route.query.id}}).then((res) => {

@@ -1,6 +1,6 @@
 <template>
   <div>
-  <mt-cell :title="user.name + ' - ' + user.part.name + ' - ' + user.role.fullname"></mt-cell>
+  <mt-cell v-if="user.part" :title="user.name + ' - ' + user.part.name + ' - ' + user.role.fullname"></mt-cell>
     <div class="split"></div>
     <div>
       <ul class="menu-ul">
@@ -47,6 +47,7 @@ export default {
         menuNum: null,
         priceAll: null
       },
+      orderlistArr: [],
     }
   },
   computed: {
@@ -55,14 +56,12 @@ export default {
     }
   },
   created () {
-    setTimeout(() => {
-      this.$http.get(this.resource + '/api/order/surelist', {params: {user_id: this.user.id}}).then((res) => {
-        this.listData = res.data.map((item) => {
-          this.menuNum += item.total
-          return item
-        })
-      })
-    }, 500)
+    this.listData = JSON.parse(this.$route.query.dataArr)
+    this.menuNum = this.$route.query.menuNum
+    this.listData.forEach((item) => {
+      this.orderlistArr.push(item.menu_id)
+    })
+    console.log(this.orderlistArr)
   },
   methods: {
     // 取消订单
@@ -84,10 +83,12 @@ export default {
         console.log(JSON.stringify(this.orderForm))
         this.$http.post(this.resource + '/api/order/add', this.orderForm).then((res) => {
           this.$toast('下单成功了哦')
-          this.$http.delete(this.resource + '/api/shop/deleteCheck', {params: {data: String(this.$route.query.dataArr), user_id: this.user.id}}).then((res) => {
-            // this.$toast('删除成功')
-          })
-          this.$router.go(-1)
+          if (this.$route.query.isDelete == 'true') {
+            this.$http.delete(this.resource + '/api/shop/deleteCheck', {params: {data: String(this.orderlistArr), user_id: this.user.id}}).then((res) => {
+              // this.$toast('删除成功')
+            })
+          }
+          this.$router.push('/' + this.user.role.name + '/mine/mineorderlist')
         })
         this.listData.forEach((item) => {
           this.$http.post(this.resource + '/api/ordermenu/add', item).then((res) => {

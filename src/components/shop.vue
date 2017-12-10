@@ -191,15 +191,16 @@ export default {
     },
     // 去结算
     gosettle () {
+      console.log(JSON.stringify(this.listData))
       let dataArr = []
       this.listData.forEach((item) => {
         if (item.isCheck == 'true') {
-          dataArr.push(item.menu_id)
+          dataArr.push(item)
         }
       })
       if (dataArr.length > 0) {
         MessageBox.confirm('确定要购买选中的商品吗?').then(action => {
-          this.$router.push({path: '/orderlist', query: {dataArr: String(dataArr), priceAll: this.priceAll}})
+          this.$router.push({path: '/orderlist', query: {dataArr: JSON.stringify(dataArr), priceAll: this.priceAll, menuNum: this.checkNum, isDelete: 'true'}})
         })
       } else {
         this.$toast('您还没有选择商品哦')

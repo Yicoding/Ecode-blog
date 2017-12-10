@@ -1,5 +1,9 @@
 <template>
 	<div>
+		<div style="padding: 5px 10px;">
+		  <el-button size="small" icon="arrow-left" type="text" @click="$router.go(-1)">返回</el-button>
+		</div>
+		<div class="split"></div>
 		<vueSignature ref="signature" :sigOption="option" :w="'100%;'" :h="'300px'"></vueSignature> 
 		<!--<vueSignature ref="signature1" :sigOption="option"></vueSignature>--> 
 		<div style="text-align: center;">

@@ -406,11 +406,24 @@ a.active {
     bottom: 5px;
 }
 /*mineorderlist*/
-.img-box {
+.img-box-order {
     padding: 5px;
 }
-.img-box > img {
+.img-box-order > img {
     width: 20%;
     margin: 10px 2%;
     height: 80px;
+}
+/*tprate*/
+.rate-img {
+    width: 25%;
+    height: 100px;
+    padding: 10px;
+}
+.rate-img > img {
+    width: 100%;
+    height: 100%;
+}
+.rate-star {
+    padding: 20px;
 }
