@@ -1,16 +1,6 @@
-var express = require('express')
-var router = express.Router()
-var mysql = require('mysql')
-var bodyParser = require('body-parser')
-var pool  = mysql.createPool({
-	host: 'localhost',
-	user: 'root',
-	password: 'root',
-	port: '3306',
-	database: 'myblog'
-})
-router.use(bodyParser.json())
-router.use(bodyParser.urlencoded({ extended: false }))
+var router = require('./router.js')
+var pool = require('./pool.js')
+
 // role
 // /role/findall
 router.get('/api/role/findall', (req, res) => {
