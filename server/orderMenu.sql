@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: myblog
+-- Host: localhost    Database: ordermenu
 -- ------------------------------------------------------
 -- Server version	5.7.18-log
 
@@ -317,7 +317,7 @@ INSERT INTO `user` VALUES (1,'root',19,'123',1,4),(7,'ez',25,'123',3,2),(11,'sem
 UNLOCK TABLES;
 
 --
--- Dumping routines for database 'myblog'
+-- Dumping routines for database 'ordermenu'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -329,4 +329,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-11 10:57:23
+-- Dump completed on 2017-12-11 15:04:52
