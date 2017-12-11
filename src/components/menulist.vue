@@ -20,7 +20,7 @@
           <div class="menu-right">
             <div @click="jump(item)" style="overflow: hidden;">
               <h4 v-text="item.name"></h4>
-              <p v-text="item.desc"></p>
+              <p v-text="item.descript"></p>
               <div class="menu-num">共销售{{item.num}}&nbsp;&nbsp;&nbsp;共{{item.rateAllNum}}条评价</div>
             </div>
             <div class="munu-price">

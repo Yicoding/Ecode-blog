@@ -73,8 +73,10 @@ import ordercontent from 'components/ordercontent'
 
 // 去评价
 import torate from 'components/torate'
-// 去评价
+// 我的评价
 import minerate from 'components/minerate'
+// 编辑菜单
+import editmenu from 'components/editmenu'
 
 
 Vue.use(Router)
@@ -253,6 +255,7 @@ export default new Router({
     { path: '/orderlist', component: orderlist },
     { path: '/ordercontent', component: ordercontent },
     { path: '/torate', component: torate },
+    { path: '/editmenu', component: editmenu },
     // {
     //   path: '*',
     //   redirect: '/admin/mine'

@@ -26,7 +26,7 @@
     <div class="split"></div>
     <div class="info">
     	<div>商品信息</div>
-    	<p class="info-p">{{food.desc}}</p>
+    	<p class="info-p">{{food.descript}}</p>
     </div>
     <div class="split"></div>
     <div class="info">
@@ -94,7 +94,7 @@ export default {
 		this.$http.get(this.resource + '/api/rate/all', {params: {menu_id: this.$route.query.id}}).then((res) => {
 			this.rateArr = res.data
 			this.$http.get(this.resource + '/api/greatNum/rate', {params: {menu_id: this.$route.query.id}}).then((result) => {
-				this.favoraRate = ((result.data.greatNum / res.data.length) * 100).toFixed(2) || 0
+				this.favoraRate = (result.data.greatNum / res.data.length).toFixed(2) * 100 || 0
 			})
 		})
 		this.$http.get(this.resource + '/api/menu/saleNum', {params: {menu_id: this.$route.query.id}}).then((res) => {
@@ -124,7 +124,7 @@ export default {
 		this.$http.get(this.resource + '/api/rate/all', {params: {menu_id: this.$route.query.id}}).then((res) => {
 			this.rateArr = res.data
 			this.$http.get(this.resource + '/api/greatNum/rate', {params: {menu_id: this.$route.query.id}}).then((result) => {
-				this.favoraRate = ((result.data.greatNum / res.data.length) * 100).toFixed(2) || 0
+				this.favoraRate = (result.data.greatNum / res.data.length).toFixed(2) * 100 || 0
 			})
 		})
 		this.$http.get(this.resource + '/api/menu/saleNum', {params: {menu_id: this.$route.query.id}}).then((res) => {

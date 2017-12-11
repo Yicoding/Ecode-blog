@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div style="padding: 5px 10px;">
+      <el-button size="small" icon="arrow-left" type="text" @click="$router.go(-1)">返回</el-button>
+    </div>
   	<mt-header title="我的资料卡"></mt-header>
     <div class="div-title">个性签名</div>
     <div class="div-content" v-text="minesign"></div>

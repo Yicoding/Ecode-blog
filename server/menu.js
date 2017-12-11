@@ -1,6 +1,11 @@
 var router = require('./router.js')
 var pool = require('./pool.js')
+var express = require('express')
+var fs = require("fs");
+var multer  = require('multer');
 
+router.use(express.static('public'));
+router.use(multer({ dest: '/'}).array('image'));
 // menu
 // /menu/findall
 router.get('/api/menu/findall/:type/:order', (req, res) => {
@@ -51,47 +56,33 @@ router.get('/api/menu/like', (req, res) => {
 })
 // menu/add
 router.post('/api/menu/add', (req, res) => {
-	// res.send({name: req.body.name, fullname: req.body.fullname})
-	if (!req.body.name) {
-		res.status(500).send({'message':'角色不能为空'})
-	} else if (!req.body.fullname) {
-		res.status(500).send({'message':'角色名不能为空'})
-	} else {
-		var sql = 'insert into menu values(null,?,?)'
-		pool.getConnection(function(err, connection) {
-			connection.query(sql, [req.body.name, req.body.fullname], (err, data, fields) => {
-				if (err) {
-					res.status(500).send(err)
-				} else {
-					res.send(data)
-					console.log(data)
-				}
-				connection.release();
-			})
+	var sql = 'insert into menu values(null,?,?,1,?,?,?)'
+	pool.getConnection(function(err, connection) {
+		connection.query(sql, [req.body.name, req.body.price, req.body.descript, req.body.picture, req.body.createTime], (err, data) => {
+			if (err) {
+				res.status(500).send(err)
+			} else {
+				res.send(data)
+				console.log(data)
+			}
+			connection.release();
 		})
-		// connection.end()		
-	}
+	})
 })
 // menu/put
-router.put('/api/menu/put', (req, res) => {
-	if (!req.body.name) {
-		res.status(500).send([{'message':'角色不能为空'}])
-	} else if (!req.body.fullname) {
-		res.status(500).send({'message':'角色名不能为空'})
-	} else {
-		var sql = 'update menu set name=?,fullname=? where id=' + req.body.id
-		pool.getConnection(function(err, connection) {
-			connection.query(sql, [req.body.name, req.body.fullname], (err, data, fields) => {
-				if (err) {
-					res.status(500).send(err)
-				} else {
-					res.send(data)
-					console.log(data)
-				}
-				connection.release();
-			})
+router.put('/api/menu/edit', (req, res) => {
+	var sql = 'update menu set name=?, price=?, descript=?, picture=? where id=?'
+	pool.getConnection(function(err, connection) {
+		connection.query(sql, [req.body.name, req.body.price, req.body.descript, req.body.picture, req.body.id], (err, data) => {
+			if (err) {
+				res.status(500).send(err)
+			} else {
+				res.send(data)
+				console.log(data)
+			}
+			connection.release();
 		})
-	}
+	})
 })
 // menu/delete
 router.delete('/api/menu/:id', (req, res) => {
@@ -199,6 +190,85 @@ router.get('/api/menu/imgArr', (req, res) => {
 	})
 })
 
+// 上传商品封面图片
+router.post('/api/img/menucover', function (req, res) {
+  let nowDate = new Date();
+  console.log(req.files[0]);  // 上传的文件信息
 
+  // var des_file = __dirname + "/tmp/img/" + nowDate.getTime() + req.files[0].originalname;
+  var des_file = "../static/menucover/" + nowDate.getTime() + req.files[0].originalname;
+  fs.readFile( req.files[0].path, function (err, data) {
+    fs.writeFile(des_file, data, function (err) {
+      if( err ){
+        console.log( err );
+      } else {
+        response = {
+          message:'File uploaded successfully', 
+          filename:nowDate.getTime() + req.files[0].originalname
+        };
+      }
+      // console.log( response );
+      console.log( response.filename );
+      // res.end( JSON.stringify( response ) );
+      // res.end(response);
+      res.status(200).send({filename: response.filename});
+    });
+  });
+})
+ 
+
+// 上传商品列表图片
+router.post('/api/img/menulist', function (req, res) {
+  let nowDate = new Date();
+  console.log(req.files[0]);  // 上传的文件信息
+
+  // var des_file = __dirname + "/tmp/img/" + nowDate.getTime() + req.files[0].originalname;
+  var des_file = "../static/menulist/" + nowDate.getTime() + req.files[0].originalname;
+  fs.readFile( req.files[0].path, function (err, data) {
+    fs.writeFile(des_file, data, function (err) {
+      if( err ){
+        console.log( err );
+      } else {
+        response = {
+          message:'File uploaded successfully', 
+          filename:nowDate.getTime() + req.files[0].originalname
+        };
+      }
+      // console.log( response );
+      console.log( response.filename );
+      // res.end( JSON.stringify( response ) );
+      // res.end(response);
+      // res.status(200).send({filename: response.filename});
+      var sql = 'insert into menuimg values(null,?,?)'
+      let src = 'static/menulist/' + response.filename
+		pool.getConnection(function(err, connection) {
+			connection.query(sql, [req.body.menu_id, src], (err, data) => {
+				if (err) {
+					res.status(500).send(err)
+				} else {
+					res.send(data)
+					console.log(data)
+				}
+				connection.release();
+			})
+		})
+    });
+  });
+})
+// 删除商品列表图片
+router.delete('/api/imgArr/remove', (req, res) => {
+	var sql = 'delete from menuimg where src="' + req.query.src + '"'
+	pool.getConnection(function(err, connection) {
+		connection.query(sql, (err, data) => {
+			if (err) {
+				res.status(500).send(err)
+			} else {
+				res.send(data)
+				console.log(data)
+			}
+			connection.release();
+		})
+	})
+})
 
 module.exports = router

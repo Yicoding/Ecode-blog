@@ -4,10 +4,10 @@
     <div class="order-tabs">
       <el-tabs v-model="activeName">
         <el-tab-pane label="默认" name="id"></el-tab-pane>
-        <!--<el-tab-pane label="销量" name="num"></el-tab-pane>-->
         <el-tab-pane label="价格" name="price"></el-tab-pane>
         <el-tab-pane label="上架时间" name="createTime"></el-tab-pane>
       </el-tabs>
+      <el-button size="small" class="add-button" @click="add" style="color: #20A0FF;" icon="plus"></el-button>
       <el-button v-show="order == 'ASC'" size="small" class="order-button" @click="byOrder('DESC')" style="color: #e4393c;">&uarr;</el-button>
       <el-button v-show="order == 'DESC'" size="small" class="order-button" @click="byOrder('ASC')" style="color: #e4393c;">&darr;</el-button>
     </div>
@@ -20,12 +20,15 @@
           <div class="menu-right">
             <div @click="jump(item)" style="overflow: hidden;">
               <h4 v-text="item.name"></h4>
-              <p v-text="item.desc"></p>
+              <p v-text="item.descript"></p>
               <div class="menu-num">共销售{{item.num}}&nbsp;&nbsp;&nbsp;共{{item.rateAllNum}}条评价</div>
             </div>
             <div class="munu-price">
               <div class="left" style="width: 40%;" @click="jump(item)">
                 &yen;{{item.price}}
+              </div>
+              <div class="menu-shop">
+                <el-button icon="edit" type="text" @click="edit(item)"></el-button>
               </div>
             </div>
           </div>
@@ -123,19 +126,16 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
+    // 添加菜单
     add (item) {
-      item.total ++
-      this.$http.put(this.resource + '/api/shop/put', {user_id: this.user.id, menu_id: item.id, action: 'add'}).then((res) => {
-        console.log(JSON.stringify(res.data))
-        this.$store.dispatch('getonechangeNum', 'add')
-      })
+      this.$router.push({path: '/editmenu'})
+      window.sessionStorage.setItem('method', 'add')
     },
-    remove (item) {
-      item.total --
-      this.$http.delete(this.resource + '/api/shop/remove', {params: {user_id: this.user.id, menu_id: item.id}}).then((res) => {
-        console.log(JSON.stringify(res.data))
-        this.$store.dispatch('getonechangeNum', 'remove')
-      })
+    // 编辑菜单
+    edit (item) {
+      this.$router.push({path: '/editmenu', query: {id: item.id}})
+      window.sessionStorage.setItem('method', 'edit')
+      window.sessionStorage.setItem('menu_id', item.id)
     },
     // 跳转到单个商品详情
     jump (item) {

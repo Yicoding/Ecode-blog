@@ -14,7 +14,7 @@
             <div @click="jump(item)" style="overflow: hidden;">
               <h4 v-text="item.name"></h4>
               <div class="div-top"></div>
-              <p v-text="item.desc"></p>
+              <p v-text="item.descript"></p>
             </div>
             <div class="munu-price">
               <div class="left" style="width: 40%;" @click="jump(item)">

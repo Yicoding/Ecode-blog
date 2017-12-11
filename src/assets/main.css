@@ -123,6 +123,11 @@ a.active {
 .order-tabs {
     position: relative;
 }
+.add-button {
+    position: absolute;
+    right: 60px;
+    top: 8px;
+}
 .order-button {
     position: absolute;
     right: 20px;
@@ -426,4 +431,44 @@ a.active {
 }
 .rate-star {
     padding: 20px;
+}
+/*editmenu*/
+.cover-img {
+    text-align: center;
+}
+.cover-img img {
+    width: 100%;
+    height: 320px;
+}
+.btn-input {
+    padding: 7px 9px;
+    font-size: 12px;
+    border-radius: 4px;
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    background: #fff;
+    border: 1px solid #c4c4c4;
+    color: #1f2d3d;
+    margin: 0;
+}
+.file {
+    position: relative;
+    padding: 7px 9px;
+    font-size: 12px;
+    border-radius: 4px;
+    display: inline-block;
+    line-height: 1;
+    white-space: nowrap;
+    background: #fff;
+    border: 1px solid #c4c4c4;
+    color: #1f2d3d;
+    margin: 0;
+}
+.file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
 }

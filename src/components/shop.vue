@@ -14,7 +14,7 @@
           <div class="menu-right">
             <div @click="jump(item)">
               <h4 v-text="item.name"></h4>
-              <p style="margin-top: 12px;" v-text="item.desc"></p>
+              <p style="margin-top: 12px;" v-text="item.descript"></p>
             </div>
             <div class="munu-price">
               <div class="left" style="width: 40%;" @click="jump(item)">
