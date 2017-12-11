@@ -8,14 +8,12 @@
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:2000
+# 前端2000端口
 npm run dev
 
-# build for production with minification
-npm run build
+# 服务端3000端口(进入server目录)
+node index.js
 
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 # 效果图
 ## gif动图
