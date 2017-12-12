@@ -4,7 +4,7 @@ var pool = require('./pool.js')
 // shop
 // /shop/findall
 router.get('/api/shop/findall', (req, res) => {
-	var sql = 'select s.id, s.menu_id, s.total, s.isCheck, m.name, m.price, m.type_id, m.desc, m.picture from shop s inner join menu m on s.menu_id=m.id where s.user_id=?'
+	var sql = 'select s.id, s.menu_id, s.total, s.isCheck, m.name, m.price, m.type_id, m.descript, m.picture from shop s inner join menu m on s.menu_id=m.id where s.user_id=?'
 	pool.getConnection(function(err, connection) {
 		connection.query(sql, [req.query.uid], (err, data) => {
 			if (err) {

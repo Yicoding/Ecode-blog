@@ -14,7 +14,7 @@ router.get('/api/menu/findall/:type/:order', (req, res) => {
 	pool.getConnection(function(err, connection) {
 		connection.query(sql, (err, data, fields) => {
 			if (err) {
-				res.status(500).send(err)
+				res.status(500).send(err)// //777777777777777777`7`7`74527`////7`7`777`77`777777775565
 			} else {
 				res.send(data)
 				console.log(data)
