@@ -5,7 +5,7 @@ var fs = require("fs");
 var multer  = require('multer');
 
 router.use(express.static('public'));
-router.use(multer({ dest: '/'}).array('image'));
+router.use(multer({ dest: '/dd'}).array('image'));
 // menu
 // /menu/findall
 router.get('/api/menu/findall/:type/:order', (req, res) => {

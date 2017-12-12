@@ -13,8 +13,8 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(MintUI)
 Vue.prototype.$http = axios
-// Vue.prototype.resource = 'http://192.168.10.239:3000'
-Vue.prototype.resource = 'http://192.168.1.104:3000'
+Vue.prototype.resource = 'http://192.168.10.239:3000'
+// Vue.prototype.resource = 'http://192.168.1.104:3000'
 // Vue.prototype.resource = 'http://localhost:3000'
 import store from './store'
 // 签名
