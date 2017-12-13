@@ -29,7 +29,7 @@ export default {
       method: '',
     }
   },
-  mounted () {
+  activated () {
   	if (this.$route.query.id) {
     	this.method = 'put'
     	this.$http.get(this.resource + '/api/user/findone', {params: {id: this.$route.query.id}}).then((res) => {

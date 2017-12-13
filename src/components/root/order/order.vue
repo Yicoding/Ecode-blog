@@ -40,7 +40,11 @@ export default {
   	statusFilter (value) {
   		if (value == 0) {
   			return '待发货'
-  		}
+  		} else if (value == 1) {
+        return '待收货'
+      } else {
+        return '已完成'
+      }
   	}
   }, 
   data () {

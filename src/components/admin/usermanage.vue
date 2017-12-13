@@ -53,7 +53,10 @@ export default {
   		return this.$store.state.user
   	}
   },
-  mounted () {
+  // mounted () {
+  //   this.findall()
+  // },
+  activated () {
     this.findall()
   },
   data () {
