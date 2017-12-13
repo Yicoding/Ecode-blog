@@ -4,10 +4,10 @@
     <!-- 系统管理员 -->
     <div v-if="user.role && user.role.name == 'root'">
      <mt-cell title="个人信息" is-link to="/root/mine/mineinfo"></mt-cell>
-     <div style="height: 5px;"></div>
+     <!--<div style="height: 5px;"></div>
      <mt-cell title="用户意见" is-link to="/root/mine/useroption"></mt-cell>
      <div style="height: 5px;"></div>
-  	 <mt-cell title="个性签" is-link to="/root/mine/sign"></mt-cell>
+  	 <mt-cell title="个性签" is-link to="/root/mine/sign"></mt-cell>-->
     </div>
     <!-- 部门管理员 -->
     <div v-if="user.role && user.role.name == 'admin'">
@@ -18,10 +18,10 @@
      <mt-cell title="我的订单" is-link to="/admin/mine/mineorderlist"></mt-cell>
      <div style="height: 5px;"></div>
      <mt-cell title="我的评价" is-link to="/admin/mine/minerate"></mt-cell>
-     <div style="height: 5px;"></div>
+     <!--<div style="height: 5px;"></div>
      <mt-cell title="意见反馈" is-link to="/admin/mine/useroption"></mt-cell>
      <div style="height: 5px;"></div>
-     <mt-cell title="个性签" is-link to="/admin/mine/sign"></mt-cell>
+     <mt-cell title="个性签" is-link to="/admin/mine/sign"></mt-cell>-->
      <div style="height: 5px;"></div>
      <mt-cell title="我的积分">120</mt-cell>
     </div>
@@ -34,10 +34,10 @@
      <mt-cell title="我的订单" is-link to="/general/mine/mineorderlist"></mt-cell>
      <div style="height: 5px;"></div>
      <mt-cell title="我的评价" is-link to="/general/mine/minerate"></mt-cell>
-     <div style="height: 5px;"></div>
+     <!--<div style="height: 5px;"></div>
      <mt-cell title="意见反馈" is-link to="/general/mine/useroption"></mt-cell>
      <div style="height: 5px;"></div>
-     <mt-cell title="个性签" is-link to="/general/mine/sign"></mt-cell>
+     <mt-cell title="个性签" is-link to="/general/mine/sign"></mt-cell>-->
      <div style="height: 5px;"></div>
      <mt-cell title="我的积分">350</mt-cell>
     </div>

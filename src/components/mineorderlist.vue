@@ -43,7 +43,11 @@ export default {
   	statusFilter (value) {
   		if (value == 0) {
   			return '待发货'
-  		}
+  		} else if (value == 1) {
+        return '待收货'
+      } else {
+        return '已完成'
+      }
   	}
   }, 
   data () {
@@ -108,7 +112,12 @@ export default {
     surearrive (item) {
       MessageBox.confirm('确定要收货吗?').then(action => {
         this.$http.put(this.resource + '/api/order/surearrive', {id: item.id, completeTime: this.changedate(new Date(), 'yyyy-MM-dd HH:mm:ss')}).then(() => {
-
+          if (this.activeName == 'all') {
+            this.findall()
+          } else {
+            this.findByType()
+          }
+          this.$toast('收获成功呦，亲-_- 快去已完成订单去评价吧')
         })
       })
     },

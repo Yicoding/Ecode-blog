@@ -8,7 +8,10 @@
 	    	<img :src="menu.picture" alt="" v-show="menu.picture"/>
 	    	<div class="div-top"></div>
 	    	<form enctype="multipart/form-data" id="formExcel">
-    			<a href="javascript:;" class="file"><span>{{menu.picture? '修改封面图片' : '添加封面图片'}}</span><input type="file" name="image" id="image" accept="image/*"/></a>
+    			<a href="javascript:;" class="file">
+    				<span>{{menu.picture? '修改封面图片' : '添加封面图片'}}</span>
+    				<input type="file" name="image" id="image" accept="image/*"/>
+    			</a>
     		</form>
 	    	<div class="div-top"></div>
 	    </div>

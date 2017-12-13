@@ -3,9 +3,9 @@ var pool = require('./pool.js')
 
 // 查看个人信息
 router.get('/api/user/loginname', (req, res) => {
-	var sql = 'select user.id, user.name, user.age, user.password, role.id as roleId, role.name as roleName, role.fullname as rolefullName, part.id as partId, part.name as partName from user join role on user.role_id=role.id join part on user.part_id=part.id where user.name=?'
+	var sql = 'select u.id, u.name, u.age, u.password, u.minesign, u.artsign, u.avatar, r.id rid, r.name rolename, r.fullname, p.id pid, p.name pname from user u inner join role r on u.role_id=r.id join part p on u.part_id=p.id where u.id=?'
 	pool.getConnection((err, connection) => {
-		connection.query(sql, [req.query.name], (err, data, fields) => {
+		connection.query(sql, [req.query.id], (err, data, fields) => {
 			if (err) {
 				console.log(err)
 				res.status(500).send(err)
@@ -18,14 +18,17 @@ router.get('/api/user/loginname', (req, res) => {
 					age: data[0].age,
 					password: data[0].password,
 					role: {
-						id: data[0].roleId,
-						name: data[0].roleName,
-						fullname: data[0].rolefullName
+						id: data[0].rid,
+						name: data[0].rolename,
+						fullname: data[0].fullname
 					},
 					part: {
-						id: data[0].partId,
-						name: data[0].partName
-					}
+						id: data[0].pid,
+						name: data[0].pname
+					},
+					minesign: data[0].minesign,
+					artsign: data[0].artsign,
+					avatar: data[0].avatar
 				}
 				res.send(result)
 
@@ -96,7 +99,7 @@ router.post('/api/user/rootadd', (req, res) => {
 	} else if (req.body.part_id == 0) {
 		res.send({code: 500, message: '请选择一个部门'})
 	} else {
-		var sql = 'insert into user values(null,?,?,?,?,?)'
+		var sql = 'insert into user values(null,?,?,?,?,?,null,null,null)'
 		pool.getConnection((err, connection) => {
 			connection.query(sql, [req.body.name, req.body.age, req.body.password, req.body.role_id, req.body.part_id], (err, data) => {
 				if (err) {
@@ -143,7 +146,7 @@ router.post('/api/user/adminadd', (req, res) => {
 	} else if (!req.body.password) {
 		res.send({code: 500, message: '密码不能为空'})
 	} else {
-		var sql = 'insert into user values(null,?,?,?,?,?)'
+		var sql = 'insert into user values(null,?,?,?,?,?,null,null,null,)'
 		pool.getConnection((err, connection) => {
 			connection.query(sql, [req.body.name, req.body.age, req.body.password, req.body.role_id, req.body.part_id], (err, data) => {
 				if (err) {
@@ -242,6 +245,21 @@ router.get('/api/part/:id/admin', (req, res) => {
 					})
 				}
 				res.send(result)
+			}
+			connection.release();
+		})
+	})
+})
+// 个人中心修改用户信息
+router.put('/api/user/selfedit', (req, res) => {
+	let sql = 'update user set name=?, age=?, minesign=?, artsign=? where id=?'
+	pool.getConnection((error, connection) => {
+		connection.query(sql, [req.body.name, req.body.age, req.body.minesign, req.body.artsign, req.body.id], (err, data) => {
+			if (err) {
+				res.status(500).send(err)
+			} else {
+				res.send(data)
+				console.log(data)
 			}
 			connection.release();
 		})

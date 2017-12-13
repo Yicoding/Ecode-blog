@@ -25,7 +25,7 @@
       </div>
     </el-dialog>
     <div class="header-home">
-      <el-button type="text" style="margin-right: 40px;" v-popover:popover5>{{loginname.name}}</el-button>
+      <el-button type="text" style="margin-right: 40px;" v-popover:popover5>{{user.name}}</el-button>
     </div>
     <section>
       <router-view></router-view>
@@ -49,17 +49,18 @@ export default {
         newpwd: [{required: true, message: '请输入新密码', trigger: 'blur'}]
       },
       loading: true,
+      loginId: null,
     }
   },
   computed: {
-    loginname () {
+    user () {
       return this.$store.state.user
     }
   },
   created () {
-    console.log(this.loginname)
+    this.loginId = window.sessionStorage.getItem('loginId')
     if (!(this.$route.path == '/registered' || this.$route.path == '/login')) {
-      this.$http.get(this.resource + '/api/user/loginfo', {params: {name: this.loginname.name}}).then((res) => {
+      this.$http.get(this.resource + '/api/user/loginname', {params: {id: this.loginId}}).then((res) => {
         this.$store.dispatch('getUser', res.data)
         this.loading = false
       }).catch(() => {
@@ -74,23 +75,19 @@ export default {
     putpwd () {
       this.visible2 = false
       this.dialogFormVisible = true
-      var name = this.loginname.name
+      var name = this.user.name
       this.form.name = name
     },
     logout () {
-      this.$http.get(this.resource + '/api/loginfo/logout', {params: {name: this.loginname.name}}).then((res) => {
-        this.$message({
-          showClose: true,
-          message: '退出成功，下次再见呦',
-          type: 'success'
-        });
-        this.visible2 = false
-        window.sessionStorage.clear()
-        setTimeout(() => {
-          this.$store.dispatch('getUser', '')
-          this.$router.push('/login')
-        }, 1000)
+      this.$message({
+        showClose: true,
+        message: '退出成功，下次再见呦',
+        type: 'success'
       })
+      window.sessionStorage.clear()
+      this.visible2 = false
+      this.$store.dispatch('getUser', '')
+      this.$router.push('/login')
     },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {

@@ -239,8 +239,8 @@ router.post('/api/img/menulist', function (req, res) {
       // res.end( JSON.stringify( response ) );
       // res.end(response);
       // res.status(200).send({filename: response.filename});
-      var sql = 'insert into menuimg values(null,?,?)'
-      let src = 'static/menulist/' + response.filename
+        var sql = 'insert into menuimg values(null,?,?)'
+        let src = 'static/menulist/' + response.filename
 		pool.getConnection(function(err, connection) {
 			connection.query(sql, [req.body.menu_id, src], (err, data) => {
 				if (err) {
@@ -271,4 +271,44 @@ router.delete('/api/imgArr/remove', (req, res) => {
 	})
 })
 
+// 上传用户头像
+router.post('/api/img/user', function (req, res) {
+  let nowDate = new Date();
+  console.log(req.files[0]);  // 上传的文件信息
+
+  // var des_file = __dirname + "/tmp/img/" + nowDate.getTime() + req.files[0].originalname;
+  var des_file = "../static/user/" + nowDate.getTime() + req.files[0].originalname;
+  fs.readFile( req.files[0].path, function (err, data) {
+    fs.writeFile(des_file, data, function (err) {
+      if( err ){
+        console.log( err );
+      } else {
+        response = {
+          message:'File uploaded successfully', 
+          filename:nowDate.getTime() + req.files[0].originalname
+        };
+      }
+      // console.log( response );
+      console.log( response.filename );
+      // res.end( JSON.stringify( response ) );
+      // res.end(response);
+      // res.status(200).send({filename: response.filename});
+        var sql = 'update user set avatar=? where id=?'
+        let avatar = 'static/user/' + response.filename
+		pool.getConnection(function(err, connection) {
+			connection.query(sql, [avatar, req.body.id], (err, data) => {
+				if (err) {
+					res.status(500).send(err)
+				} else {
+					// res.send(data)
+					res.send(response.filename)
+					console.log(data)
+				}
+				connection.release();
+			})
+		})
+    });
+  });
+})
+ 
 module.exports = router

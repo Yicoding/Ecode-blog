@@ -472,3 +472,15 @@ a.active {
     top: 0;
     opacity: 0;
 }
+/*user*/
+.user-img {
+    overflow: hidden;
+    background-color: #f3f5f7; 
+}
+.user-img > img {
+    display: block;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 10px auto;
+}

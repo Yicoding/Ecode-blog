@@ -43,35 +43,31 @@
       };
     },
     methods: {
-      submitForm(formName) {
+      submitForm (formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$http.get(this.resource + '/api/user/findByName', {params: {name: this.ruleForm.name, password: this.ruleForm.password}}).then((res) => {
-            	console.log(res.data)
-            	if (res.data.code == 200) {
-                window.sessionStorage.setItem('uname', this.ruleForm.name)
-	            	this.$message({
-  			          showClose: true,
-  			          message: '恭喜你，登录成功！欢迎来到home',
-  			          type: 'success'
-  			        });
-                this.$http.get(this.resource + '/api/user/loginfo', {params: {name: this.ruleForm.name}}).then((res) => {
-                  this.$store.dispatch('getUser', res.data)
-                  if (res.data.role.name == 'root') {
-                    this.$router.push('/root/mine')
-                  } else if (res.data.role.name == 'admin') {
-                    this.$router.push('/admin/mine')
-                  } else if (res.data.role.name == 'general') {
-                    this.$router.push('/general/mine')
-                  }
-                })
-            	} else if (res.data.code == 500) {
-            		this.$message({
-  			          showClose: true,
-  			          message: res.data.message,
-  			          type: 'error'
-  			        });
-            	}
+            this.$http.get(this.resource + '/api/user/login', {params: {name: this.ruleForm.name, password: this.ruleForm.password}}).then((res) => {
+              // console.log(res.data)
+              this.$store.dispatch('getUser', res.data)
+              window.sessionStorage.setItem('loginId', res.data.id)
+              this.$message({
+                showClose: true,
+                message: '恭喜你，登录成功！欢迎来到home',
+                type: 'success'
+              });
+              if (res.data.role.name == 'root') {
+                this.$router.push('/root/mine')
+              } else if (res.data.role.name == 'admin') {
+                this.$router.push('/admin/mine')
+              } else if (res.data.role.name == 'general') {
+                this.$router.push('/general/mine')
+              }
+            }).catch((err) => {
+              this.$message({
+                showClose: true,
+                message: '用户名或密码不正确',
+                type: 'error'
+              });
             })
           } else {
             console.log('error submit!!');
@@ -79,7 +75,7 @@
           }
         });
       },
-      resetForm(formName) {
+      resetForm (formName) {
         this.$refs[formName].resetFields();
       },
       register () {

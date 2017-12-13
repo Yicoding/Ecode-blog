@@ -4,13 +4,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
-var uname = ''
-uname = window.sessionStorage.getItem('uname')
 const store = new Vuex.Store({
   state: {
-    user: {
-      name: uname
-    },
+    user: {},
     shopNum: 0,
     priceAll: 0,
   },

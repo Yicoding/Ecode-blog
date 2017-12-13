@@ -7,8 +7,6 @@ import rootpage from 'components/root/root'
 // order (二级路由)
 import order from 'components/root/order/order'
 // (三级路由)
-import unorder from 'components/root/order/unorder'
-import past from 'components/root/order/past'
 // system (二级路由)
 import system from 'components/root/system/system'
 // (三级路由)
@@ -23,13 +21,10 @@ import roleinfo from 'components/root/system/roleinfo'
 // admin
 // admin (一级路由)
 import admin from 'components/admin/admin'
-// myorder (二级路由)
-import myorder from 'components/myorder/myorder'
+// user (二级路由)
 import usermanage from 'components/admin/usermanage'
 import userchange from 'components/admin/userchange'
 // (三级路由)
-import today from 'components/myorder/today'
-import pastorder from 'components/myorder/pastorder'
 
 // general 
 // general (一级路由)
@@ -77,6 +72,8 @@ import torate from 'components/torate'
 import minerate from 'components/minerate'
 // 编辑菜单
 import editmenu from 'components/editmenu'
+// 编辑个人信息
+import edituser from 'components/edituser'
 
 
 Vue.use(Router)
@@ -88,65 +85,21 @@ export default new Router({
       path: '/root',
       component: rootpage,
       children: [
-        {
-          path: '/',
-          component: order
-        },
+        { path: '/', component: order },
+        { path: 'order', component: order },
         { path: 'menuinfo', component: menuinfo },
-        {
-          path: 'order',
-          component: order,
-          // children: [
-          //   {
-          //     path: '/',
-          //     component: unorder
-          //   },
-          //   {
-          //     path: 'unorder',
-          //     component: unorder
-          //   },
-          //   {
-          //     path: 'past',
-          //     component: past
-          //   },
-          // ]
-        },
         {
           path: 'system',
           component: system,
           children: [
-            {
-              path: '/',
-              component: sysmenu
-            },
-            {
-              path: 'menu',
-              component: sysmenu
-            },
-            {
-              path: 'user',
-              component: user
-            },
-            {
-              path: 'userinfo',
-              component: userinfo
-            },
-            {
-              path: 'part',
-              component: part
-            },
-            {
-              path: 'partinfo',
-              component: partinfo
-            },
-            {
-              path: 'role',
-              component: role
-            },
-            {
-              path: 'roleinfo',
-              component: roleinfo
-            },
+            { path: '/', component: sysmenu },
+            { path: 'menu', component: sysmenu },
+            { path: 'user', component: user },
+            { path: 'userinfo', component: userinfo },
+            { path: 'part', component: part },
+            { path: 'partinfo', component: partinfo },
+            { path: 'role', component: role },
+            { path: 'roleinfo', component: roleinfo },
           ]
         },
         {
@@ -166,36 +119,8 @@ export default new Router({
       path: '/admin',
       component: admin,
       children: [
-        {
-          path: '/',
-          component: myorder
-        },
-        {
-          path: 'myorder',
-          component: myorder,
-          children: [
-            {
-              path: '/',
-              component: today
-            },
-            {
-              path: 'today',
-              component: today
-            },
-            {
-              path: 'pastorder',
-              component: pastorder
-            }
-          ]
-        },
-        {
-          path: 'usermanage',
-          component: usermanage
-        },
-        {
-          path: 'userchange',
-          component: userchange
-        },
+        { path: 'usermanage', component: usermanage },
+        { path: 'userchange', component: userchange },
         {
           path: 'mine',
           component: mine,
@@ -219,18 +144,6 @@ export default new Router({
       path: '/general',
       component: general,
       children: [
-        {
-          path: '/',
-          component: today
-        },
-        {
-          path: 'today',
-          component: today
-        },
-        {
-          path: 'pastorder',
-          component: pastorder
-        },
         {
           path: 'mine',
           component: mine,
@@ -256,9 +169,6 @@ export default new Router({
     { path: '/ordercontent', component: ordercontent },
     { path: '/torate', component: torate },
     { path: '/editmenu', component: editmenu },
-    // {
-    //   path: '*',
-    //   redirect: '/admin/mine'
-    // }
+    { path: '/edituser', component: edituser },
   ]
 })
