@@ -170,5 +170,6 @@ export default new Router({
     { path: '/torate', component: torate },
     { path: '/editmenu', component: editmenu },
     { path: '/edituser', component: edituser },
+    { path: '*', redirect: '/login' },
   ]
 })

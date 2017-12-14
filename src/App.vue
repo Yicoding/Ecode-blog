@@ -65,9 +65,9 @@ export default {
         this.loading = false
       }).catch(() => {
         this.loading = false
-        this.$router.push('/login')
       })
     } else {
+      this.$router.push('/login')
       this.loading = false
     }
   },
