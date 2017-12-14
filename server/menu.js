@@ -1,7 +1,8 @@
 var router = require('./router.js')
 var pool = require('./pool.js')
 var fs = require("fs");
-
+var multipart = require('connect-multiparty')
+var multipartMiddleware = multipart()
 // menu
 // /menu/findall
 router.get('/api/menu/findall/:type/:order', (req, res) => {
@@ -187,26 +188,24 @@ router.get('/api/menu/imgArr', (req, res) => {
 })
 
 // 上传商品封面图片
-router.post('/api/img/menucover', function (req, res) {
+router.post('/api/img/menucover', multipartMiddleware, function (req, res) {
   let nowDate = new Date();
-  console.log(req.files[0]);  // 上传的文件信息
+  // console.log(req.files[0]);  // 上传的文件信息
+  console.log(req.files.image);  // 上传的文件信息
 
   // var des_file = __dirname + "/tmp/img/" + nowDate.getTime() + req.files[0].originalname;
-  var des_file = "../static/menucover/" + nowDate.getTime() + req.files[0].originalname;
-  fs.readFile( req.files[0].path, function (err, data) {
+  var des_file = "../static/menucover/" + nowDate.getTime() + req.files.image.originalFilename;
+  fs.readFile( req.files.image.path, function (err, data) {
     fs.writeFile(des_file, data, function (err) {
       if( err ){
         console.log( err );
       } else {
         response = {
           message:'File uploaded successfully', 
-          filename:nowDate.getTime() + req.files[0].originalname
+          filename:nowDate.getTime() + req.files.image.originalFilename
         };
       }
-      // console.log( response );
       console.log( response.filename );
-      // res.end( JSON.stringify( response ) );
-      // res.end(response);
       res.status(200).send({filename: response.filename});
     });
   });
@@ -214,20 +213,20 @@ router.post('/api/img/menucover', function (req, res) {
  
 
 // 上传商品列表图片
-router.post('/api/img/menulist', function (req, res) {
+router.post('/api/img/menulist', multipartMiddleware, function (req, res) {
   let nowDate = new Date();
-  console.log(req.files[0]);  // 上传的文件信息
+  console.log(req.files.image);  // 上传的文件信息
 
   // var des_file = __dirname + "/tmp/img/" + nowDate.getTime() + req.files[0].originalname;
-  var des_file = "../static/menulist/" + nowDate.getTime() + req.files[0].originalname;
-  fs.readFile( req.files[0].path, function (err, data) {
+  var des_file = "../static/menulist/" + nowDate.getTime() + req.files.image.originalFilename;
+  fs.readFile( req.files.image.path, function (err, data) {
     fs.writeFile(des_file, data, function (err) {
       if( err ){
         console.log( err );
       } else {
         response = {
           message:'File uploaded successfully', 
-          filename:nowDate.getTime() + req.files[0].originalname
+          filename:nowDate.getTime() + req.files.image.originalFilename
         };
       }
       // console.log( response );
@@ -268,20 +267,20 @@ router.delete('/api/imgArr/remove', (req, res) => {
 })
 
 // 上传用户头像
-router.post('/api/img/user', function (req, res) {
+router.post('/api/img/user', multipartMiddleware, function (req, res) {
   let nowDate = new Date();
-  console.log(req.files[0]);  // 上传的文件信息
+  console.log(req.files.image);  // 上传的文件信息
 
   // var des_file = __dirname + "/tmp/img/" + nowDate.getTime() + req.files[0].originalname;
-  var des_file = "../static/user/" + nowDate.getTime() + req.files[0].originalname;
-  fs.readFile( req.files[0].path, function (err, data) {
+  var des_file = "../static/user/" + nowDate.getTime() + req.files.image.originalFilename;
+  fs.readFile( req.files.image.path, function (err, data) {
     fs.writeFile(des_file, data, function (err) {
       if( err ){
         console.log( err );
       } else {
         response = {
           message:'File uploaded successfully', 
-          filename:nowDate.getTime() + req.files[0].originalname
+          filename:nowDate.getTime() + req.files.image.originalFilename
         };
       }
       // console.log( response );
