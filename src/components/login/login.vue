@@ -62,6 +62,7 @@
               } else if (res.data.role.name == 'general') {
                 this.$router.push('/general/mine')
               }
+              this.$store.dispatch('getTimeup', false)
             }).catch((err) => {
               this.$message({
                 showClose: true,

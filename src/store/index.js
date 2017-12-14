@@ -9,6 +9,7 @@ const store = new Vuex.Store({
     user: {},
     shopNum: 0,
     priceAll: 0,
+    timeup: true,
   },
   getters: {
     // config: state => state.config
@@ -37,6 +38,9 @@ const store = new Vuex.Store({
         state.priceAll -= data.price
       }
     },
+    setTimeup (state, data) {
+      state.timeup = data
+    },
   },
   actions: {
     getUser (store, data) {
@@ -53,7 +57,10 @@ const store = new Vuex.Store({
     },
     getonepriceAll (store, data) {
       store.commit('setonepriceAll', data)
-    }
+    },
+    getTimeup (store, data) {
+      store.commit('setTimeup', data)
+    },
   }
 })
 
