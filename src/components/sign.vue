@@ -31,8 +31,8 @@ export default {
 			var svg = this.$refs.signature.save('image/svg+xml')
 			// console.log(png)
 			// console.log(jpeg)
-			console.log(svg)
-			console.log(svg.length)
+			// console.log(svg)
+			console.log(png.length)
 			this.bindSrc = svg
 		},
 		clear () {

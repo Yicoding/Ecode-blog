@@ -1,4 +1,4 @@
-# orderMenu
+# orderMeal
 
 > Personal orderMeal use of vue,node,express and mysql
 
@@ -16,41 +16,33 @@ node index.js
 
 ```
 # 效果图
-## gif动图
-![image](https://github.com/Yicoding/Ecode-blog/raw/new/src/assets/githubImg/example.gif)
+## 注册
+![image](https://github.com/Yicoding/Ecode-blog/raw/final/static/gif/register.gif)
+
+## 普通用户登录
+![image](https://github.com/Yicoding/Ecode-blog/raw/final/static/gif/general.gif)
+
+## 部门管理员登录
+![image](https://github.com/Yicoding/Ecode-blog/raw/final/static/gif/admin.gif)
+
+## 系统管理员登录
+![image](https://github.com/Yicoding/Ecode-blog/raw/final/static/gif/root.gif)
+
+## 购物
+![image](https://github.com/Yicoding/Ecode-blog/raw/final/static/gif/shop.gif)
+
+## 修改订单状态
+![image](https://github.com/Yicoding/Ecode-blog/raw/final/static/gif/editorder.gif)
+
+## 修改菜单
+![image](https://github.com/Yicoding/Ecode-blog/raw/final/static/gif/editmenu.gif)
+
+## 评论
+![image](https://github.com/Yicoding/Ecode-blog/raw/final/static/gif/rate.gif)
+
+## 收藏
+![image](https://github.com/Yicoding/Ecode-blog/raw/final/static/gif/collect.gif)
 
 
-## 登录页面
-![image](https://github.com/Yicoding/Ecode-blog/raw/new/src/assets/githubImg/12.png)
-
-
-## 注册页面
-![image](https://github.com/Yicoding/Ecode-blog/raw/new/src/assets/githubImg/13.png)
-
-
-## 超级系统管理员登录界面
-![image](https://github.com/Yicoding/Ecode-blog/raw/new/src/assets/githubImg/1.png)
-
-![image](https://github.com/Yicoding/Ecode-blog/raw/new/src/assets/githubImg/2.png)
-
-![image](https://github.com/Yicoding/Ecode-blog/raw/new/src/assets/githubImg/3.png)
-
-![image](https://github.com/Yicoding/Ecode-blog/raw/new/src/assets/githubImg/4.png)
-
-![image](https://github.com/Yicoding/Ecode-blog/raw/new/src/assets/githubImg/5.png)
-
-## 部门管理员登录界面
-![image](https://github.com/Yicoding/Ecode-blog/raw/new/src/assets/githubImg/6.png)
-
-![image](https://github.com/Yicoding/Ecode-blog/raw/new/src/assets/githubImg/7.png)
-
-![image](https://github.com/Yicoding/Ecode-blog/raw/new/src/assets/githubImg/8.png)
-
-## 普通员工登录界面
-![image](https://github.com/Yicoding/Ecode-blog/raw/new/src/assets/githubImg/9.png)
-
-![image](https://github.com/Yicoding/Ecode-blog/raw/new/src/assets/githubImg/10.png)
-
-![image](https://github.com/Yicoding/Ecode-blog/raw/new/src/assets/githubImg/11.png)
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

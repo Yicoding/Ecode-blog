@@ -72,7 +72,7 @@ export default {
       this.$router.push({path: '/torate', query: {item: this.$route.query.item, index: index}})
     },
     back () {
-      if (this.user.role.nanme == 'root') {
+      if (this.user.role.name == 'root') {
         this.$router.push({path: '/root/order'})
       } else {
         this.$router.push({path: '/' + this.user.role.name + '/mine/mineorderlist'})
