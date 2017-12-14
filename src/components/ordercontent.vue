@@ -4,7 +4,7 @@
     <div class="split"></div>
     <div>
       <ul class="menu-ul">
-        <li v-for="(item, index) in listData.content" :key="item.id">
+        <li v-for="(item, index) in listData.content" :key="item.id" @click="jump(item)">
           <div class="menu-left">
             <img :src="item.picture" alt=""/>
           </div>
@@ -66,6 +66,9 @@ export default {
     })
   },
   methods: {
+    jump (item) {
+      this.$router.push({path: '/' + this.user.role.name + '/menuinfo', query: {id: item.menu_id}})
+    },
     // 去评价
     gotoRate (index) {
       console.log(index)
