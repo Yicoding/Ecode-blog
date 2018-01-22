@@ -62,6 +62,7 @@
 				<p class="info-p">{{item.content}}</p>
 	    	</li>
 	    </ul>
+	    <div v-show="!rateArr.length" style="text-align: center;">暂无评价！</div>
     </div>
   </div>
 </template>

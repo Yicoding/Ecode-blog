@@ -1,7 +1,7 @@
 <template>
   <div>
   	<div class="line">
-  		<el-button @click="add">新增</el-button>
+  		<el-button @click="add" size="small">新增</el-button>
   	</div>
   	<el-table
       :data="data"

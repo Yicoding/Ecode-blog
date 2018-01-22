@@ -27,7 +27,8 @@
 	    	<vueSignature ref="signature" :sigOption="option" :w="'100%;'" :h="'200px'"></vueSignature>
 	    </div>
 	    <el-button style="margin-left: 10px;" size="small" @click="clear">重新绘制</el-button>
-	    <mt-button style="position: fixed; bottom: 0;" size="large" type="danger" @click="save">保存</mt-button>
+	    <div style="height: 20px;"></div>
+	    <mt-button style="position: fixed; bottom: 50px; z-index: 2000;" size="large" type="danger" @click="save">保存</mt-button>
 	    <div class="div-top"></div>
 	    <div class="split"></div>
 	</div>

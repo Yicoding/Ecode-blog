@@ -7,7 +7,7 @@
       <el-button @click="putpwd">修改密码</el-button>
       <el-button type="primary" @click="logout">退出</el-button> 
     </el-popover>
-    <el-dialog title="修改密码" :visible.sync="dialogFormVisible" size="large">
+    <el-dialog title="修改密码" :visible.sync="dialogFormVisible" width="80%">
       <el-form :model="form" :rules="rules" ref="form">
         <el-form-item label="用户名">
           <el-tag>{{form.name}}</el-tag>
@@ -24,17 +24,29 @@
         <el-button @click="dialogFormVisible = false">取 消</el-button>
       </div>
     </el-dialog>
-    <div class="header-home">
+    <header>
       <el-button type="text" style="margin-right: 40px;" v-popover:popover5>{{user.name}}</el-button>
-    </div>
+    </header>
     <section>
-      <router-view></router-view>
+      <div ref="section" class="section-content">
+        <router-view/>
+      </div>
     </section>
+    <footer v-show="user.role">
+      <footer-root v-if="user && user.role && user.role.name == 'root'"></footer-root>
+      <footer-menu v-else></footer-menu>
+    </footer>
   </div>
 </template>
 
 <script>
+import footerRoot from 'components/footer/footer-root.vue'
+import footerMenu from 'components/footer/footer-menu.vue'
 export default {
+  components: {
+    footerRoot,
+    footerMenu
+  },
   data () {
     return {
       visible2: false,

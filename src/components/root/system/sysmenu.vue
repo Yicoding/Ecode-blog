@@ -7,7 +7,7 @@
         <el-tab-pane label="价格" name="price"></el-tab-pane>
         <el-tab-pane label="上架时间" name="createTime"></el-tab-pane>
       </el-tabs>
-      <el-button size="small" class="add-button" @click="add" style="color: #20A0FF;" icon="plus"></el-button>
+      <el-button size="small" class="add-button" @click="add" style="color: #20A0FF;" icon="el-icon-plus"></el-button>
       <el-button v-show="order == 'ASC'" size="small" class="order-button" @click="byOrder('DESC')" style="color: #e4393c;">&uarr;</el-button>
       <el-button v-show="order == 'DESC'" size="small" class="order-button" @click="byOrder('ASC')" style="color: #e4393c;">&darr;</el-button>
     </div>
@@ -28,7 +28,7 @@
                 &yen;{{item.price}}
               </div>
               <div class="menu-shop">
-                <el-button icon="edit" type="text" @click="edit(item)"></el-button>
+                <el-button icon="el-icon-edit" type="text" @click="edit(item)"></el-button>
               </div>
             </div>
           </div>
