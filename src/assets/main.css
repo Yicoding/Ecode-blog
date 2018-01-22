@@ -55,6 +55,8 @@ img {
 section {
     height: 84%;
     overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 80px;
 }
 footer {
     height: 8%;
@@ -62,7 +64,7 @@ footer {
     width: 100%;
     position: fixed;
     bottom: 0;
-    z-index: 999;
+    z-index: 9999;
 }
 .bar{
 	padding: 5px 0;

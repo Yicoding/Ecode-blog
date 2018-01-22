@@ -24,7 +24,7 @@
 	    <div class="split"></div>
 	    <mt-cell title="请绘制你的艺术签"></mt-cell>
 	    <div style="margin: 10px; border: 1px solid #aaa; border-radius: 3px; overflow: hidden;">
-	    	<vueSignature ref="signature" :sigOption="option" :w="'100%;'" :h="'300px'"></vueSignature>
+	    	<vueSignature ref="signature" :sigOption="option" :w="'100%;'" :h="'200px'"></vueSignature>
 	    </div>
 	    <el-button style="margin-left: 10px;" size="small" @click="clear">重新绘制</el-button>
 	    <mt-button style="position: fixed; bottom: 0;" size="large" type="danger" @click="save">保存</mt-button>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import vueSignature from "components/vue-signature.vue"
 import { MessageBox } from 'mint-ui'
 export default {
 	data () {
@@ -43,6 +44,9 @@ export default {
 				penColor:"rgb(0, 0, 0)"
 			},
 		}
+	},
+	components: {
+		vueSignature
 	},
 	computed: {
   		user () {
@@ -79,11 +83,12 @@ export default {
 			let png = this.$refs.signature.save()
 			let jpeg = this.$refs.signature.save('image/jpeg')
 			let svg = this.$refs.signature.save('image/svg+xml')
-			// console.log(png)
+			console.log(png)
 			// console.log(jpeg)
-			console.log(svg)
+			// console.log(svg)
 			// console.log(svg.length)
-			this.user.artsign = svg
+			console.log(png.length)
+			this.user.artsign = png
 			if (!this.user.name) {
 				this.$toast('昵称不能为空')
 			} else if (!this.user.age) {
