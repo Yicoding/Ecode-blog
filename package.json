@@ -10,8 +10,18 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.17.1",
+    "body-parser": "^1.18.2",
+    "connect-multiparty": "^2.1.0",
+    "cors": "^2.8.4",
+    "element-ui": "^2.0.11",
+    "mint-ui": "^2.2.13",
+    "mysql": "^2.15.0",
+    "signature_pad": "^2.3.2",
+    "vconsole": "^3.1.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
