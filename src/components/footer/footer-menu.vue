@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="item.style" v-for="item in menuArr" style="position: relative;">
+    <div :class="item.style" v-for="item in menuArr" :key="item.tab" style="position: relative;">
       <router-link :to="item.link" class="tab"><span :class="item.icon"></span><br/>{{item.tab}}</router-link>
       <span v-show="shopNum > 0 && item.isShow" class="shop-ball">{{shopNum}}</span>
     </div>

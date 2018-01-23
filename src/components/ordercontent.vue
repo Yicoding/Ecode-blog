@@ -21,7 +21,7 @@
             <div class="orderlist-num">x{{item.total}}</div>
           </div>
           <div style="clear: both;">
-          <mt-cell v-if="(listData.status == 2) && user.role && (user.role.name != 'root') && !item.hasRate" title="去评价该商品" is-link @click.native="gotoRate(index)"></mt-cell>
+          <mt-cell v-if="(listData.status == 2) && user.role && (user.role.name != 'root') && !item.hasRate" title="去评价该商品" is-link @click.stop.native="gotoRate(index)"></mt-cell>
           <mt-cell v-if="user.role && (user.role.name != 'root') && item.hasRate">已完成评价</mt-cell>
             <div class="split"></div>
           </div>

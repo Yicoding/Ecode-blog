@@ -56,7 +56,7 @@
 				  disabled
 				  show-text
 				  text-color="#ff9900"
-				  text-template="{value}"
+				  score-template="{value}"
 				  :colors="['#99A9BF', '#F7BA2A', '#FF9900']">
 				</el-rate>
 				<p class="info-p">{{item.content}}</p>
@@ -95,7 +95,7 @@ export default {
 		this.$http.get(this.resource + '/api/rate/all', {params: {menu_id: this.$route.query.id}}).then((res) => {
 			this.rateArr = res.data
 			this.$http.get(this.resource + '/api/greatNum/rate', {params: {menu_id: this.$route.query.id}}).then((result) => {
-				this.favoraRate = (result.data.greatNum / res.data.length).toFixed(2) * 100 || 0
+				this.favoraRate = (result.data.greatNum / res.data.length * 100).toFixed(2) || 0
 			})
 		})
 		this.$http.get(this.resource + '/api/menu/saleNum', {params: {menu_id: this.$route.query.id}}).then((res) => {
@@ -125,7 +125,7 @@ export default {
 		this.$http.get(this.resource + '/api/rate/all', {params: {menu_id: this.$route.query.id}}).then((res) => {
 			this.rateArr = res.data
 			this.$http.get(this.resource + '/api/greatNum/rate', {params: {menu_id: this.$route.query.id}}).then((result) => {
-				this.favoraRate = (result.data.greatNum / res.data.length).toFixed(2) * 100 || 0
+				this.favoraRate = (result.data.greatNum / res.data.length * 100).toFixed(2) || 0
 			})
 		})
 		this.$http.get(this.resource + '/api/menu/saleNum', {params: {menu_id: this.$route.query.id}}).then((res) => {

@@ -117,7 +117,7 @@ export default {
           } else {
             this.findByType()
           }
-          this.$toast('收获成功呦，亲-_- 快去已完成订单去评价吧')
+          this.$toast('收货成功呦，亲-_- 快去已完成订单去评价吧')
         })
       })
     },
