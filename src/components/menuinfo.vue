@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="menuinfo-header">
-    	<img :src="food.picture" alt=""/>
+    	<img v-lazy="food.picture" alt=""/>
     	<div class="back" @click="$router.go(-1)">
     		<i class="el-icon-arrow-left"></i>
     	</div>
     </div>
     <div class="menuinfo-content">
     	<h4>{{food.name}}</h4>
-    	<div class="food-num">共销售{{nums}}份&nbsp;&nbsp;&nbsp;好评率{{favoraRate}}%</div>
+    	<div class="food-num">共销售{{nums}}份&nbsp;&nbsp;&nbsp;好评率{{favoraRate | rateFilter}}%</div>
     	<div class="food-price">&yen;{{food.price}}</div>
     	<i @click="changeCollect('add')" v-show="(iscollect == 0) && user.role && (user.role.name != 'root')" class="el-icon-star-off food-collection"></i>
     	<i @click="changeCollect('remove')" v-show="(iscollect == 1) && user.role && (user.role.name != 'root')" class="el-icon-star-on food-collection-full"></i>
@@ -33,7 +33,7 @@
     	<div>商品参考图</div>
     	<hr/>
     	<div v-for="todo in imgArr" :key="todo.id" class="img-box">
-    		<img :src="todo.src" alt=""/>
+    		<img v-lazy="todo.src" alt=""/>
     	</div>
     </div>
     <div class="split"></div>
@@ -69,6 +69,11 @@
 
 <script>
 export default {
+	filters: {
+		rateFilter(value) {
+			return value === 'NaN'? 0 : value
+		}
+	},
 	data () {
 		return {
 			food: {},
@@ -96,6 +101,7 @@ export default {
 			this.rateArr = res.data
 			this.$http.get(this.resource + '/api/greatNum/rate', {params: {menu_id: this.$route.query.id}}).then((result) => {
 				this.favoraRate = (result.data.greatNum / res.data.length * 100).toFixed(2) || 0
+				console.log(this.favoraRate)
 			})
 		})
 		this.$http.get(this.resource + '/api/menu/saleNum', {params: {menu_id: this.$route.query.id}}).then((res) => {
@@ -126,6 +132,7 @@ export default {
 			this.rateArr = res.data
 			this.$http.get(this.resource + '/api/greatNum/rate', {params: {menu_id: this.$route.query.id}}).then((result) => {
 				this.favoraRate = (result.data.greatNum / res.data.length * 100).toFixed(2) || 0
+				console.log(this.favoraRate)
 			})
 		})
 		this.$http.get(this.resource + '/api/menu/saleNum', {params: {menu_id: this.$route.query.id}}).then((res) => {
@@ -174,12 +181,12 @@ export default {
 			if (value == 'add') {
 				this.iscollect = 1
 				this.$http.post(this.resource + '/api/collect/add', {menu_id: this.$route.query.id, user_id: this.user.id}).then((res) => {
-
+					this.$toast('收藏成功了哟')
 				})
 			} else {
 				this.iscollect = 0
 				this.$http.delete(this.resource + '/api/collect/remove', {params: {menu_id: this.$route.query.id, user_id: this.user.id}}).then((res) => {
-					
+					this.$toast('再见了主人')
 				})
 			}
 		}

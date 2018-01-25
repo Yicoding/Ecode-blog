@@ -6,8 +6,8 @@
 	    <div class="split"></div>
 	    <div class="cover-img">
 	    	<div class="user-img">
-		      <img v-if="user.avatar" :src="user.avatar" alt=""/>
-		      <img v-if="!user.avatar" :src="avatar" alt=""/>
+		      <img v-if="user.avatar" v-lazy="user.avatar" alt=""/>
+		      <img v-if="!user.avatar" v-lazy="avatar" alt=""/>
 		    </div>
 	    	<div class="div-top"></div>
 	    	<form enctype="multipart/form-data" id="formExcel">

@@ -10,7 +10,7 @@
 			<button @click="save">保存</button>
 			<button @click="clear">清除</button>
 		</div>
-		<img style="width: 100%;" :src="bindSrc" alt=""/>
+		<img style="width: 100%;" v-lazy="bindSrc" alt=""/>
 	</div>
 </template>
 

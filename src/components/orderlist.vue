@@ -6,7 +6,7 @@
       <ul class="menu-ul">
         <li v-for="(item, index) in listData" :key="item.id">
           <div class="menu-left">
-            <img :src="item.picture" alt=""/>
+            <img v-lazy="item.picture" alt=""/>
           </div>
           <div class="menu-right">
             <div style="overflow: hidden;">
@@ -25,6 +25,7 @@
     </div>
     <div class="split"></div>
     <mt-cell>共{{menuNum}}件商品</mt-cell>
+    <div style="height: 50px;"></div>
     <div class="orderlist-footer">
       <div class="orderlist-footer-left left" @click="cancelOrder">取消订单</div>
       <div class="orderlist-footer-center left">合计：&yen;{{$route.query.priceAll}}</div>

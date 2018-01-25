@@ -314,8 +314,8 @@ a.active {
     position: absolute;
     top: 20px;
     left: 10px;
-    color: #fff;
-    font-size: 20px;
+    color: #409EFF;
+    font-size: 25px;
 }
 .menuinfo-content {
    overflow: hidden;
@@ -394,7 +394,7 @@ a.active {
 .orderlist-footer {
     width: 100%;
     position: fixed;
-    bottom: 0;
+    bottom: 50px;
     border-top: 1px solid rgba(1,17,27,.1);
     line-height: 48px;
     background-color: #F9FAFC;

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="padding: 5px 10px;">
-      <el-button size="small" icon="arrow-left" type="text" @click="$router.go(-1)">返回</el-button>
+      <el-button size="small" icon="arrow-left" type="text" @click="back">返回</el-button>
     </div>
     <div class="split"></div>
     <div class="order-tabs">
@@ -21,7 +21,7 @@
         		{{item.status | statusFilter}}
         	</mt-cell>
       		<div class="img-box-order" @click="checkOrderList(item)">
-          		<img :src="todo.picture" :key="todo.id" v-for="todo in item.content"/>
+          		<img v-lazy="todo.picture" :key="todo.id" v-for="todo in item.content"/>
       		</div>
       		<mt-cell>共{{item.menuNum}}件商品 合计：&yen;{{item.priceAll}}</mt-cell>
       		<mt-cell>
@@ -79,6 +79,9 @@ export default {
   	}, 500)
   },
   methods: {
+    back() {
+      this.$router.push(`/${this.user.role.name}/mine`)
+    },
     findall () {
       this.$http.get(this.resource + '/api/order/findall', {params: {user_id: this.user.id}}).then((res) => {
         this.listData = res.data.map((item) => {

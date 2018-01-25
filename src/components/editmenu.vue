@@ -5,7 +5,7 @@
 	    </div>
 	    <div class="split"></div>
 	    <div class="cover-img">
-	    	<img :src="menu.picture" alt="" v-show="menu.picture"/>
+	    	<img v-lazy="menu.picture" alt="" v-show="menu.picture"/>
 	    	<div class="div-top"></div>
 	    	<form enctype="multipart/form-data" id="formExcel">
     			<a href="javascript:;" class="file">
@@ -18,8 +18,8 @@
 	    <mt-field label="商品名称" placeholder="请输入商品名称" v-model.trim="menu.name"></mt-field>
 	    <mt-field label="单价" placeholder="请输入单价" type="number" v-model="menu.price"></mt-field>
 	    <mt-field label="商品描述" placeholder="请输入商品描述" type="textarea" rows="4" v-model.trim="menu.descript"></mt-field>
-	    <mt-button style="position: fixed; bottom: 0;" v-if="method == 'add'" size="large" type="danger" @click="save">保存</mt-button>
-	    <mt-button style="position: fixed; bottom: 0;" v-if="method == 'edit'" size="large" type="danger" @click="save">保存</mt-button>
+	    <mt-button style="position: fixed; bottom: 50px; z-index: 2000;" v-if="method == 'add'" size="large" type="danger" @click="save">保存</mt-button>
+	    <mt-button style="position: fixed; bottom: 50px; z-index: 2000;" v-if="method == 'edit'" size="large" type="danger" @click="save">保存</mt-button>
 	    <div class="div-top"></div>
 	    <div class="split"></div>
 	    <div style="text-align: center;" v-show="method == 'edit'">
@@ -35,6 +35,7 @@
 		      <i class="el-icon-plus"></i>
 		    </el-upload>
 	    </div>
+	    <div style="height: 50px;"></div>
 	</div>
 </template>
 

@@ -17,10 +17,9 @@
         		{{item.status | statusFilter}}
         	</mt-cell>
       		<div class="img-box-order" @click="checkOrderList(item)">
-          		<img :src="todo.picture" :key="todo.id" v-for="todo in item.content"/>
+          		<img v-lazy="todo.picture" :key="todo.id" v-for="todo in item.content"/>
       		</div>
       		<mt-cell>共{{item.menuNum}}件商品 合计：&yen;{{item.priceAll}}</mt-cell>
-      		<!--<mt-cell>订购者：</mt-cell>-->
       		<mt-cell>
       			<mt-button size="small" :plain="true" type="danger" @click="surepost(item)" v-if="item.status == 0">确认发货</mt-button>&nbsp;&nbsp;
       			<mt-button size="small" :plain="true" type="primary" @click="surearrive(item)" v-if="item.status == 1">确认送达</mt-button>

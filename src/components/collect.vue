@@ -6,22 +6,22 @@
     <div class="split"></div>
     <div>
       <ul class="menu-ul">
-        <li v-for="(item, index) in listData" :key="item.id">
-          <div class="menu-left" @click="jump(item)">
-            <img :src="item.picture" alt=""/>
+        <li v-for="(item, index) in listData" :key="item.id" @click="jump(item)">
+          <div class="menu-left">
+            <img v-lazy="item.picture" alt=""/>
           </div>
           <div class="menu-right">
-            <div @click="jump(item)" style="overflow: hidden;">
+            <div style="overflow: hidden;">
               <h4 v-text="item.name"></h4>
               <div class="div-top"></div>
               <p v-text="item.descript"></p>
             </div>
             <div class="munu-price">
-              <div class="left" style="width: 40%;" @click="jump(item)">
+              <div class="left" style="width: 40%;">
                 &yen;{{item.price}}
               </div>
             </div>
-    		<i @click="changeCollect(item)" class="el-icon-star-on collect-list-one"></i>
+    		    <i @click.stop="changeCollect(item)" class="el-icon-star-on collect-list-one"></i>
           </div>
         </li>
       </ul>

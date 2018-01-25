@@ -6,7 +6,7 @@
         <li>
       		<div style="overflow: hidden;">
             <div class="rate-img left">
-        		  <img :src="listData.content[index].picture"/>
+        		  <img v-lazy="listData.content[index].picture"/>
             </div>
             <div class="rate-star left">
               <h5>评分</h5>

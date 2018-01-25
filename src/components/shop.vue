@@ -2,32 +2,32 @@
   <div>
     <div style="height: 30px; background-color: #eee;"></div>
   	<ul class="menu-ul" v-show="listData.length > 0">
-      <li v-for="(item, index) in listData" :key="item.id">
+      <li v-for="(item, index) in listData" :key="item.id" @click="jump(item)">
         <div style="float: left; width: 8%; height: 120px; position: relative;">
-          <div class="radio-check" v-show="item.isCheck == 'false'" @click="checkLine(item)"></div>
-          <div class="radio-not-check" v-show="item.isCheck == 'true'" @click="checkLine(item)">&radic;</div>
+          <div class="radio-check" v-show="item.isCheck == 'false'" @click.stop="checkLine(item)"></div>
+          <div class="radio-not-check" v-show="item.isCheck == 'true'" @click.stop="checkLine(item)">&radic;</div>
         </div>
         <div style="float: left; width: 92%;">
-          <div class="menu-left-shop" @click="jump(item)">
-            <img :src="item.picture" alt=""/>
+          <div class="menu-left-shop">
+            <img v-lazy="item.picture" alt=""/>
           </div>
           <div class="menu-right">
-            <div @click="jump(item)">
+            <div>
               <h4 v-text="item.name"></h4>
               <p style="margin-top: 12px;" v-text="item.descript"></p>
             </div>
             <div class="munu-price">
-              <div class="left" style="width: 40%;" @click="jump(item)">
+              <div class="left" style="width: 40%;">
                 &yen;{{item.price}}
               </div>
               <div class="menu-shop">
                 <transition name="fade">
-                  <div v-if="item.total > 1" class="shop-first" @click="remove(item)">-</div>
+                  <div v-if="item.total > 1" class="shop-first" @click.stop="remove(item)">-</div>
                 </transition>
                 <transition name="fade">
                   <div v-if="item.total > 0" class="shop-second" v-text="item.total"></div>
                 </transition>
-                <div class="shop-third" @click="add(item)">+</div>
+                <div class="shop-third" @click.stop="add(item)">+</div>
               </div>
             </div>
           </div>

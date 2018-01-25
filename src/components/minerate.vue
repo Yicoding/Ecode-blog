@@ -6,10 +6,10 @@
     <div class="split"></div>
     <div>
       <ul class="menu-ul">
-        <li v-for="item in listData" :key="item.id">
+        <li v-for="item in listData" :key="item.id" @click=jump(item)>
       		<div style="overflow: hidden;">
             <div class="rate-img left">
-        		  <img :src="item.picture"/>
+        		  <img v-lazy="item.picture"/>
             </div>
             <div class="rate-star left">
               <h5>评分</h5>
@@ -55,6 +55,11 @@ export default {
         this.listData = res.data
       })
     }, 500)
+  },
+  methods: {
+    jump(item) {
+      this.$router.push({path: '/' + this.user.role.name + '/menuinfo', query: {id: item.menu_id}})
+    }
   },
 }
 </script>

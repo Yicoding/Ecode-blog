@@ -13,22 +13,22 @@
     </div>
     <div v-show="listData.length > 0">
       <ul class="menu-ul">
-        <li v-for="(item, index) in listData" :key="item.id">
-          <div class="menu-left" @click="jump(item)">
-            <img :src="item.picture" alt=""/>
+        <li v-for="(item, index) in listData" :key="item.id" @click="jump(item)">
+          <div class="menu-left">
+            <img v-lazy="item.picture" alt=""/>
           </div>
           <div class="menu-right">
-            <div @click="jump(item)" style="overflow: hidden;">
+            <div style="overflow: hidden;">
               <h4 v-text="item.name"></h4>
-              <p v-text="item.descript"></p>
+              <p v-text="item.descript" style="padding: 10px 0;"></p>
               <div class="menu-num">共销售{{item.num}}&nbsp;&nbsp;&nbsp;共{{item.rateAllNum}}条评价</div>
             </div>
             <div class="munu-price">
-              <div class="left" style="width: 40%;" @click="jump(item)">
+              <div class="left" style="width: 40%;">
                 &yen;{{item.price}}
               </div>
               <div class="menu-shop">
-                <el-button icon="el-icon-edit" type="text" @click="edit(item)"></el-button>
+                <el-button icon="el-icon-edit" type="text" @click.stop="edit(item)"></el-button>
               </div>
             </div>
           </div>

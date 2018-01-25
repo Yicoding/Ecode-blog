@@ -6,8 +6,8 @@
     </div>
   	<mt-header title="我的资料卡"></mt-header>
     <div class="user-img">
-      <img v-if="user.avatar" :src="user.avatar" alt=""/>
-      <img v-if="!user.avatar" :src="avatar" alt=""/>
+      <img v-if="user.avatar" v-lazy="user.avatar" alt=""/>
+      <img v-if="!user.avatar" v-lazy="avatar" alt=""/>
     </div>
     <div class="div-title">个性签名</div>
     <div class="div-content" v-if="user.minesign" v-text="user.minesign"></div>
@@ -20,7 +20,7 @@
     <div class="split"></div>
     <mt-cell title="艺术签"></mt-cell>
     <div>
-      <img style="width: 100%; height: 200px;" v-if="user.artsign" :src="user.artsign"/>
+      <img style="width: 100%; height: 200px;" v-if="user.artsign" v-lazy="user.artsign"/>
     </div>
   </div>
 </template>
