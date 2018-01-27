@@ -46,7 +46,7 @@
 	      <el-tab-pane label="差评" name="bad"></el-tab-pane>
 	    </el-tabs>
 	    <ul class="rate-ul">
-	    	<li v-for="item in rateArr">
+	    	<li v-for="item in rateArr" :key="item.time">
 	    		<div class="food-num">
 	    			{{item.time}}
 	    			<div class="right">{{item.user_name}} <span class="icon-user"></span></div>

@@ -41,7 +41,7 @@
      <div style="height: 5px;"></div>
      <mt-cell title="我的积分">350</mt-cell>
     </div>
-    <mt-button type="danger" size="large" @click.native="logout" style="position: fixed; bottom: 50px;">退出账号</mt-button>
+    <mt-button type="danger" size="large" @click.native="logout" style="position: fixed; bottom: 45px;">退出账号</mt-button>
     <div></div>
     <canvas v-show="!timeup" id="canvas">你的浏览器不支持canvas,请更换浏览器</canvas>
   </div>

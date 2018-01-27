@@ -6,7 +6,7 @@
     <div class="split"></div>
     <div>
       <ul class="menu-ul">
-        <li v-for="(item, index) in listData" :key="item.id" @click="jump(item)">
+        <li v-for="item in listData" :key="item.id" @click="jump(item)">
           <div class="menu-left">
             <img v-lazy="item.picture" alt=""/>
           </div>

@@ -4,7 +4,7 @@
     <div class="split"></div>
     <div>
       <ul class="menu-ul">
-        <li v-for="(item, index) in listData" :key="item.id">
+        <li v-for="item in listData" :key="item.id">
           <div class="menu-left">
             <img v-lazy="item.picture" alt=""/>
           </div>

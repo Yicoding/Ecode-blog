@@ -16,7 +16,7 @@
     <div class="split"></div>
     <div v-show="listData.length > 0">
       <ul class="menu-ul">
-        <li v-for="(item, index) in listData" :key="item.id">
+        <li v-for="item in listData" :key="item.id">
         	<mt-cell :title="item.createdTime">
         		{{item.status | statusFilter}}
         	</mt-cell>

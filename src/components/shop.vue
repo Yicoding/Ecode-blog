@@ -2,7 +2,7 @@
   <div>
     <div style="height: 30px; background-color: #eee;"></div>
   	<ul class="menu-ul" v-show="listData.length > 0">
-      <li v-for="(item, index) in listData" :key="item.id" @click="jump(item)">
+      <li v-for="item in listData" :key="item.id" @click="jump(item)">
         <div style="float: left; width: 8%; height: 120px; position: relative;">
           <div class="radio-check" v-show="item.isCheck == 'false'" @click.stop="checkLine(item)"></div>
           <div class="radio-not-check" v-show="item.isCheck == 'true'" @click.stop="checkLine(item)">&radic;</div>
