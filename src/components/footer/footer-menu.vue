@@ -44,31 +44,34 @@ export default {
     }
   },
   mounted () {
-    setTimeout(() => {
-      this.$http.get(this.resource + '/api/shop/findall', {params: {uid: this.user.id}}).then(res => {
-        let num = 0
-        res.data.forEach((item) => {
-          num += item.total
+    if (this.user.name) {
+      
+      setTimeout(() => {
+        this.$http.get(this.resource + '/api/shop/findall', {params: {uid: this.user.id}}).then(res => {
+          let num = 0
+          res.data.forEach((item) => {
+            num += item.total
+          })
+          this.$store.dispatch('getshopNum', num)
         })
-        this.$store.dispatch('getshopNum', num)
-      })
-      if (!this.menuArr.length) {
-        if (this.user.role && this.user.role.name == 'admin') {
-          this.menuArr = [
-            {style: 'bar left', link: '/admin/menulist', icon: 'icon-menu', isShow: false, tab: '菜单'},
-            {style: 'bar left', link: '/admin/usermanage', icon: 'icon-users', isShow: false, tab: '成员'},
-            {style: 'bar left', link: '/admin/shop', icon: 'icon-cart', isShow: true, tab: '购物车'},
-            {style: 'bar left', link: '/admin/mine', icon: 'icon-home', isShow: false, tab: '我的'},
-          ]
-        } else {
-          this.menuArr = [
-            {style: 'box left', link: '/general/menulist', icon: 'icon-menu', isShow: false, tab: '菜单'},
-            {style: 'box left', link: '/general/shop', icon: 'icon-cart', isShow: true, tab: '购物车'},
-            {style: 'box left', link: '/general/mine', icon: 'icon-home', isShow: false, tab: '我的'},
-          ]
+        if (!this.menuArr.length) {
+          if (this.user.role && this.user.role.name == 'admin') {
+            this.menuArr = [
+              {style: 'bar left', link: '/admin/menulist', icon: 'icon-menu', isShow: false, tab: '菜单'},
+              {style: 'bar left', link: '/admin/usermanage', icon: 'icon-users', isShow: false, tab: '成员'},
+              {style: 'bar left', link: '/admin/shop', icon: 'icon-cart', isShow: true, tab: '购物车'},
+              {style: 'bar left', link: '/admin/mine', icon: 'icon-home', isShow: false, tab: '我的'},
+            ]
+          } else {
+            this.menuArr = [
+              {style: 'box left', link: '/general/menulist', icon: 'icon-menu', isShow: false, tab: '菜单'},
+              {style: 'box left', link: '/general/shop', icon: 'icon-cart', isShow: true, tab: '购物车'},
+              {style: 'box left', link: '/general/mine', icon: 'icon-home', isShow: false, tab: '我的'},
+            ]
+          }
         }
-      }
-    }, 500)
+      }, 500)
+    }
   }
 }
 </script>

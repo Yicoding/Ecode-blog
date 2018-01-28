@@ -71,7 +71,7 @@ export default {
   },
   created () {
     this.loginId = window.sessionStorage.getItem('loginId')
-    if (!(this.$route.path == '/registered' || this.$route.path == '/login')) {
+    if (!((this.$route.path == '/registered' || this.$route.path == '/login')) && this.loginId) {
       this.$http.get(this.resource + '/api/user/loginname', {params: {id: this.loginId}}).then((res) => {
         this.$store.dispatch('getUser', res.data)
         this.loading = false
