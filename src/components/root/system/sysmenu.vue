@@ -11,7 +11,7 @@
       <el-button v-show="order == 'ASC'" size="small" class="order-button" @click="byOrder('DESC')" style="color: #e4393c;">&uarr;</el-button>
       <el-button v-show="order == 'DESC'" size="small" class="order-button" @click="byOrder('ASC')" style="color: #e4393c;">&darr;</el-button>
     </div>
-    <div v-show="listData.length > 0">
+    <div v-show="listData.length">
       <ul class="menu-ul">
         <li v-for="item in listData" :key="item.id" @click="jump(item)">
           <div class="menu-left">
@@ -35,7 +35,9 @@
         </li>
       </ul>
     </div>
-    <div v-show="listData.length == 0" class="empty-content">没有查到符合你要求的商品哦，换个名称试试 --</div>
+    <transition name="fade">
+      <div v-show="!listData.length" class="empty-content">没有查到符合你要求的商品哦，换个名称试试 --</div>
+    </transition>
   </div>
 </template>
 
@@ -68,14 +70,11 @@ export default {
   computed: {
     user () {
       return this.$store.state.user
-    }
+    },
   },
   created () {
     this.activeName = 'id'
   },
-  // activated () {
-  //   this.activeName = 'id'
-  // },
   methods: {
     byOrder (value) {
       this.order = value

@@ -10,7 +10,7 @@
     </div>
     <mt-cell :title="'共有' + listData.length + '条记录'"></mt-cell>
     <div class="split"></div>
-    <div v-show="listData.length > 0">
+    <div v-show="listData.length">
       <ul class="menu-ul">
         <li v-for="item in listData" :key="item.id">
         	<mt-cell :title="item.createdTime">
@@ -28,7 +28,9 @@
         </li>
       </ul>
     </div>
-    <div v-show="listData.length == 0" class="empty-content">您还没有相关订单 --</div>
+    <transition name="fade">
+      <div v-show="!listData.length" class="empty-content">您还没有相关订单 --</div>
+    </transition>
   </div>
 </template>
 

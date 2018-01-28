@@ -19,8 +19,8 @@ Vue.use(VueLazyload, {
 })
 Vue.prototype.$http = axios
 // Vue.prototype.resource = 'http://192.168.10.239:3000'
-Vue.prototype.resource = 'http://192.168.1.105:8000'
-// Vue.prototype.resource = 'http://localhost:3000'
+// Vue.prototype.resource = 'http://192.168.1.105:8000'
+Vue.prototype.resource = 'http://localhost:3000'
 import store from './store'
 // 签名
 // import vueSignature from "vue-signature"
