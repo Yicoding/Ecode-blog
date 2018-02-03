@@ -28,7 +28,7 @@
 	    </div>
 	    <el-button style="margin-left: 10px;" size="small" @click="clear">重新绘制</el-button>
 	    <div style="height: 20px;"></div>
-	    <mt-button style="position: fixed; bottom: 45px; z-index: 2000;" size="large" type="danger" @click="save">保存</mt-button>
+	    <mt-button style="position: fixed; bottom: 50px; z-index: 2000;" size="large" type="danger" @click="save">保存</mt-button>
 	    <div class="div-top"></div>
 	    <div class="split"></div>
 	</div>

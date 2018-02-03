@@ -1,12 +1,18 @@
 <template>
-  <div>
-    <div class="bar left">
-      <router-link to="/root/order" class="tab"><span class="icon-menu"></span><br/>订单</router-link>
+  <div class="footer-menu">
+    <div class="bar">
+      <router-link to="/root/order" class="tab">
+        <span class="icon-menu"></span>
+        <span>订单</span>
+      </router-link>
     </div>
-    <div class="bar left">
-      <router-link to="/root/system/menu" class="tab"><span class="icon-menu"></span><br/>菜单</router-link>
+    <div class="bar">
+      <router-link to="/root/system/menu" class="tab">
+        <span class="icon-menu"></span>
+        <span>菜单</span>
+      </router-link>
     </div>
-    <div class="bar left" v-popover:popover2>
+    <div class="bar" v-popover:popover2>
       <el-popover
         ref="popover2"
         placement="top"
@@ -18,10 +24,16 @@
         <div class="child-div" @click="getSystem"><router-link to="/root/system/part" class="tab">部门管理</router-link></div>
         <div class="child-div" @click="getSystem"><router-link to="/root/system/role" class="tab">角色管理</router-link></div>
       </el-popover>
-      <a class="tab" :class="system?'active':''"><span class="icon-cog"></span><br/>系统</a>
+      <a class="tab" :class="system?'active':''">
+        <span class="icon-cog"></span>
+        <span>系统</span>
+      </a>
     </div>
-    <div class="bar left">
-      <router-link to="/root/mine" class="tab"><span class="icon-home"></span><br/>我的</router-link>
+    <div class="bar">
+      <router-link to="/root/mine" class="tab">
+        <span class="icon-home"></span>
+        <span>我的</span>
+      </router-link>
     </div>
   </div>
 </template>

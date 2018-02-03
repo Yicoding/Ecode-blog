@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="loading" element-loading-text="正在拼命加载，请稍后" style="height: 100%;">
+  <div v-loading="loading" element-loading-text="正在拼命加载，请稍后" class="box-content">
     <el-popover
       ref="popover5"
       placement="bottom"
@@ -28,9 +28,8 @@
       <el-button type="text" style="margin-right: 40px;" v-popover:popover5>{{user.name}}</el-button>
     </header>
     <section>
-      <div ref="section" class="section-content">
-        <router-view/>
-      </div>
+      <router-view/>
+      <vue-progress-bar></vue-progress-bar>
     </section>
     <footer v-show="user.role">
       <footer-root v-if="user && user.role && user.role.name == 'root'"></footer-root>
@@ -75,6 +74,13 @@ export default {
       this.$http.get(this.resource + '/api/user/loginname', {params: {id: this.loginId}}).then((res) => {
         this.$store.dispatch('getUser', res.data)
         this.loading = false
+        this.$http.get(this.resource + '/api/shop/findall', {params: {uid: res.data.id}}).then(res => {
+          let num = 0
+          res.data.forEach((item) => {
+            item.isCheck === 'true' && (num += item.total)
+          })
+          this.$store.dispatch('getshopNum', num)
+        })
       }).catch(() => {
         this.loading = false
       })
@@ -82,6 +88,29 @@ export default {
       this.$router.push('/login')
       this.loading = false
     }
+    this.$Progress.start()
+    //  hook the progress bar to start before we move router-view
+    this.$router.beforeEach((to, from, next) => {
+      //  does the page we want to go to have a meta.progress object
+      if (to.meta.progress !== undefined) {
+        let meta = to.meta.progress
+        // parse meta tags
+        this.$Progress.parseMeta(meta)
+      }
+      //  start the progress bar
+      this.$Progress.start()
+      //  continue to next page
+      next()
+    })
+    //  hook the progress bar to finish after we've finished moving router-view
+    this.$router.afterEach((to, from) => {
+      //  finish the progress bar
+      this.$Progress.finish()
+    })
+  },
+  mounted () {
+    //  [App.vue specific] When App.vue is finish loading finish the progress bar
+    this.$Progress.finish()
   },
   methods: {
     putpwd () {

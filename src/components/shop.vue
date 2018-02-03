@@ -138,8 +138,8 @@ export default {
       item.total ++
       this.$http.put(this.resource + '/api/shop/put', {user_id: this.user.id, menu_id: item.menu_id, action: 'add'}).then((res) => {
         console.log(JSON.stringify(res.data))
-        this.$store.dispatch('getonechangeNum', 'add')
         if (item.isCheck == 'true') {
+          this.$store.dispatch('getonechangeNum', 'add')
           this.checkNum ++
           this.$store.dispatch('getonepriceAll', {action: 'add', price: item.price})
         }
@@ -149,8 +149,8 @@ export default {
       item.total > 1 && item.total --
       && this.$http.put(this.resource + '/api/shop/put', {user_id: this.user.id, menu_id: item.menu_id, action: 'remove'}).then((res) => {
         console.log(JSON.stringify(res.data))
-        this.$store.dispatch('getonechangeNum', 'remove')
         if (item.isCheck == 'true') {
+          this.$store.dispatch('getonechangeNum', 'remove')
           this.checkNum --
           this.$store.dispatch('getonepriceAll', {action: 'remove', price: item.price})
         }

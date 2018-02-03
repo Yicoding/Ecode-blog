@@ -58,8 +58,22 @@
               if (res.data.role.name == 'root') {
                 this.$router.push('/root/mine')
               } else if (res.data.role.name == 'admin') {
+                  this.$http.get(this.resource + '/api/shop/findall', {params: {uid: res.data.id}}).then(res => {
+                  let num = 0
+                  res.data.forEach((item) => {
+                    item.isCheck === 'true' && (num += item.total)
+                  })
+                  this.$store.dispatch('getshopNum', num)
+                })
                 this.$router.push('/admin/mine')
               } else if (res.data.role.name == 'general') {
+                this.$http.get(this.resource + '/api/shop/findall', {params: {uid: res.data.id}}).then(res => {
+                  let num = 0
+                  res.data.forEach((item) => {
+                    item.isCheck === 'true' && (num += item.total)
+                  })
+                  this.$store.dispatch('getshopNum', num)
+                })
                 this.$router.push('/general/mine')
               }
               // this.$store.dispatch('getTimeup', false)

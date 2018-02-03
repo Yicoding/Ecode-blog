@@ -9,6 +9,7 @@ import 'mint-ui/lib/style.css'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import VueProgressBar from 'vue-progressbar'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(MintUI)
@@ -17,10 +18,25 @@ import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload, {
   loading: require('assets/logo.png')
 })
+const options = {
+  color: '#bffaf3',
+  failedColor: '#874b4b',
+  thickness: '5px',
+  transition: {
+    speed: '0.2s',
+    opacity: '0.6s',
+    termination: 300
+  },
+  autoRevert: true,
+  location: 'top',
+  inverse: false
+}
+
+Vue.use(VueProgressBar, options)
 Vue.prototype.$http = axios
 // Vue.prototype.resource = 'http://192.168.10.239:3000'
-// Vue.prototype.resource = 'http://192.168.1.105:8000'
-Vue.prototype.resource = 'http://localhost:3000'
+Vue.prototype.resource = 'http://192.168.1.105:3000'
+// Vue.prototype.resource = 'http://localhost:3000'
 import store from './store'
 // 签名
 // import vueSignature from "vue-signature"
@@ -30,8 +46,8 @@ import 'assets/style.css'
 // 自定义css
 import 'assets/main.css'
 /* eslint-disable no-unused-vars */
-// import VConsole from 'vconsole'
-// var vConsole = new VConsole()
+import VConsole from 'vconsole'
+var vConsole = new VConsole()
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

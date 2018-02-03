@@ -19,7 +19,7 @@
 	    <mt-field label="单价" placeholder="请输入单价" type="number" v-model="menu.price"></mt-field>
 	    <mt-field label="商品描述" placeholder="请输入商品描述" type="textarea" rows="4" v-model.trim="menu.descript"></mt-field>
 	    <mt-button style="position: fixed; bottom: 45px; z-index: 2000;" v-if="method == 'add'" size="large" type="danger" @click="save">保存</mt-button>
-	    <mt-button style="position: fixed; bottom: 45px; z-index: 2000;" v-if="method == 'edit'" size="large" type="danger" @click="save">保存</mt-button>
+	    <mt-button style="position: fixed; bottom: 50px; z-index: 2000;" v-if="method == 'edit'" size="large" type="danger" @click="save">保存</mt-button>
 	    <div class="div-top"></div>
 	    <div class="split"></div>
 	    <div style="text-align: center;" v-show="method == 'edit'">
@@ -76,7 +76,7 @@ export default {
 			this.findImgArr()
 		}
 	},
-	mounted () {
+	mounted() {
 		this.$nextTick(function () {
 		    // 代码保证 this.$el 在 document 中
 		    document.getElementById('image').onchange = () => {

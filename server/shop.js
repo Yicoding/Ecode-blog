@@ -45,7 +45,7 @@ router.put('/api/shop/put', (req, res) => {
 					})
 				} else {
 					console.log('新增')
-					let sql = 'insert into shop values(null, ?, ?, 1, "false")'
+					let sql = 'insert into shop values(null, ?, ?, 1, "true")'
 					connection.query(sql, [req.body.user_id, req.body.menu_id], (error, result) => {
 						if (error) {
 							res.status(500).send(error)

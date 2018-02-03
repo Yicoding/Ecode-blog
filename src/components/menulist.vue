@@ -42,7 +42,7 @@
       </ul>
     </div>
     <transition name="fade">
-      <div v-show="!listData.lengt" class="empty-content">没有查到符合你要求的商品哦，换个名称试试 --</div>
+      <div v-show="!listData.length" class="empty-content">没有查到符合你要求的商品哦，换个名称试试 --</div>
     </transition>
   </div>
 </template>

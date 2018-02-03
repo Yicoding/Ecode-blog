@@ -84,19 +84,19 @@ router.put('/api/user/put', (req, res) => {
 		})
 	}) 
 })
-// 退出
-// /user/logout
-router.get('/api/loginfo/logout', (req, res) => {
-	pool.getConnection(function(err, connection) {
-		connection.query('delete from loginfo where name=?', [req.query.name], (err, data) => {
-			if (err) {
-				res.send(err)
-			} else {
-				res.send(data)
-				console.log(data)
-			}
-			connection.release();
-		})
-	})
-})
+// // 退出
+// // /user/logout
+// router.get('/api/loginfo/logout', (req, res) => {
+// 	pool.getConnection(function(err, connection) {
+// 		connection.query('delete from loginfo where name=?', [req.query.name], (err, data) => {
+// 			if (err) {
+// 				res.send(err)
+// 			} else {
+// 				res.send(data)
+// 				console.log(data)
+// 			}
+// 			connection.release();
+// 		})
+// 	})
+// })
 module.exports = router

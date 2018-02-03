@@ -41,7 +41,7 @@
      <div style="height: 5px;"></div>
      <mt-cell title="我的积分">350</mt-cell>
     </div>
-    <mt-button type="danger" size="large" @click.native="logout" style="position: fixed; bottom: 45px;">退出账号</mt-button>
+    <mt-button type="danger" size="large" @click.native="logout" style="position: fixed; bottom: 50px;">退出账号</mt-button>
     <div></div>
     <canvas v-show="!timeup" id="canvas">你的浏览器不支持canvas,请更换浏览器</canvas>
   </div>
@@ -140,13 +140,6 @@ export default {
               drops[i].draw();
             }
           },30);
-          
-          
-          
-          
-          
-          
-          
           function random(min,max) {
             return Math.random() * (max - min) + min;//min-max
           }
@@ -159,16 +152,14 @@ export default {
   },
   methods: {
     logout () {
-      this.$http.get(this.resource + '/api/loginfo/logout', {params: {name: this.loginname}}).then((res) => {
-        this.$message({
-          showClose: true,
-          message: '退出成功，下次再见呦',
-          type: 'success'
-        });
-        window.sessionStorage.clear()
-        this.$store.dispatch('getUser', '')
-        this.$router.push('/login')
-      })
+      this.$message({
+        showClose: true,
+        message: '退出成功，下次再见呦',
+        type: 'success'
+      });
+      window.sessionStorage.clear()
+      this.$store.dispatch('getUser', '')
+      this.$router.push('/login')
     },
   }
 }

@@ -31,7 +31,7 @@
     <div class="split"></div>
     <mt-cell>共{{menuNum}}件商品</mt-cell>
     <div style="height: 50px;"></div>
-    <mt-button size="large" style="position: fixed; bottom: 45px;" type="primary" @click="back">返回到订单列表</mt-button>
+    <mt-button size="large" style="position: fixed; bottom: 50px;" type="primary" @click="back">返回到订单列表</mt-button>
   </div>
 </template>
 

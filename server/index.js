@@ -3,9 +3,6 @@ var cors = require('cors');
 var app = express();
 app.use(cors())
 
-// // 页面
-// var page = require('./page')
-// app.use(page)
 // 登录注册
 var login = require('./login')
 app.use(login)

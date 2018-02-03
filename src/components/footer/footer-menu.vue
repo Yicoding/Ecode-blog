@@ -1,7 +1,10 @@
 <template>
-  <div>
+  <div class="footer-menu">
     <div :class="item.style" v-for="item in menuArr" :key="item.tab" style="position: relative;">
-      <router-link :to="item.link" class="tab"><span :class="item.icon"></span><br/>{{item.tab}}</router-link>
+      <router-link :to="item.link" class="tab">
+        <span :class="item.icon"></span> 
+        <span>{{item.tab}}</span>
+      </router-link>
       <span v-show="shopNum > 0 && item.isShow" class="shop-ball">{{shopNum}}</span>
     </div>
   </div>
@@ -21,9 +24,6 @@ export default {
     user () {
       return this.$store.state.user
     },
-    // isChange() {
-
-    // }
   },
   watch: {
     $route(value) {
@@ -45,15 +45,7 @@ export default {
   },
   mounted () {
     if (this.user.name) {
-      
       setTimeout(() => {
-        this.$http.get(this.resource + '/api/shop/findall', {params: {uid: this.user.id}}).then(res => {
-          let num = 0
-          res.data.forEach((item) => {
-            num += item.total
-          })
-          this.$store.dispatch('getshopNum', num)
-        })
         if (!this.menuArr.length) {
           if (this.user.role && this.user.role.name == 'admin') {
             this.menuArr = [
