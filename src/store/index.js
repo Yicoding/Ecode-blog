@@ -10,9 +10,11 @@ const store = new Vuex.Store({
     shopNum: 0,
     priceAll: 0,
     timeup: true,
+    menuList: [],
   },
   getters: {
     // config: state => state.config
+    menuList: state => state.menuList
   },
   mutations: {
     setUser (state, data) {
@@ -41,6 +43,9 @@ const store = new Vuex.Store({
     setTimeup (state, data) {
       state.timeup = data
     },
+    setMenuList(state, data) {
+      state.menuList = data
+    }
   },
   actions: {
     getUser (store, data) {
@@ -61,6 +66,9 @@ const store = new Vuex.Store({
     getTimeup (store, data) {
       store.commit('setTimeup', data)
     },
+    saveMenuList(store, data) {
+      store.commit('setMenuList', data)
+    }
   }
 })
 

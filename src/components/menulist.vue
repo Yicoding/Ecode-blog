@@ -20,7 +20,7 @@
           <div class="menu-right">
             <div style="overflow: hidden;">
               <h4 v-text="item.name"></h4>
-              <p v-text="item.descript" style="padding: 10px 0;"></p>
+              <p v-text="item.descript" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; padding: 5px 0;"></p>
               <div class="menu-num">共销售{{item.num}}&nbsp;&nbsp;&nbsp;共{{item.rateAllNum}}条评价</div>
             </div>
             <div class="munu-price">
@@ -42,7 +42,7 @@
       </ul>
     </div>
     <transition name="fade">
-      <div v-show="!listData.length" class="empty-content">没有查到符合你要求的商品哦，换个名称试试 --</div>
+      <div v-show="!listData.length && searchContent" class="empty-content">没有查到符合你要求的商品哦，换个名称试试 --</div>
     </transition>
   </div>
 </template>
@@ -137,14 +137,12 @@ export default {
     add (item) {
       item.total ++
       this.$http.put(this.resource + '/api/shop/put', {user_id: this.user.id, menu_id: item.id, action: 'add'}).then((res) => {
-        console.log(JSON.stringify(res.data))
         this.$store.dispatch('getonechangeNum', 'add')
       })
     },
     remove (item) {
       item.total --
       this.$http.delete(this.resource + '/api/shop/remove', {params: {user_id: this.user.id, menu_id: item.id}}).then((res) => {
-        console.log(JSON.stringify(res.data))
         this.$store.dispatch('getonechangeNum', 'remove')
       })
     },

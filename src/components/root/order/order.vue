@@ -73,7 +73,7 @@ export default {
   },
   created () {
   	setTimeout(() => {
-    	this.activeName = '0'
+    	this.activeName = 'all'
   	}, 500)
   },
   methods: {

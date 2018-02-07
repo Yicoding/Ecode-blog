@@ -32,19 +32,17 @@
       <vue-progress-bar></vue-progress-bar>
     </section>
     <footer v-show="user.role">
-      <footer-root v-if="user && user.role && user.role.name == 'root'"></footer-root>
-      <footer-menu v-else></footer-menu>
+      <footer-all></footer-all>
     </footer>
   </div>
 </template>
 
 <script>
-import footerRoot from 'components/footer/footer-root.vue'
-import footerMenu from 'components/footer/footer-menu.vue'
+import footerAll from 'components/footer/footer-all.vue'
+import {mapActions} from 'vuex'
 export default {
   components: {
-    footerRoot,
-    footerMenu
+    footerAll
   },
   data () {
     return {
@@ -73,6 +71,31 @@ export default {
     if (!((this.$route.path == '/registered' || this.$route.path == '/login')) && this.loginId) {
       this.$http.get(this.resource + '/api/user/loginname', {params: {id: this.loginId}}).then((res) => {
         this.$store.dispatch('getUser', res.data)
+        if (res.data.role.name == 'root') {
+          this.saveMenuList([
+            {link: '/root/order', icon: 'icon-menu', showNum: false, showMenu: false, tab: '订单'},
+            {link: '/root/system/menu', icon: 'icon-menu', showNum: false, showMenu: false, tab: '菜单'},
+            {icon: 'icon-cog', showMenu: true, tab: '系统', children: [
+              {option: '员工管理', link: '/root/system/user'},
+              {option: '部门管理', link: '/root/system/part'},
+              {option: '角色管理', link: '/root/system/role'}
+            ]},
+            {link: '/root/mine', icon: 'icon-home', showNum: false, showMenu: false, tab: '我的'}
+          ])
+        } else if (res.data.role.name == 'admin') {
+          this.saveMenuList([
+            {link: '/admin/menulist', icon: 'icon-menu', showNum: false, showMenu: false, tab: '菜单'},
+            {link: '/admin/usermanage', icon: 'icon-users', showNum: false, showMenu: false, tab: '成员'},
+            {link: '/admin/shop', icon: 'icon-cart', showNum: true, showMenu: false, tab: '购物车'},
+            {link: '/admin/mine', icon: 'icon-home', showNum: false, showMenu: false, tab: '我的'}
+          ])
+        } else if (res.data.role.name == 'general') {
+          this.saveMenuList([
+            {link: '/general/menulist', icon: 'icon-menu', showNum: false, showMenu: false, tab: '菜单'},
+            {link: '/general/shop', icon: 'icon-cart', showNum: true, showMenu: false, tab: '购物车'},
+            {link: '/general/mine', icon: 'icon-home', showNum: false, showMenu: false, tab: '我的'}
+          ])
+        }
         this.loading = false
         this.$http.get(this.resource + '/api/shop/findall', {params: {uid: res.data.id}}).then(res => {
           let num = 0
@@ -113,6 +136,9 @@ export default {
     this.$Progress.finish()
   },
   methods: {
+    ...mapActions([
+      'saveMenuList',
+    ]),
     putpwd () {
       this.visible2 = false
       this.dialogFormVisible = true

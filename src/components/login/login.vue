@@ -25,6 +25,7 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
   export default {
     data() {
       return {
@@ -47,7 +48,6 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.$http.get(this.resource + '/api/user/login', {params: {name: this.ruleForm.name, password: this.ruleForm.password}}).then((res) => {
-              // console.log(res.data)
               this.$store.dispatch('getUser', res.data)
               window.sessionStorage.setItem('loginId', res.data.id)
               this.$message({
@@ -56,9 +56,25 @@
                 type: 'success'
               });
               if (res.data.role.name == 'root') {
+                this.saveMenuList([
+                  {link: '/root/order', icon: 'icon-menu', showNum: false, showMenu: false, tab: '订单'},
+                  {link: '/root/system/menu', icon: 'icon-menu', showNum: false, showMenu: false, tab: '菜单'},
+                  {icon: 'icon-cog', showMenu: true, tab: '系统', children: [
+                    {option: '员工管理', link: '/root/system/user'},
+                    {option: '部门管理', link: '/root/system/part'},
+                    {option: '角色管理', link: '/root/system/role'}
+                  ]},
+                  {link: '/root/mine', icon: 'icon-home', showNum: false, showMenu: false, tab: '我的'}
+                ])
                 this.$router.push('/root/mine')
               } else if (res.data.role.name == 'admin') {
-                  this.$http.get(this.resource + '/api/shop/findall', {params: {uid: res.data.id}}).then(res => {
+                this.saveMenuList([
+                  {link: '/admin/menulist', icon: 'icon-menu', showNum: false, showMenu: false, tab: '菜单'},
+                  {link: '/admin/usermanage', icon: 'icon-users', showNum: false, showMenu: false, tab: '成员'},
+                  {link: '/admin/shop', icon: 'icon-cart', showNum: true, showMenu: false, tab: '购物车'},
+                  {link: '/admin/mine', icon: 'icon-home', showNum: false, showMenu: false, tab: '我的'}
+                ])
+                this.$http.get(this.resource + '/api/shop/findall', {params: {uid: res.data.id}}).then(res => {
                   let num = 0
                   res.data.forEach((item) => {
                     item.isCheck === 'true' && (num += item.total)
@@ -67,6 +83,11 @@
                 })
                 this.$router.push('/admin/mine')
               } else if (res.data.role.name == 'general') {
+                this.saveMenuList([
+                  {link: '/general/menulist', icon: 'icon-menu', showNum: false, showMenu: false, tab: '菜单'},
+                  {link: '/general/shop', icon: 'icon-cart', showNum: true, showMenu: false, tab: '购物车'},
+                  {link: '/general/mine', icon: 'icon-home', showNum: false, showMenu: false, tab: '我的'}
+                ])
                 this.$http.get(this.resource + '/api/shop/findall', {params: {uid: res.data.id}}).then(res => {
                   let num = 0
                   res.data.forEach((item) => {
@@ -95,7 +116,10 @@
       },
       register () {
       	this.$router.push('/registered')
-      }
+      },
+      ...mapActions([
+        'saveMenuList',
+      ])
     }
   }
 </script>

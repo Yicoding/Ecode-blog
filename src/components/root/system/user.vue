@@ -15,7 +15,6 @@
       <el-table-column
         prop="name"
         label="姓名"
-        fixed
         width="90">
       </el-table-column>
       <el-table-column
@@ -35,7 +34,6 @@
         label="部门" width="100">
       </el-table-column>
       <el-table-column
-      	fixed="right"
         label="操作" width="100">
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="putrole(scope.row.id)">编辑</el-button>

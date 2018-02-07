@@ -1,41 +1,42 @@
 <template>
-  <div>
-    <div style="height: 30px; background-color: #eee;"></div>
-  	<ul class="menu-ul" v-show="listData.length > 0">
-      <li v-for="item in listData" :key="item.id" @click="jump(item)">
-        <div style="float: left; width: 8%; height: 120px; position: relative;">
-          <div class="radio-check" v-show="item.isCheck == 'false'" @click.stop="checkLine(item)"></div>
-          <div class="radio-not-check" v-show="item.isCheck == 'true'" @click.stop="checkLine(item)">&radic;</div>
-        </div>
-        <div style="float: left; width: 92%;">
-          <div class="menu-left-shop">
-            <img v-lazy="item.picture" alt=""/>
+  <div class="shop-box">
+    <div class="shop-content">
+      <div style="height: 30px; background-color: #eee;"></div>
+      <ul class="menu-ul" v-show="listData.length > 0">
+        <li v-for="item in listData" :key="item.id" @click="jump(item)">
+          <div style="float: left; width: 8%; height: 120px; position: relative;">
+            <div class="radio-check" v-show="item.isCheck == 'false'" @click.stop="checkLine(item)"></div>
+            <div class="radio-not-check" v-show="item.isCheck == 'true'" @click.stop="checkLine(item)">&radic;</div>
           </div>
-          <div class="menu-right">
-            <div>
-              <h4 v-text="item.name"></h4>
-              <p style="margin-top: 12px;" v-text="item.descript"></p>
+          <div style="float: left; width: 92%;">
+            <div class="menu-left-shop">
+              <img v-lazy="item.picture" alt=""/>
             </div>
-            <div class="munu-price">
-              <div class="left" style="width: 40%;">
-                &yen;{{item.price}}
+            <div class="menu-right">
+              <div>
+                <h4 v-text="item.name"></h4>
+                <p style="margin-top: 12px;" v-text="item.descript"></p>
               </div>
-              <div class="menu-shop">
-                <transition name="fade">
-                  <div v-if="item.total > 1" class="shop-first" @click.stop="remove(item)">-</div>
-                </transition>
-                <transition name="fade">
-                  <div v-if="item.total > 0" class="shop-second" v-text="item.total"></div>
-                </transition>
-                <div class="shop-third" @click.stop="add(item)">+</div>
+              <div class="munu-price">
+                <div class="left" style="width: 40%;">
+                  &yen;{{item.price}}
+                </div>
+                <div class="menu-shop">
+                  <transition name="fade">
+                    <div v-if="item.total > 1" class="shop-first" @click.stop="remove(item)">-</div>
+                  </transition>
+                  <transition name="fade">
+                    <div v-if="item.total > 0" class="shop-second" v-text="item.total"></div>
+                  </transition>
+                  <div class="shop-third" @click.stop="add(item)">+</div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </li>
-    </ul>
-    <div v-show="listData.length == 0" class="empty-content">购物车空空如也，快去一些添加进来吧 ----</div>
-    <div style="height: 45px;"></div>
+        </li>
+      </ul>
+      <div v-show="listData.length == 0" class="empty-content">购物车空空如也，快去一些添加进来吧 ----</div>
+    </div>
     <div class="shop-footer">
       <div class="shop-footer-left">
         <div style="float: left; height: 50px; position: relative;">
@@ -86,6 +87,7 @@ export default {
           this.listData = res.data
           let priceAll = 0
           let isAll = true
+
           res.data.forEach((item) => {
             if (item.isCheck == 'true'){
               priceAll += item.total * item.price
@@ -94,6 +96,7 @@ export default {
               isAll = false
             }
           })
+          this.$store.dispatch('getshopNum', this.checkNum)
           isAll && (this.isCheckAll = true)
           this.$store.dispatch('getpriceAll', priceAll)
         } else {
@@ -106,6 +109,7 @@ export default {
       console.log(item.isCheck)
       if (item.isCheck == 'true') {
         this.checkNum -= item.total
+        this.$store.dispatch('getshopNum', this.checkNum)
         this.isCheckAll = false
         item.isCheck = 'false'
         this.$store.dispatch('getonepriceAll', {action: 'remove', price: item.price * item.total})
@@ -114,6 +118,7 @@ export default {
         })
       } else {
         this.checkNum += item.total
+        this.$store.dispatch('getshopNum', this.checkNum)
         console.log(JSON.stringify(this.listData))
         item.isCheck = 'true'
         this.$store.dispatch('getonepriceAll', {action: 'add', price: item.price * item.total})
@@ -141,6 +146,7 @@ export default {
         if (item.isCheck == 'true') {
           this.$store.dispatch('getonechangeNum', 'add')
           this.checkNum ++
+          this.$store.dispatch('getshopNum', this.checkNum)
           this.$store.dispatch('getonepriceAll', {action: 'add', price: item.price})
         }
       })
@@ -152,6 +158,7 @@ export default {
         if (item.isCheck == 'true') {
           this.$store.dispatch('getonechangeNum', 'remove')
           this.checkNum --
+          this.$store.dispatch('getshopNum', this.checkNum)
           this.$store.dispatch('getonepriceAll', {action: 'remove', price: item.price})
         }
       })
@@ -172,13 +179,6 @@ export default {
           this.$http.delete(this.resource + '/api/shop/deleteCheck', {params: {data: String(dataArr), user_id: this.user.id}}).then((res) => {
             this.findall()
             this.$toast('删除成功')
-            this.$http.get(this.resource + '/api/shop/findall', {params: {uid: this.user.id}}).then(result => {
-              let num = 0
-              result.data.forEach((item) => {
-                num += item.total
-              })
-              this.$store.dispatch('getshopNum', num)
-            })
           })
         })
       } else {

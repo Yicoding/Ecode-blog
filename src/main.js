@@ -46,8 +46,8 @@ import 'assets/style.css'
 // 自定义css
 import 'assets/main.css'
 /* eslint-disable no-unused-vars */
-import VConsole from 'vconsole'
-var vConsole = new VConsole()
+// import VConsole from 'vconsole'
+// var vConsole = new VConsole()
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
