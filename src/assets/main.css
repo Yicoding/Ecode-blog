@@ -46,11 +46,12 @@ img {
     display: flex;
     flex-direction: column;
 }
-header {
-	background: #4a4c5b;
+header.header {
     height: 50px;
 	line-height: 50px;
-	text-align: right;
+    text-align: right;
+    background: #282828 url('./logo.png') no-repeat center center;
+    background-size: 120px 49px;
 }
 section {
     flex: 1;
@@ -74,7 +75,7 @@ section::-webkit-scrollbar-track {
 footer {
     height: 50px;
     text-align: center;
-    background: #eaeaea;
+    background: #222;
     z-index: 1;
 }
 .footer-menu {
@@ -84,7 +85,6 @@ footer {
 
 .bar{
 	flex: 1;
-    border-right: 1px solid #ddd;
     position: relative;
 }
 .bar:last-child {
@@ -96,9 +96,10 @@ a.tab {
     font-size: 16px;
     flex-direction: column;
     justify-content: center;
+    color:hsla(0,0%,100%,.5)
 }
 a.active {
-    color: #26a2ff;
+    color: #ffcd32;
 }
 .child-div {
     line-height: 30px;
@@ -107,7 +108,8 @@ a.active {
     border-bottom: 1px solid #dfdddd;
 }
 .el-popover {
-	padding: 3px;
+    padding: 3px;
+    min-width: 0;
 }
 .line {
     margin: 10px 0;

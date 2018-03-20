@@ -4,6 +4,8 @@
     <!-- 系统管理员 -->
     <div v-if="user.role && user.role.name == 'root'">
      <mt-cell title="个人信息" is-link to="/root/mine/mineinfo"></mt-cell>
+     <div class="split-top"></div>
+     <mt-cell title="退出账号" is-link @click.native="open"></mt-cell>
      <!--<div style="height: 5px;"></div>
      <mt-cell title="用户意见" is-link to="/root/mine/useroption"></mt-cell>
      <div style="height: 5px;"></div>
@@ -12,43 +14,47 @@
     <!-- 部门管理员 -->
     <div v-if="user.role && user.role.name == 'admin'">
      <mt-cell title="个人信息" is-link to="/admin/mine/mineinfo"></mt-cell>
-     <div style="height: 5px;"></div>
+     <div class="split-top"></div>
      <mt-cell title="我的收藏" is-link to="/admin/mine/collect"></mt-cell>
-     <div style="height: 5px;"></div>
+     <div class="split-top"></div>
      <mt-cell title="我的订单" is-link to="/admin/mine/mineorderlist"></mt-cell>
-     <div style="height: 5px;"></div>
+     <div class="split-top"></div>
      <mt-cell title="我的评价" is-link to="/admin/mine/minerate"></mt-cell>
-     <!--<div style="height: 5px;"></div>
+     <!--<div class="split-top"></div>
      <mt-cell title="意见反馈" is-link to="/admin/mine/useroption"></mt-cell>
-     <div style="height: 5px;"></div>
+     <div class="split-top"></div>
      <mt-cell title="个性签" is-link to="/admin/mine/sign"></mt-cell>-->
-     <div style="height: 5px;"></div>
-     <mt-cell title="我的积分">120</mt-cell>
+     <div class="split-top"></div>
+     <mt-cell title="退出账号" is-link @click.native="open"></mt-cell>
     </div>
     <!-- 普通员工 -->
     <div v-if="user.role && user.role.name == 'general'">
      <mt-cell title="个人信息" is-link to="/general/mine/mineinfo"></mt-cell>
-     <div style="height: 5px;"></div>
+     <div class="split-top"></div>
      <mt-cell title="我的收藏" is-link to="/general/mine/collect"></mt-cell>
-     <div style="height: 5px;"></div>
+     <div class="split-top"></div>
      <mt-cell title="我的订单" is-link to="/general/mine/mineorderlist"></mt-cell>
-     <div style="height: 5px;"></div>
+     <div class="split-top"></div>
      <mt-cell title="我的评价" is-link to="/general/mine/minerate"></mt-cell>
-     <!--<div style="height: 5px;"></div>
+     <!--<div class="split-top"></div>
      <mt-cell title="意见反馈" is-link to="/general/mine/useroption"></mt-cell>
-     <div style="height: 5px;"></div>
+     <div class="split-top"></div>
      <mt-cell title="个性签" is-link to="/general/mine/sign"></mt-cell>-->
-     <div style="height: 5px;"></div>
-     <mt-cell title="我的积分">350</mt-cell>
+     <div class="split-top"></div>
+     <mt-cell title="退出账号" is-link @click.native="open"></mt-cell>
     </div>
-    <mt-button type="danger" size="large" @click.native="logout" style="position: fixed; bottom: 50px;">退出账号</mt-button>
     <div></div>
     <canvas v-show="!timeup" id="canvas">你的浏览器不支持canvas,请更换浏览器</canvas>
+    <confirm ref="confirm" @confirm="confirmClear" text="您确定要退出账号吗？" confirmBtnText="确定"></confirm>
   </div>
 </template>
 
 <script>
+import Confirm from 'components/confirm'
 export default {
+  components: {
+    Confirm
+  },
   computed: {
     user () {
       return this.$store.state.user
@@ -151,6 +157,13 @@ export default {
     })
   },
   methods: {
+    open() {
+      this.$refs.confirm.show()
+    },
+    confirmClear() {
+      console.log('确定的回调')
+      this.logout()
+    },
     logout () {
       this.$message({
         showClose: true,
@@ -165,6 +178,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+  .split-top {
+    height: 5px;
+  }
 </style>
