@@ -37,11 +37,11 @@
     methods: {
       clearInfo() {
         this.ruleForm.name = null
-        this.$refs.name.focus()
+        // this.$refs.name.focus()
       },
       changePassShow(){
         this.passwordShow = !this.passwordShow
-        this.$refs.password.focus()
+        // this.$refs.password.focus()
 			},
       butLogin() {
         if (!this.ruleForm.name) {
@@ -156,29 +156,28 @@
   .but-clear {
     display: inline-block;
     position: absolute;
-    height: 11px;
-    width: 11px;
+    height: 16px;
+    width: 16px;
     background: url(../../assets/icon-clear.png) no-repeat;
-    background-size:11px 11px;
+    background-size:16px 16px;
     right: 3px;
-    top: 17px;
+    top: 19px;
     z-index: 10;
-    margin-right: 0.05rem;
   }
   .but-nosee {
     display: inline-block;
     position: absolute;
-    height: 11px;
-    width: 16px;
+    height: 15px;
+    width: 23px;
     background: url(../../assets/icon-nosee.png) no-repeat;
-    background-size:16px 11px;
+    background-size:23px 15px;
     right: 0;
-    top: 17px;
+    top: 19px;
     z-index: 10;
   }
   .see {
     background: url(../../assets/icon-see.png) no-repeat;
-    background-size:16px 11px;
+    background-size:23px 15px;
   }
   .but-login{
     background-color: #DB3B3E;

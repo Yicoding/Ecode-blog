@@ -55,6 +55,9 @@ header.header {
 }
 section {
     flex: 1;
+    flex-grow:1;
+    flex-shrink:1;
+    flex-basis:0;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
 }
@@ -284,11 +287,10 @@ a.active {
 }
 .shop-box {
     height: 100%;
-    display: flex;
-    flex-direction: column;
 }
 .shop-content {
-    flex: 1;
+    box-sizing: border-box;
+    height: calc(100% - 50px);
     overflow: auto;
     -webkit-overflow-scrolling: touch;
 }
@@ -308,6 +310,7 @@ a.active {
 }
 .shop-footer {
     height: 50px;
+    background: #F9FAFC;
 }
 .shop-footer-left {
     float: left;

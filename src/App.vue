@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="loading" element-loading-text="正在拼命加载，请稍后" class="box-content">
+  <div v-loading="loading" element-loading-text="正在拼命加载，请稍后" class="box-content" ref="boxContent">
     <el-popover
       ref="popover5"
       placement="bottom"
@@ -140,6 +140,7 @@ export default {
   mounted () {
     //  [App.vue specific] When App.vue is finish loading finish the progress bar
     this.$nextTick(() => {
+      this.$refs.boxContent.style.height = window.innerHeight + 'px'
       this.$Progress.finish()
       this.$refs.section.addEventListener('scroll', this.handleScroll, true)
     })
@@ -246,7 +247,7 @@ export default {
     border-radius: 4px;
     line-height: 45px;
     background-image: url("assets/ruturnTop.png");
-     background-size: 40px 40px;
+    background-size: 40px 40px;
   }
   
 </style>
