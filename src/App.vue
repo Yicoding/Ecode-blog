@@ -140,7 +140,9 @@ export default {
   mounted () {
     //  [App.vue specific] When App.vue is finish loading finish the progress bar
     this.$nextTick(() => {
-      this.$refs.boxContent.style.height = window.innerHeight + 'px'
+      // window.addEventListener('resize', () => {
+      //   this.$refs.boxContent.style.height = window.innerHeight + 'px'
+      // })
       this.$Progress.finish()
       this.$refs.section.addEventListener('scroll', this.handleScroll, true)
     })
