@@ -34,10 +34,10 @@ const options = {
 
 Vue.use(VueProgressBar, options)
 Vue.prototype.$http = axios
-// Vue.prototype.resource = 'http://192.168.10.239:3000'
+Vue.prototype.resource = 'http://172.30.67.141:3000'
 // Vue.prototype.resource = 'http://192.168.1.104:3000'
 // Vue.prototype.resource = 'http://localhost:3000'
-Vue.prototype.resource = ''
+// Vue.prototype.resource = ''
 import store from './store'
 // 签名
 // import vueSignature from "vue-signature"
