@@ -131,12 +131,14 @@ export default {
               isAll = false
             }
           })
+          console.log(this.checkNum)
           this.$store.dispatch('getshopNum', this.checkNum)
           isAll && (this.isCheckAll = true)
           this.$store.dispatch('getpriceAll', priceAll)
         } else {
           this.listData = []
           this.$store.dispatch('getpriceAll', 0)
+          this.$store.dispatch('getshopNum', 0)
         }
       })
     },
@@ -212,8 +214,8 @@ export default {
           // console.log(dataArr)
           // console.log(String(dataArr))
           this.$http.delete(this.resource + '/api/shop/deleteCheck', {params: {data: String(dataArr), user_id: this.user.id}}).then((res) => {
-            this.findall()
             this.$toast('删除成功')
+            this.findall()
           })
         })
       } else {
