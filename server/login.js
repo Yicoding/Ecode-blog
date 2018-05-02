@@ -1,6 +1,6 @@
 var router = require('./router.js')
 var pool = require('./pool.js')
-
+var {getListOneTable, addLine} = require('./code')
 // 登录(点击登录验证账号是否存在)
 router.get('/api/user/login', (req, res) => {
 	let sql = 'select u.id, u.name, u.age, u.password, u.minesign, u.artsign, u.avatar, r.id rid, r.name rolename, r.fullname, p.id pid, p.name pname from user u inner join role r on u.role_id=r.id join part p on u.part_id=p.id where u.name=? and u.password=?'
@@ -36,28 +36,13 @@ router.get('/api/user/login', (req, res) => {
 		})
 	})
 })
-
+getListOneTable('/api/user/a', '*', 'user',  'id,name', {errMsg: '用户名或密码不正确'})
+getListOneTable('/api/user/list', '*', 'user')
 // 注册
 // /user/add
-router.post('/api/user/add', (req, res) => {
-	var sql = 'insert into user values(null, ?, ?, ?, 3, 5, null, null, null)'
-	pool.getConnection((err, connection) => {
-		connection.query('select * from user where name=?', [req.body.name], (err, result) => {
-			if (result.length > 0) {
-				res.status(500).send('用户名已存在')
-			} else {
-				connection.query(sql, [req.body.name, req.body.age, req.body.password], (err, data) => {
-					if (err) {
-						res.send(err)
-					} else {
-						res.send(data)
-					}
-					connection.release()
-				})
-			}
-		})
-	}) 
-})
+addLine('/api/user/add', 'user', 'null, ?, ?, ?, 3, 5, null, null, null',{errMsg: '用户名已存在'})
+
+
 // header用户自行修改密码
 // /user/put
 router.put('/api/user/put', (req, res) => {
@@ -84,19 +69,5 @@ router.put('/api/user/put', (req, res) => {
 		})
 	}) 
 })
-// // 退出
-// // /user/logout
-// router.get('/api/loginfo/logout', (req, res) => {
-// 	pool.getConnection(function(err, connection) {
-// 		connection.query('delete from loginfo where name=?', [req.query.name], (err, data) => {
-// 			if (err) {
-// 				res.send(err)
-// 			} else {
-// 				res.send(data)
-// 				console.log(data)
-// 			}
-// 			connection.release();
-// 		})
-// 	})
-// })
+
 module.exports = router
