@@ -76,16 +76,17 @@ router.delete('/api/collect/remove', (req, res) => {
 // rate
 // rate/find
 router.get('/api/rate/:type', (req, res) => {
-	let sql
+	let factor
 	if (req.params.type == 'all') {
-		sql = 'select r.id, r.star, r.time, r.content, u.name as user_name from ratelist r inner join user u on r.user_id=u.id where menu_id=? order by star DESC'
+		factor = 'menu_id=?'
 	} else if (req.params.type == 'great') {
-		sql = 'select r.id, r.star, r.time, r.content, u.name as user_name from ratelist r inner join user u on r.user_id=u.id where star>3 and menu_id=? order by star DESC'
+		factor = 'star>3 and menu_id=?'
 	} else if (req.params.type == 'good') {
-		sql = 'select r.id, r.star, r.time, r.content, u.name as user_name from ratelist r inner join user u on r.user_id=u.id where star=3 and menu_id=? order by star DESC'
+		factor = 'star=3 and menu_id=?'
 	} else {
-		sql = 'select r.id, r.star, r.time, r.content, u.name as user_name from ratelist r inner join user u on r.user_id=u.id where star<3 and menu_id=? order by star DESC'
+		factor = 'star<3 and menu_id=?'
 	}
+	let sql = `select r.id, r.star, r.time, r.content, u.name as user_name from ratelist r inner join user u on r.user_id=u.id where ${factor} order by star DESC`
 	pool.getConnection(function(err, connection) {
 		connection.query(sql, [req.query.menu_id], (err, data) => {
 			if (err) {
