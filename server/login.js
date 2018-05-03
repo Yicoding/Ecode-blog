@@ -1,6 +1,6 @@
 var router = require('./router.js')
 var pool = require('./pool.js')
-var {getListOneTable, addLine} = require('./code')
+var {getListOneTable, addLine} = require('./api')
 // 登录(点击登录验证账号是否存在)
 router.get('/api/user/login', (req, res) => {
 	let sql = 'select u.id, u.name, u.age, u.password, u.minesign, u.artsign, u.avatar, r.id rid, r.name rolename, r.fullname, p.id pid, p.name pname from user u inner join role r on u.role_id=r.id join part p on u.part_id=p.id where u.name=? and u.password=?'

@@ -9,12 +9,8 @@ app.use(login)
 // 用户
 var user = require('./user')
 app.use(user)
-// 部门
-var part = require('./part')
-app.use(part)
-// 角色
-var role = require('./role')
-app.use(role)
+var userone = require('./userone')
+app.use(userone)
 // 菜单
 var menu = require('./menu')
 app.use(menu)
@@ -28,7 +24,7 @@ app.use(collect)
 var order = require('./order')
 app.use(order)
 
-var server = app.listen(3000, function () {
+var server = app.listen(9000, function () {
 // var server = app.listen(8000, function () {
  
   var host = server.address().address

@@ -6,16 +6,13 @@
     </div>
     <div class="split-top"></div>
     <p class="line">
-			<input placeholder="请输入用户名" v-model="ruleForm.name" ref="name">
-			<span class='but-clear' @click="clearInfo" v-show="ruleForm.name"></span>
+			<input placeholder="请输入手机号" maxlength="13" @input="phoneFormat" ref="phone">
 		</p>
 		<p class="line">
 			<input placeholder="请输入密码" v-model="ruleForm.password" :type="passwordShow?'text':'password'" ref="password">
 			<span  class='but-nosee' :class="{'see':passwordShow}" @click="changePassShow"></span>
 		</p>
 		<button class="but-login" @click="butLogin">登录</button>
-
-
 		<p class="line register-p">
 			<span class="span1">还没有账号？<i> <router-link to="/registered">注册一个</router-link></i></span>
 		</p>
@@ -28,28 +25,49 @@
     data() {
       return {
         ruleForm: {
-          name: null,
+          phone: null,
           password: null
         },
         passwordShow: false,
       };
     },
     methods: {
-      clearInfo() {
-        this.ruleForm.name = null
-        // this.$refs.name.focus()
+      // 手机号显示格式 3-4-4
+      phoneFormat(e) {
+        var val = e.target.value
+        var arr = val.split(' ')
+        var Arr = []
+        var Str = ''
+        for(var i = 0; i < arr.length; i ++){
+          var arr1 = arr[i].split('')
+          for(var j = 0; j < arr1.length; j ++){
+            Arr.push(arr1[j])
+          }
+        }
+        if(Arr.length > 3 && Arr.length <= 7){
+          Arr.splice(3, 0, ' ');
+        }else if(Arr.length > 7){
+          Arr.splice(7, 0, ' ');
+          Arr.splice(3, 0, ' ');
+        }
+        Arr.forEach(function(ele){
+          Str += ele;
+        })
+        e.target.value = Str
       },
       changePassShow(){
         this.passwordShow = !this.passwordShow
-        // this.$refs.password.focus()
 			},
       butLogin() {
-        if (!this.ruleForm.name) {
-          this.$toast('用户名不能为空')
+        this.ruleForm.phone = this.$refs.phone.value.replace(/\s+/g, "")
+        if (!this.ruleForm.phone) {
+          this.$toast('手机号不能为空')
+        } else if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.ruleForm.phone))) {
+          this.$toast('手机号格式不正确')
         } else if (!this.ruleForm.password) {
           this.$toast('密码不能为空')
         } else {
-          this.$http.get(this.resource + '/api/user/login', {params: {name: this.ruleForm.name, password: this.ruleForm.password}}).then((res) => {
+          this.$http.get(this.resource + '/api/user/login', {params: {phone: this.ruleForm.phone, password: this.ruleForm.password}}).then((res) => {
             this.$store.dispatch('getUser', res.data)
             window.sessionStorage.setItem('loginId', res.data.id)
             this.$message({
@@ -57,7 +75,7 @@
               message: '恭喜你，登录成功！欢迎来到home',
               type: 'success'
             });
-            if (res.data.role.name == 'root') {
+            if (res.data.role.phone == 'root') {
               this.saveMenuList([
                 {link: '/root/order', icon: 'icon-menu', showNum: false, showMenu: false, tab: '订单'},
                 {link: '/root/system/menu', icon: 'icon-menu', showNum: false, showMenu: false, tab: '菜单'},
@@ -69,7 +87,7 @@
                 {link: '/root/mine', icon: 'icon-home', showNum: false, showMenu: false, tab: '我的'}
               ])
               this.$router.push('/root/mine')
-            } else if (res.data.role.name == 'admin') {
+            } else if (res.data.role.phone == 'admin') {
               this.saveMenuList([
                 {link: '/admin/menulist', icon: 'icon-menu', showNum: false, showMenu: false, tab: '菜单'},
                 {link: '/admin/usermanage', icon: 'icon-users', showNum: false, showMenu: false, tab: '成员'},
@@ -84,7 +102,7 @@
                 this.$store.dispatch('getshopNum', num)
               })
               this.$router.push('/admin/mine')
-            } else if (res.data.role.name == 'general') {
+            } else if (res.data.role.phone == 'general') {
               this.saveMenuList([
                 {link: '/general/menulist', icon: 'icon-menu', showNum: false, showMenu: false, tab: '菜单'},
                 {link: '/general/shop', icon: 'icon-cart', showNum: true, showMenu: false, tab: '购物车'},
@@ -103,7 +121,7 @@
           }).catch((err) => {
             this.$message({
               showClose: true,
-              message: '用户名或密码不正确',
+              message: '手机号或密码不正确',
               type: 'error'
             });
           })

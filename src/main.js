@@ -34,7 +34,7 @@ const options = {
 
 Vue.use(VueProgressBar, options)
 Vue.prototype.$http = axios
-Vue.prototype.resource = 'http://172.30.67.141:3000'
+Vue.prototype.resource = 'http://172.30.67.141:9000'
 // Vue.prototype.resource = 'http://192.168.1.104:3000'
 // Vue.prototype.resource = 'http://localhost:3000'
 // Vue.prototype.resource = ''
@@ -55,5 +55,18 @@ new Vue({
   store,
   router,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  mounted() {
+    window.onload = function() {
+      getRem(375, 5)
+    }
+    window.onresize = function() {
+      getRem(375, 5)
+    }
+    function getRem(pwidth, prem) {
+      var html = document.getElementsByTagName("html")[0]
+      var oWidth = document.body.clientWidth || document.documentElement.clientWidth;
+      html.style.fontSize = oWidth / pwidth * prem + 'px'
+    }
+  }
 })

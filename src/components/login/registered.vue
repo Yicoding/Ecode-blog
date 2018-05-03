@@ -6,12 +6,11 @@
     </div>
     <div class="split-top"></div>
     <p class="line">
-			<input placeholder="请输入用户名" v-model="ruleForm.name" ref="name">
-			<span class='but-clear' @click="clearInfo('name')" v-show="ruleForm.name"></span>
+			<input placeholder="请输入手机号" maxlength="13" @input="phoneFormat" ref="phone">
 		</p>
     <p class="line">
-			<input placeholder="请输入年龄" v-model="ruleForm.age" ref="age">
-			<span class='but-clear' @click="clearInfo('age')" v-show="ruleForm.age"></span>
+			<input placeholder="请输入昵称" v-model="ruleForm.name" ref="name">
+			<span class='but-clear' @click="clearInfo('name')" v-show="ruleForm.name"></span>
 		</p>
 		<p class="line">
 			<input placeholder="请输入密码" v-model="ruleForm.password" :type="passwordShow?'text':'password'" ref="password">
@@ -27,36 +26,55 @@
     data() {
       return {
         ruleForm: {
+          phone: null,
           name: null,
-          age: null,
           password: null,
-          role_id: 3
         },
         passwordShow: false,
       }
     },
     methods: {
+      // 手机号显示格式 3-4-4
+      phoneFormat(e) {
+        var val = e.target.value
+        var arr = val.split(' ')
+        var Arr = []
+        var Str = ''
+        for(var i = 0; i < arr.length; i ++){
+          var arr1 = arr[i].split('')
+          for(var j = 0; j < arr1.length; j ++){
+            Arr.push(arr1[j])
+          }
+        }
+        if(Arr.length > 3 && Arr.length <= 7){
+          Arr.splice(3, 0, ' ');
+        }else if(Arr.length > 7){
+          Arr.splice(7, 0, ' ');
+          Arr.splice(3, 0, ' ');
+        }
+        Arr.forEach(function(ele){
+          Str += ele;
+        })
+        e.target.value = Str
+      },
       clearInfo(info) {
         this.ruleForm[info] = null
-        // this.$refs[info].focus()
       },
       changePassShow(){
         this.passwordShow = !this.passwordShow
-        // this.$refs.password.focus()
       },
       butLogin() {
-        if (!this.ruleForm.name) {
-          this.$toast('用户名不能为空')
-        } else if (!this.ruleForm.age) {
-          this.$toast('年龄不能为空')
-        } else if (!/^[0-9]+$/.test(this.ruleForm.age)) {
-          this.$toast('请输入一个数值且为正整数')
-        } else if (this.ruleForm.age < 16) {
-          this.$toast('必须年满16岁')
+        this.ruleForm.phone = this.$refs.phone.value.replace(/\s+/g, "")
+        if (!this.ruleForm.phone) {
+          this.$toast('手机号不能为空')
+        } else if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.ruleForm.phone))) {
+          this.$toast('手机号格式不正确')
+        } else if (!this.ruleForm.name) {
+          this.$toast('昵称不能为空')
         } else if (!this.ruleForm.password) {
-          this.$toast('密码不为空')
+          this.$toast('密码不能为空')
         } else {
-          this.$http.post(this.resource + '/api/user/add', this.ruleForm).then((res) => {
+          this.$http.post(this.resource + '/user/add', this.ruleForm).then((res) => {
             this.$message({
               showClose: true,
               message: '恭喜你，注册成功，3秒后自动跳转到登录界面',
@@ -65,10 +83,11 @@
             setTimeout(() => {
               this.$router.push('/login')
             }, 3000)
-          }).catch(() => {
+          }).catch(err => {
+            console.log(err.response.data.errMsg)
             this.$message({
               showClose: true,
-              message: '用户名已存在，请取一个独一无二的个性名称',
+              message: err.response.data.errMsg,
               type: 'error'
             })
           })
